@@ -12,6 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "gray-matter": "^4.0.3",
     "next": "^15",
     "next-mdx-remote": "^6.0.0",
