@@ -22,6 +22,7 @@ export type ProjectMeta = {
   references?: string[];
   media?: { title: string; url?: string }[];
   videoUrl?: string;
+  heroImages?: string[]; // frontmatterで指定した場合、ヒーロー4枚ストリップに使用（ファイル名）
   cover?: string;
   gallery?: string[];
   subProjects?: { title: string; year: string; description: string }[];

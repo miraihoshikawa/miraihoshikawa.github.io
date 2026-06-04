@@ -26,6 +26,25 @@ export async function generateMetadata({
   };
 }
 
+function SectionHead({
+  num,
+  label,
+}: {
+  num: string;
+  label: string;
+}) {
+  return (
+    <div className="mb-10 flex items-baseline gap-5">
+      <span className="font-mono text-[11px] tracking-[0.2em] text-[var(--text-mute)]">
+        {num}
+      </span>
+      <h2 className="text-2xl font-bold tracking-tight text-[var(--text)] md:text-3xl">
+        {label}
+      </h2>
+    </div>
+  );
+}
+
 export default async function WorkDetailPage({
   params,
 }: {
@@ -39,102 +58,139 @@ export default async function WorkDetailPage({
   const imageBase = `/images/projects/${meta.slug}`;
   const components = mdxComponents(imageBase);
 
+  // ヒーロー画像の決定:
+  //   1) heroImages frontmatter (ファイル名指定) → ストリップ
+  //   2) cover + gallery 最大3枚 → ストリップ
+  //   3) cover 単体 → 16:9
+  const heroStripUrls = (() => {
+    if (meta.heroImages && meta.heroImages.length > 0) {
+      return meta.heroImages.map((f) =>
+        /^https?:\/\//.test(f) || f.startsWith("/")
+          ? f
+          : `${imageBase}/${f}`
+      );
+    }
+    if (meta.cover && meta.gallery && meta.gallery.length >= 3) {
+      return [meta.cover, ...meta.gallery.slice(0, 3)];
+    }
+    return null;
+  })();
+
+  let sectionIdx = 0;
+  const nextNum = () => String(++sectionIdx).padStart(2, "0");
+
   return (
     <article className="pt-14">
-      {/* Hero image (full-width) */}
-      {meta.cover && (
-        <div className="relative aspect-[21/9] w-full overflow-hidden bg-[var(--bg-alt)]">
+      {/* Hero */}
+      {heroStripUrls ? (
+        <div className="mt-2 grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-1">
+          {heroStripUrls.map((src, i) => (
+            <div
+              key={src + i}
+              className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]"
+            >
+              <img
+                src={src}
+                alt={`${meta.title} ${i + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      ) : meta.cover ? (
+        <div className="mx-auto mt-2 max-w-6xl overflow-hidden bg-[var(--bg-alt)]">
           <img
             src={meta.cover}
             alt={meta.title}
-            className="h-full w-full object-cover"
+            className="aspect-[16/9] w-full object-cover"
           />
         </div>
-      )}
+      ) : null}
 
       {/* Title block */}
-      <header className="mx-auto max-w-4xl px-6 pt-16 pb-12 md:px-10 md:pt-24">
-        <div className="flex items-baseline gap-4 text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+      <header className="mx-auto max-w-5xl px-6 pt-20 pb-16 md:px-10 md:pt-28 md:pb-20">
+        <div className="flex items-baseline gap-5 font-mono text-[11px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
           <span>{meta.number}</span>
           <span>{meta.year}</span>
           <span>{meta.category}</span>
         </div>
-        <h1 className="mt-6 text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] font-bold tracking-tight text-[var(--text)]">
+        <h1 className="mt-8 text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] font-bold tracking-tight text-[var(--text)]">
           {meta.title}
         </h1>
         {meta.subtitle && (
-          <p className="mt-2 text-base text-[var(--text-sub)]">
+          <p className="mt-4 text-lg font-medium text-[var(--text-sub)] md:text-xl">
             {meta.subtitle}
           </p>
         )}
-        <p className="mt-8 max-w-2xl text-base leading-loose text-[var(--text-sub)]">
+        <p className="mt-10 max-w-3xl text-base leading-loose text-[var(--text-body)] md:text-lg">
           {meta.tagline}
         </p>
       </header>
 
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
-        {/* Video (if provided) */}
-        {meta.videoUrl && (
-          <section className="border-t border-[var(--border)] py-12">
+      {/* Video */}
+      {meta.videoUrl && (
+        <section className="bg-[var(--bg-alt)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="Video" />
             <Video src={meta.videoUrl} title={meta.title} />
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* Sub-projects */}
-        {meta.subProjects && meta.subProjects.length > 0 && (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              Sub Projects
-            </h2>
-            <div className="mt-8 space-y-12">
+      {/* Sub-projects */}
+      {meta.subProjects && meta.subProjects.length > 0 && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="Sub Projects" />
+            <div className="space-y-12">
               {meta.subProjects.map((sub) => (
                 <div key={sub.title}>
-                  <p className="text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
+                  <p className="text-[11px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
                     {sub.year}
                   </p>
                   <h3 className="mt-2 text-xl font-bold text-[var(--text)]">
                     {sub.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-sub)]">
+                  <p className="mt-3 leading-relaxed text-[var(--text-body)]">
                     {sub.description}
                   </p>
                 </div>
               ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* MDX body */}
-        {body.trim() && (
-          <section className="border-t border-[var(--border)] py-12">
-            <div className="mdx-body text-base text-[var(--text-sub)]">
+      {/* MDX Body */}
+      {body.trim() && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-3xl px-6 py-20 md:px-10 md:py-28">
+            <div className="mdx-body">
               <MDXRemote source={body} components={components} />
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* Team */}
-        {meta.team && (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              制作体制
-            </h2>
-            <p className="mt-8 max-w-2xl whitespace-pre-line text-base text-[var(--text-sub)]">
+      {/* Team */}
+      {meta.team && (
+        <section className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="制作体制" />
+            <p className="max-w-2xl whitespace-pre-line text-lg leading-relaxed text-[var(--text-body)]">
               {meta.team}
             </p>
-          </section>
-        )}
-      </div>
-
-      {/* Gallery — full-width */}
-      {meta.gallery && meta.gallery.length > 0 && (
-        <section className="border-t border-[var(--border)] py-12">
-          <div className="mx-auto max-w-4xl px-6 md:px-10">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              Gallery
-            </h2>
           </div>
-          <div className="mx-auto mt-8 max-w-7xl space-y-4 px-6 md:px-10">
+        </section>
+      )}
+
+      {/* Gallery */}
+      {meta.gallery && meta.gallery.length > 0 && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-5xl px-6 pt-16 md:px-10 md:pt-20">
+            <SectionHead num={nextNum()} label="Gallery" />
+          </div>
+          <div className="mx-auto max-w-7xl space-y-3 px-6 pb-16 md:px-10 md:pb-20">
             {meta.gallery.map((src, i) => (
               <img
                 key={src}
@@ -147,34 +203,32 @@ export default async function WorkDetailPage({
         </section>
       )}
 
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
-        {/* Achievements */}
-        {meta.achievements && meta.achievements.length > 0 && (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              導入・展示実績
-            </h2>
-            <ul className="mt-8 space-y-2">
+      {/* Achievements */}
+      {meta.achievements && meta.achievements.length > 0 && (
+        <section className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="導入・展示実績" />
+            <ul className="space-y-3">
               {meta.achievements.map((a) => (
                 <li
                   key={a}
-                  className="text-base text-[var(--text-sub)]"
+                  className="text-lg leading-relaxed text-[var(--text-body)]"
                 >
                   — {a}
                 </li>
               ))}
             </ul>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* References — 書誌情報 */}
-        {(meta.references && meta.references.length > 0) ||
-        meta.academicRef ? (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              書誌情報
-            </h2>
-            <ol className="mt-8 list-decimal space-y-3 pl-5 text-sm text-[var(--text-sub)]">
+      {/* References */}
+      {((meta.references && meta.references.length > 0) ||
+        meta.academicRef) && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="書誌情報" />
+            <ol className="list-decimal space-y-4 pl-6 text-[var(--text-body)]">
               {meta.references?.map((r, i) => (
                 <li key={i} className="leading-relaxed">
                   {r}
@@ -184,18 +238,21 @@ export default async function WorkDetailPage({
                 <li className="leading-relaxed">{meta.academicRef}</li>
               )}
             </ol>
-          </section>
-        ) : null}
+          </div>
+        </section>
+      )}
 
-        {/* Media — その他 */}
-        {meta.media && meta.media.length > 0 && (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              その他
-            </h2>
-            <ul className="mt-8 space-y-2">
+      {/* Media */}
+      {meta.media && meta.media.length > 0 && (
+        <section className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="その他" />
+            <ul className="space-y-3">
               {meta.media.map((m, i) => (
-                <li key={i} className="text-sm text-[var(--text-sub)]">
+                <li
+                  key={i}
+                  className="text-lg leading-relaxed text-[var(--text-body)]"
+                >
                   —{" "}
                   {m.url ? (
                     <a
@@ -212,38 +269,40 @@ export default async function WorkDetailPage({
                 </li>
               ))}
             </ul>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* Tools */}
-        {meta.tools && meta.tools.length > 0 && (
-          <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              使用ツール
-            </h2>
-            <div className="mt-8 flex flex-wrap gap-2">
+      {/* Tools */}
+      {meta.tools && meta.tools.length > 0 && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="使用ツール" />
+            <div className="flex flex-wrap gap-2">
               {meta.tools.map((t) => (
                 <ToolBadge key={t} name={t} />
               ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* Navigation */}
-        <nav className="grid border-t border-[var(--border)] py-12 md:grid-cols-3 md:gap-6">
+      {/* Navigation */}
+      <nav className="border-t border-[var(--border)]">
+        <div className="mx-auto grid max-w-5xl gap-6 px-6 py-16 md:grid-cols-3 md:px-10">
           <Link href={`/works/${prev.slug}/`} className="group block">
-            <p className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="text-[11px] font-mono tracking-[0.25em] text-[var(--text-mute)] uppercase">
               ← Prev
             </p>
-            <p className="mt-2 text-sm font-bold text-[var(--text)] group-hover:underline">
+            <p className="mt-3 text-base font-bold text-[var(--text)] group-hover:underline">
               {prev.title}
             </p>
           </Link>
           <Link
             href="/#works"
-            className="hidden text-center md:block"
+            className="hidden self-center text-center md:block"
           >
-            <p className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]">
+            <p className="text-[11px] font-mono tracking-[0.25em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]">
               All Works
             </p>
           </Link>
@@ -251,15 +310,15 @@ export default async function WorkDetailPage({
             href={`/works/${next.slug}/`}
             className="group block text-right"
           >
-            <p className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="text-[11px] font-mono tracking-[0.25em] text-[var(--text-mute)] uppercase">
               Next →
             </p>
-            <p className="mt-2 text-sm font-bold text-[var(--text)] group-hover:underline">
+            <p className="mt-3 text-base font-bold text-[var(--text)] group-hover:underline">
               {next.title}
             </p>
           </Link>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </article>
   );
 }
