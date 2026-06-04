@@ -42,34 +42,27 @@ export function Fig({ src, alt, caption, imageBase }: ImgProps) {
 }
 
 /**
- * 横並びの図2枚（A/B 比較やフロー）
+ * 横並びの図グリッド（中に Fig を並べる）
  * 使い方:
- *   <FigGrid items={[{src: "Fig1.png", caption: "..."}, {src: "Fig2.png"}]} />
+ *   <FigGrid>
+ *     <Fig src="Fig1.png" caption="..." />
+ *     <Fig src="Fig2.png" caption="..." />
+ *   </FigGrid>
  */
 export function FigGrid({
-  items,
-  imageBase,
+  children,
+  cols = 2,
 }: {
-  items: { src: string; caption?: ReactNode; alt?: string }[];
-  imageBase?: string;
+  children: ReactNode;
+  cols?: 2 | 3 | 4;
 }) {
+  const gridClass = {
+    2: "sm:grid-cols-2",
+    3: "sm:grid-cols-2 md:grid-cols-3",
+    4: "sm:grid-cols-2 md:grid-cols-4",
+  }[cols];
   return (
-    <div className="my-10 grid gap-6 sm:grid-cols-2">
-      {items.map((it, i) => (
-        <figure key={i}>
-          <img
-            src={resolveSrc(it.src, imageBase)}
-            alt={it.alt || (typeof it.caption === "string" ? it.caption : "")}
-            className="w-full"
-          />
-          {it.caption && (
-            <figcaption className="mt-2 text-center text-[10px] text-[var(--text-mute)]">
-              {it.caption}
-            </figcaption>
-          )}
-        </figure>
-      ))}
-    </div>
+    <div className={`my-10 grid gap-6 ${gridClass}`}>{children}</div>
   );
 }
 
@@ -193,9 +186,9 @@ export function Callout({
 export function mdxComponents(imageBase: string) {
   return {
     Fig: (props: ImgProps) => <Fig {...props} imageBase={imageBase} />,
-    FigGrid: (props: {
-      items: { src: string; caption?: ReactNode; alt?: string }[];
-    }) => <FigGrid {...props} imageBase={imageBase} />,
+    FigGrid: (props: { children: ReactNode; cols?: 2 | 3 | 4 }) => (
+      <FigGrid {...props} />
+    ),
     TextImage: (props: {
       children: ReactNode;
       figure: string;

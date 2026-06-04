@@ -84,7 +84,7 @@ export function HeroCarousel({ projects }: { projects: ProjectMeta[] }) {
             <span
               className={`block h-px transition-colors ${
                 i === selectedIndex
-                  ? "bg-[var(--text)]"
+                  ? "bg-[var(--accent)]"
                   : "bg-[var(--border)] group-hover:bg-[var(--text-mute)]"
               }`}
             />

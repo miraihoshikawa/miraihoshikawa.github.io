@@ -39,51 +39,51 @@ references:
 
 ## システム構成
 
+<TextImage figure="Fig1.png" caption="Fig. 1 System configuration" side="right">
 開発したシステムは、マルチモーダル入力インタフェース、各入力を集約するプロセッサユニット（ノートPC + マイコン）、移動ロボット上にロボットアーム・センサ・制御PCを搭載したリモートロボットで構成される。
-入力データはブラウザ経由でHTTPSによりリモートロボット側のWebサーバへ集約され、ROS 2のトピック通信を通じてロボットアーム・移動ロボットの動作指令に変換される。リモートロボットのカメラ映像はWebRTCでリアルタイムにブラウザへ返送され、操作者は遠隔環境を把握しながら操作できる。
 
-<Fig src="Fig1.png" caption="Fig. 1 System configuration of multimodal input interface and remote robot system" />
+入力データはブラウザ経由でHTTPSによりリモートロボット側のWebサーバへ集約され、ROS 2のトピック通信を通じてロボットアーム・移動ロボットの動作指令に変換される。リモートロボットのカメラ映像はWebRTCでリアルタイムにブラウザへ返送され、操作者は遠隔環境を把握しながら操作できる。
+</TextImage>
 
 ## マルチモーダル入力インターフェース
 
+<TextImage figure="Fig2.png" caption="Fig. 2 Eye tracking unit / BES / Touch display" side="left">
 利用者の残存機能の多様性に対応するため、異なる運動チャネルを組み合わせた**相補的構成**を設計方針とした。本システムは次の3系統の入力に対応する。
 
 - **タッチ**: 上肢が比較的保持されている利用者向け。事前キャリブレーション不要で直感的。
-- **視線 + BES（生体電位信号）**: 上肢・発話機能がいずれも低下した利用者向け。視線で「対象の選択」、BESで「決定」を担う。アイトラッカは Pupil Labs Neon を使用、ディスプレイ四隅に AprilTag を配置することで個別キャリブレーション不要の構成とした。
-- **音声**: 発話機能が保持されている利用者向け。Web Speech APIで発話を文字化し、GPT-4o-miniにより意図解釈してROS 2トピック指令に変換する。
-
-<Fig src="Fig2.png" caption="Fig. 2 Overview of the multimodal input interface. (A) Eye tracking unit and Bio-electric signals measurement unit. (B) Touch display." />
+- **視線 + BES（生体電位信号）**: 上肢・発話機能がいずれも低下した利用者向け。視線で「対象の選択」、BESで「決定」を担う。アイトラッカ Pupil Labs Neon を使用、ディスプレイ四隅に AprilTag を配置することで個別キャリブレーション不要の構成とした。
+- **音声**: 発話機能が保持されている利用者向け。Web Speech APIで発話を文字化し、GPT-4o-mini により意図解釈して ROS 2 トピック指令に変換する。
+</TextImage>
 
 ## リモートロボット
 
-リモートロボットは、Mega Rover Ver. 3.0（Vstone）の移動プラットフォーム上に、CYBERDYNE製の7自由度ロボットアームを搭載した構成である。
-ポータブル電源で独立駆動可能。500 mlペットボトル（500 g相当）を把持対象としており、これにより日常生活動作の約9割をカバーできると想定している。
+<TextImage figure="Fig3.png" caption="Fig. 3 Developed remote robot" side="right">
+リモートロボットは、Mega Rover Ver. 3.0（Vstone）の移動プラットフォーム上に、CYBERDYNE 製の7自由度ロボットアームを搭載した構成である。ポータブル電源で独立駆動可能で、500 mlペットボトル（500 g相当）を把持対象として日常生活動作の約9割をカバーすることを想定している。
 
-センサ系は RGB-D カメラ RealSense D435i と 3D LiDAR Livox MID-360。物体検出には YOLOv8 を用い、深度情報と組み合わせて把持対象の3次元位置を推定する。視覚サーボでは比例制御 + 整定確認を導入し、許容誤差バンド内に連続して収まることを停止条件とした。
-自律走行は ROS 2 Nav2 で実装し、事前に slam_toolbox で作成した環境地図上で AMCL による自己位置推定を行う。
-
-<Fig src="Fig3.png" caption="Fig. 3 Overview of the developed remote robot" />
+センサ系は RGB-D カメラ RealSense D435i と 3D LiDAR Livox MID-360。物体検出には YOLOv8 を用い、深度情報と組み合わせて把持対象の3次元位置を推定する。視覚サーボでは比例制御 + 整定確認を導入。自律走行は ROS 2 Nav2 で実装し、slam_toolbox で作成した環境地図上で AMCL による自己位置推定を行う。
+</TextImage>
 
 ## 動作フロー — ハイブリッド制御
 
-随意制御と自律制御を統合する状態機械を制御PC上のWebサーバ内に実装した。
-タッチ・視線+BES・音声のいずれかの入力を受信すると、自律タスク（経路計画 → リーチング → 把持 → 搬送 → 受け渡し）が起動し、シームレスに一連の動作を実行する。
-各状態での失敗（経路計画失敗、検出失敗、把持失敗、到達タイムアウト）は待機状態への復帰として設計した。
+<TextImage figure="Fig4.png" caption="Fig. 4 Flowchart of system operation" side="left">
+随意制御と自律制御を統合する状態機械を、制御 PC 上の Web サーバ内に実装した。
 
-<Fig src="Fig4.png" caption="Fig. 4 Flowchart of system operation for the proposed Master-Remote system" />
+タッチ・視線+BES・音声のいずれかの入力を受信すると、自律タスク（経路計画 → リーチング → 把持 → 搬送 → 受け渡し）が起動し、シームレスに一連の動作を実行する。各状態での失敗（経路計画失敗、検出失敗、把持失敗、到達タイムアウト）は待機状態への復帰として設計した。
+</TextImage>
 
 ## 基礎性能試験
 
-健常成人1名により、5.5 m × 3.6 m の日常生活模擬空間で、机上のペットボトルをベッドサイドの利用者まで搬送するタスクを評価した。
-3系統の入力それぞれで5試行、計15試行を実施した。
+健常成人1名により、5.5 m × 3.6 m の日常生活模擬空間で、机上のペットボトルをベッドサイドの利用者まで搬送するタスクを評価した。3系統の入力それぞれで5試行、計15試行を実施した。
 
-<Fig src="Fig5.png" caption="Fig. 5 Environment for the basic experiment" />
+<FigGrid>
+  <Fig src="Fig5.png" caption="Fig. 5 Environment" />
+  <Fig src="Fig6.png" caption="Fig. 6 Procedure" />
+</FigGrid>
 
-<Fig src="Fig6.png" caption="Fig. 6 Procedure for performing the operation" />
-
-<Fig src="Fig7.png" caption="Fig. 7 Operation using gaze and bio-electrical signals" />
-
-<Fig src="Fig8.png" caption="Fig. 8 (A) 3D LiDAR in operation, (B) Created environmental map" />
+<FigGrid>
+  <Fig src="Fig7.png" caption="Fig. 7 Operation using gaze + BES" />
+  <Fig src="Fig8.png" caption="Fig. 8 3D LiDAR & environmental map" />
+</FigGrid>
 
 ### 結果
 
@@ -93,5 +93,4 @@ references:
 | 視線 + BES | 5/5 | 50.7 ± 4.01 | 3.18 ± 1.07 |
 | 音声 | 5/5 | 51.1 ± 2.09 | 5.34 ± 0.40 |
 
-3系統いずれの入力でも全試行が成功し、入力手段の選択・切替が可能なシステム構成としての実現可能性を確認した。
-タッチ入力は実行時間・再現性ともに最も安定。視線+BESは個別の習熟度や閾値設定の影響を受ける。音声入力は LLM 処理時間が主支配要因のため平均は長いが標準偏差が小さく再現性が高い。
+3系統いずれの入力でも全試行が成功し、入力手段の選択・切替が可能なシステム構成としての実現可能性を確認した。タッチ入力は実行時間・再現性ともに最も安定。視線+BES は個別の習熟度や閾値設定の影響を受ける。音声入力は LLM 処理時間が主支配要因のため平均は長いが標準偏差が小さく再現性が高い。

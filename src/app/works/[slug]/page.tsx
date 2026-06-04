@@ -35,7 +35,7 @@ function SectionHead({
 }) {
   return (
     <div className="mb-10 flex items-baseline gap-5">
-      <span className="font-mono text-[11px] tracking-[0.2em] text-[var(--text-mute)]">
+      <span className="font-mono text-[11px] tracking-[0.25em] text-[var(--accent)]">
         {num}
       </span>
       <h2 className="text-2xl font-bold tracking-tight text-[var(--text)] md:text-3xl">
@@ -81,29 +81,33 @@ export default async function WorkDetailPage({
 
   return (
     <article className="pt-14">
-      {/* Hero */}
+      {/* Hero — コンテンツ幅に収めて4枚並べ */}
       {heroStripUrls ? (
-        <div className="mt-2 grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-1">
-          {heroStripUrls.map((src, i) => (
-            <div
-              key={src + i}
-              className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]"
-            >
-              <img
-                src={src}
-                alt={`${meta.title} ${i + 1}`}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ))}
+        <div className="mx-auto mt-4 max-w-7xl px-6 md:px-10">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+            {heroStripUrls.map((src, i) => (
+              <div
+                key={src + i}
+                className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]"
+              >
+                <img
+                  src={src}
+                  alt={`${meta.title} ${i + 1}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       ) : meta.cover ? (
-        <div className="mx-auto mt-2 max-w-6xl overflow-hidden bg-[var(--bg-alt)]">
-          <img
-            src={meta.cover}
-            alt={meta.title}
-            className="aspect-[16/9] w-full object-cover"
-          />
+        <div className="mx-auto mt-4 max-w-7xl px-6 md:px-10">
+          <div className="overflow-hidden bg-[var(--bg-alt)]">
+            <img
+              src={meta.cover}
+              alt={meta.title}
+              className="aspect-[16/9] w-full object-cover"
+            />
+          </div>
         </div>
       ) : null}
 
@@ -164,7 +168,7 @@ export default async function WorkDetailPage({
       {/* MDX Body */}
       {body.trim() && (
         <section className="border-t border-[var(--border)]">
-          <div className="mx-auto max-w-3xl px-6 py-20 md:px-10 md:py-28">
+          <div className="mx-auto max-w-4xl px-6 py-20 md:px-10 md:py-28">
             <div className="mdx-body">
               <MDXRemote source={body} components={components} />
             </div>

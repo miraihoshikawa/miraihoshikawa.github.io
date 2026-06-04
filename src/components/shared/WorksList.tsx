@@ -43,7 +43,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                   : "text-[var(--text-mute)] hover:text-[var(--text-sub)]"
               }`}
             >
-              <span className={isActive ? "border-b border-[var(--text)] pb-1" : "pb-1"}>
+              <span className={isActive ? "border-b border-[var(--accent)] pb-1 text-[var(--accent)]" : "pb-1"}>
                 {f.label}
               </span>
               <span className="font-mono text-[10px] text-[var(--text-mute)]">

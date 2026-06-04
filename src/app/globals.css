@@ -10,6 +10,9 @@
   --text-body: #1f1f1f;
   --text-sub: #4a4a4a;
   --text-mute: #8a8a8a;
+  /* 近未来感のアクセントブルー */
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
 }
 
 html {
@@ -72,6 +75,10 @@ section {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  transition: color 0.15s;
+}
+.mdx-body a:hover {
+  color: var(--accent);
 }
 .mdx-body code {
   font-family: "SF Mono", Menlo, Consolas, monospace;
