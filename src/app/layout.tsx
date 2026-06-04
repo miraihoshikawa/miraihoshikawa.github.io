@@ -5,8 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "干川未来 | Portfolio",
-  description:
-    "文化を発火させる技術で、心踊るエンタテインメントを設計する - 干川未来のポートフォリオ",
+  description: "干川未来のポートフォリオ - Research / Entertainment / Implementation",
 };
 
 export default function RootLayout({

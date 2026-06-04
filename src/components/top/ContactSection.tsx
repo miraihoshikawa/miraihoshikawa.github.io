@@ -1,3 +1,4 @@
+import { profile } from "@/data/profile";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
@@ -15,10 +16,10 @@ export function ContactSection() {
             Email
           </p>
           <a
-            href="mailto:example@example.com"
+            href={`mailto:${profile.email}`}
             className="text-lg font-bold text-[var(--text)] underline-offset-4 hover:underline"
           >
-            example@example.com
+            {profile.email}
           </a>
         </div>
       </div>

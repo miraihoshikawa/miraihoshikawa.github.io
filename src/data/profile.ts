@@ -1,12 +1,13 @@
 export const profile = {
   name: "干川 未来",
   nameEn: "Mirai Hoshikawa",
-  tagline: "文化を発火させる技術で、心踊るエンタテインメントを設計する",
-  university: "筑波大学大学院 修士課程1年",
+  university:
+    "筑波大学大学院 システム情報工学研究群 知能機能システム学位プログラム 2年",
   labs: [
     "サイバニクス研究室（システム情報系）",
-    "内山研究室（芸術系・情報プロダクトデザイン領域）",
+    "日本財団HUMAIプログラム Sメンバー",
   ],
+  email: "hoshikawa.153@gmail.com",
   hometown: "群馬県草津町",
   hobbies: ["アニメ鑑賞", "カメラ", "旅行", "物作り"],
   experiences: [

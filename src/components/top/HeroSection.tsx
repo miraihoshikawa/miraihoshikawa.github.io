@@ -15,10 +15,10 @@ export function HeroSection() {
               {profile.nameEn}
             </h1>
             <p className="mt-2 text-sm tracking-wide text-[var(--text-sub)]">
-              {profile.name} · {profile.university}
+              {profile.name}
             </p>
-            <p className="mt-10 max-w-xl text-base leading-loose text-[var(--text-sub)]">
-              {profile.tagline}
+            <p className="mt-1 max-w-xl text-xs leading-relaxed text-[var(--text-sub)]">
+              {profile.university}
             </p>
             <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
               {profile.axes.map((a) => (
