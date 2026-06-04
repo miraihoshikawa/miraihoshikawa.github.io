@@ -6,24 +6,24 @@ export function ExperienceSection() {
   return (
     <SectionWrapper id="experience">
       <SectionHeading>Experience</SectionHeading>
-      <div className="space-y-4">
+      <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
         {profile.experiences.map((exp) => (
-          <div
+          <li
             key={exp.company}
-            className="flex flex-col gap-1 rounded border border-[#2a2a2a] bg-[#161616] p-4 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-1 py-6 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <h3 className="text-sm font-semibold text-[#e8e8e8]">
+              <h3 className="text-base font-bold text-[var(--text)]">
                 {exp.company}
               </h3>
-              <p className="text-sm text-[#5a5a5a]">{exp.role}</p>
+              <p className="mt-0.5 text-sm text-[var(--text-sub)]">{exp.role}</p>
             </div>
-            <span className="inline-block self-start rounded border border-[#2a2a2a] px-2 py-0.5 text-xs text-[#5a5a5a]">
+            <span className="text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
               {exp.type}
             </span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </SectionWrapper>
   );
 }

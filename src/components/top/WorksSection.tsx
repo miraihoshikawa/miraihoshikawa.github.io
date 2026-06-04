@@ -1,21 +1,24 @@
 import { getAllProjects } from "@/lib/content";
-import { SectionHeading } from "@/components/shared/SectionHeading";
-import { ProjectCard } from "@/components/shared/ProjectCard";
+import { WorksList } from "@/components/shared/WorksList";
 
 export function WorksSection() {
   const projects = getAllProjects();
   return (
-    <section id="works" className="mx-auto max-w-6xl px-4 py-16 md:px-6">
-      <SectionHeading sub="研究・エンタメ・実装の3フィールドを横断するプロジェクト">
-        Works
-      </SectionHeading>
-      {/* Offset 2-column grid (Plan 9 style) */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        {projects.map((project, i) => (
-          <div key={project.slug} style={{ marginTop: i % 2 === 1 ? 60 : 0 }}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
+    <section
+      id="works"
+      className="border-t border-[var(--border)] bg-[var(--bg)]"
+    >
+      <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+        <header className="mb-16 flex items-baseline justify-between">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight">
+            Works
+          </h2>
+          <p className="hidden text-xs tracking-wider text-[var(--text-sub)] uppercase md:block">
+            {projects.length} projects
+          </p>
+        </header>
+
+        <WorksList projects={projects} />
       </div>
     </section>
   );

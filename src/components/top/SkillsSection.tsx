@@ -7,10 +7,13 @@ export function SkillsSection() {
   return (
     <SectionWrapper id="skills">
       <SectionHeading>Skills &amp; Tools</SectionHeading>
-      <div className="space-y-6">
+      <div className="space-y-10">
         {skills.map((category) => (
-          <div key={category.label}>
-            <h3 className="mb-2 text-sm font-semibold text-[#5a5a5a] uppercase tracking-wider">
+          <div
+            key={category.label}
+            className="grid gap-4 md:grid-cols-[1fr_3fr] md:gap-12"
+          >
+            <h3 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
               {category.label}
             </h3>
             <div className="flex flex-wrap gap-2">

@@ -8,8 +8,13 @@ export function SectionWrapper({
   className?: string;
 }) {
   return (
-    <section id={id} className={`mx-auto max-w-6xl px-4 py-16 md:px-6 ${className}`}>
-      {children}
+    <section
+      id={id}
+      className={`border-t border-[var(--border)] ${className}`}
+    >
+      <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+        {children}
+      </div>
     </section>
   );
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getAllArticles } from "@/lib/content";
-import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export const metadata = {
   title: "Articles | 干川未来",
@@ -11,45 +10,53 @@ export default function ArticlesIndexPage() {
 
   return (
     <div className="pt-14">
-      <section className="mx-auto max-w-4xl px-4 py-16 md:px-6">
-        <SectionHeading sub="制作メモ・展示レポート・覚え書き">
-          Articles
-        </SectionHeading>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+        <header className="mb-16 flex items-baseline justify-between">
+          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight">
+            Articles
+          </h1>
+          <p className="hidden text-xs tracking-wider text-[var(--text-sub)] uppercase md:block">
+            {articles.length} posts
+          </p>
+        </header>
 
         {articles.length === 0 ? (
-          <p className="mt-12 text-sm text-[#5a5a5a]">
+          <p className="text-sm text-[var(--text-sub)]">
             まだ記事はありません。
           </p>
         ) : (
-          <ul className="mt-12 space-y-6">
+          <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
             {articles.map((a) => (
-              <li
-                key={a.slug}
-                className="border-b border-[#2a2a2a] pb-6 last:border-0"
-              >
+              <li key={a.slug}>
                 <Link
-                  href={`/articles/${a.slug}`}
-                  className="group block"
+                  href={`/articles/${a.slug}/`}
+                  className="group grid grid-cols-1 gap-2 py-8 md:grid-cols-[200px_1fr] md:gap-10"
                 >
-                  <div className="flex items-baseline gap-3">
-                    <time className="font-mono text-[10px] text-[#2a5aaa]">
+                  <div className="flex items-baseline gap-3 md:block">
+                    <time className="text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
                       {a.date}
                     </time>
-                    {a.tags?.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded border border-[#2a2a2a] px-1.5 py-0.5 text-[9px] text-[#5a5a5a]"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {a.tags?.map((t) => (
+                        <span
+                          key={t}
+                          className="text-[10px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
+                        >
+                          / {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="mt-1 text-base font-semibold text-[#e8e8e8] group-hover:text-[#2a5aaa]">
-                    {a.title}
-                  </h3>
-                  {a.summary && (
-                    <p className="mt-1 text-xs text-[#5a5a5a]">{a.summary}</p>
-                  )}
+                  <div>
+                    <h3 className="text-xl font-bold text-[var(--text)] group-hover:underline">
+                      {a.title}
+                    </h3>
+                    {a.summary && (
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-sub)]">
+                        {a.summary}
+                      </p>
+                    )}
+                  </div>
                 </Link>
               </li>
             ))}

@@ -31,28 +31,30 @@ export default async function ArticlePage({
   const { meta, body } = data;
 
   return (
-    <div className="pt-14">
-      <article className="mx-auto max-w-3xl px-4 py-16 md:px-6">
+    <article className="pt-14">
+      <div className="mx-auto max-w-3xl px-6 py-24 md:px-10 md:py-32">
         {/* Header */}
-        <header className="border-b border-gray-200 pb-6">
-          <div className="flex flex-wrap items-baseline gap-3">
-            <time className="font-mono text-xs text-[#2a5aaa]">
+        <header className="border-b border-[var(--border)] pb-10">
+          <div className="flex flex-wrap items-baseline gap-4">
+            <time className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
               {meta.date}
             </time>
             {meta.tags?.map((t) => (
               <span
                 key={t}
-                className="rounded border border-gray-300 px-1.5 py-0.5 text-[10px] text-gray-500"
+                className="text-[10px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
               >
-                {t}
+                / {t}
               </span>
             ))}
           </div>
-          <h1 className="mt-2 text-2xl font-bold text-gray-900 md:text-3xl">
+          <h1 className="mt-6 text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.2] font-bold tracking-tight text-[var(--text)]">
             {meta.title}
           </h1>
           {meta.summary && (
-            <p className="mt-2 text-sm text-gray-500">{meta.summary}</p>
+            <p className="mt-4 text-base text-[var(--text-sub)]">
+              {meta.summary}
+            </p>
           )}
         </header>
 
@@ -61,25 +63,25 @@ export default async function ArticlePage({
           <img
             src={meta.cover}
             alt={meta.title}
-            className="mt-8 w-full rounded"
+            className="mt-12 w-full"
           />
         )}
 
         {/* Body */}
-        <div className="mdx-body mt-8 text-sm leading-relaxed text-gray-700">
+        <div className="mdx-body mt-12 text-base text-[var(--text-sub)]">
           <MDXRemote source={body} />
         </div>
 
         {/* Footer nav */}
-        <nav className="mt-16 border-t border-gray-200 pt-6">
+        <nav className="mt-20 border-t border-[var(--border)] pt-8">
           <Link
-            href="/articles"
-            className="text-xs text-gray-400 hover:text-gray-600"
+            href="/articles/"
+            className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]"
           >
-            ← Articles 一覧
+            ← All Articles
           </Link>
         </nav>
-      </article>
-    </div>
+      </div>
+    </article>
   );
 }

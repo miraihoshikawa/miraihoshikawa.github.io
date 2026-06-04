@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #fafafa;
+  --bg-alt: #f0f0f0;
+  --card: #ffffff;
+  --border: #e5e5e5;
+  --border-strong: #1a1a1a;
+  --text: #0a0a0a;
+  --text-sub: #6a6a6a;
+  --text-mute: #a0a0a0;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-  color: #e8e8e8;
-  background: #0a0a0a;
+  font-family: "Helvetica Neue", Helvetica, Arial,
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-feature-settings: "palt" 1;
+  -webkit-font-smoothing: antialiased;
 }
 
 section {
   scroll-margin-top: 4rem;
 }
 
-:root {
-  --bg: #0a0a0a;
-  --bg2: #141414;
-  --card: #161616;
-  --border: #2a2a2a;
-  --text: #e8e8e8;
-  --text-sub: #5a5a5a;
-  --blue: #2a5aaa;
-  --blue-dark: #1a3a6a;
+/* MDX 本文の基本タイポグラフィ */
+.mdx-body p {
+  margin: 0 0 1.2em;
+  line-height: 1.9;
+}
+.mdx-body h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 2em 0 0.6em;
+}
+.mdx-body h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 1.6em 0 0.4em;
+}
+.mdx-body ul,
+.mdx-body ol {
+  margin: 0 0 1.2em 1.4em;
+  line-height: 1.9;
+}
+.mdx-body li {
+  margin: 0.2em 0;
+}
+.mdx-body code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--bg-alt);
+  padding: 0.1em 0.4em;
+  border-radius: 2px;
+}
+.mdx-body pre {
+  background: var(--bg-alt);
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.mdx-body pre code {
+  background: none;
+  padding: 0;
+}
+.mdx-body a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
