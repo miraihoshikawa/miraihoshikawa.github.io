@@ -48,7 +48,7 @@ export function HeroCarousel({ projects }: { projects: ProjectMeta[] }) {
               href={`/works/${p.slug}/`}
               className="relative block min-w-0 flex-[0_0_100%] overflow-hidden bg-[var(--bg-alt)]"
             >
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <img
                   src={p.cover}
                   alt={p.title}
