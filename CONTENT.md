@@ -54,27 +54,61 @@ tagline: "1行のキャッチコピー（カード一覧で表示される）"
 team: |
   個人制作
   協力: ○○さん
-achievements:
+videoUrl: "https://www.youtube.com/watch?v=XXXX"   # 任意：詳細ページに動画埋め込み
+achievements:                  # 受賞・展示・発表実績
   - "イベント名 (2026/X)"
   - "学会発表 (2026/X)"
-tools:
+references:                    # 書誌情報（学術論文・著作）
+  - '干川未来, "論文タイトル", 学会名, 2026年X月.'
+media:                         # その他メディア掲載・リンク集
+  - title: "日経産業新聞で紹介"
+    url: "https://..."
+  - title: "Maker Faire 2026 出展"
+    # url 省略可
+tools:                         # 使用ツール
   - TouchDesigner
   - Unity
   - Python
-imageCount: 4                  # ギャラリーに使う枚数（任意・自動検出されない場合のフォールバック）
-academicRef: "干川未来 ほか, \"論文タイトル\", 学会名, 2026年X月"  # 任意
 ---
 
-ここから Markdown 本文。「制作背景」の本文として表示される。
+ここから Markdown 本文。各章を ## 見出しで区切る。
 
-複数段落も書ける。**強調** や `コード` も使える。
+## 概要
 
-## 見出し
+本文中に Fig コンポーネントで画像を埋め込める（images/Fig1.png を指定）：
 
-リスト：
-- 項目1
-- 項目2
+<Fig src="Fig1.png" caption="システム構成図" />
+
+## システム
+
+横並びレイアウトも可能：
+
+<TextImage figure="Fig2.png" caption="装置の外観">
+本文を書く。図の隣に表示される。
+</TextImage>
+
+## 動画
+
+<Video src="https://www.youtube.com/watch?v=XXXX" />
+
+## 強調ボックス
+
+<Callout title="Download">
+PDFや成果物のリンクをここに。
+</Callout>
 ```
+
+### 使えるMDXコンポーネント
+
+| コンポーネント | 用途 | 例 |
+|---|---|---|
+| `<Fig src="..." caption="..." />` | 図 + キャプション（中央寄せ） | `<Fig src="Fig1.png" caption="..." />` |
+| `<FigGrid items={[...]} />` | 図2枚を横並び | `<FigGrid items={[{src:"Fig1.png", caption:"..."}, {src:"Fig2.png"}]} />` |
+| `<TextImage figure="..." caption="..." side="right">本文</TextImage>` | 図+テキストの2カラム | `side="left"` で反転 |
+| `<Video src="..." />` | YouTube/Vimeo 埋め込み | URLを直接渡せる |
+| `<Callout title="...">...</Callout>` | 強調ボックス | DLリンク等に |
+
+`src=` には**画像ファイル名のみ**を書く（例: `"Fig1.png"`）。自動で `/images/projects/{slug}/Fig1.png` に解決される。
 
 ### Article 用 frontmatter
 

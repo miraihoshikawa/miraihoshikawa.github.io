@@ -8,6 +8,7 @@ import {
   getAdjacentProjects,
 } from "@/lib/content";
 import { ToolBadge } from "@/components/shared/ToolBadge";
+import { Video, mdxComponents } from "@/components/mdx";
 
 export function generateStaticParams() {
   return getAllProjects().map((p) => ({ slug: p.slug }));
@@ -35,6 +36,8 @@ export default async function WorkDetailPage({
   if (!data) notFound();
   const { meta, body } = data;
   const { prev, next } = getAdjacentProjects(slug);
+  const imageBase = `/images/projects/${meta.slug}`;
+  const components = mdxComponents(imageBase);
 
   return (
     <article className="pt-14">
@@ -70,7 +73,14 @@ export default async function WorkDetailPage({
       </header>
 
       <div className="mx-auto max-w-4xl px-6 md:px-10">
-        {/* Sub-projects (for kosen) */}
+        {/* Video (if provided) */}
+        {meta.videoUrl && (
+          <section className="border-t border-[var(--border)] py-12">
+            <Video src={meta.videoUrl} title={meta.title} />
+          </section>
+        )}
+
+        {/* Sub-projects */}
         {meta.subProjects && meta.subProjects.length > 0 && (
           <section className="border-t border-[var(--border)] py-12">
             <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
@@ -94,14 +104,11 @@ export default async function WorkDetailPage({
           </section>
         )}
 
-        {/* Background — MDX body */}
+        {/* MDX body */}
         {body.trim() && (
           <section className="border-t border-[var(--border)] py-12">
-            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              制作背景
-            </h2>
-            <div className="mdx-body mt-8 max-w-2xl text-base text-[var(--text-sub)]">
-              <MDXRemote source={body} />
+            <div className="mdx-body text-base text-[var(--text-sub)]">
+              <MDXRemote source={body} components={components} />
             </div>
           </section>
         )}
@@ -157,11 +164,54 @@ export default async function WorkDetailPage({
                 </li>
               ))}
             </ul>
-            {meta.academicRef && (
-              <p className="mt-6 text-xs italic text-[var(--text-mute)]">
-                {meta.academicRef}
-              </p>
-            )}
+          </section>
+        )}
+
+        {/* References — 書誌情報 */}
+        {(meta.references && meta.references.length > 0) ||
+        meta.academicRef ? (
+          <section className="border-t border-[var(--border)] py-12">
+            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+              書誌情報
+            </h2>
+            <ol className="mt-8 list-decimal space-y-3 pl-5 text-sm text-[var(--text-sub)]">
+              {meta.references?.map((r, i) => (
+                <li key={i} className="leading-relaxed">
+                  {r}
+                </li>
+              ))}
+              {meta.academicRef && !meta.references && (
+                <li className="leading-relaxed">{meta.academicRef}</li>
+              )}
+            </ol>
+          </section>
+        ) : null}
+
+        {/* Media — その他 */}
+        {meta.media && meta.media.length > 0 && (
+          <section className="border-t border-[var(--border)] py-12">
+            <h2 className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+              その他
+            </h2>
+            <ul className="mt-8 space-y-2">
+              {meta.media.map((m, i) => (
+                <li key={i} className="text-sm text-[var(--text-sub)]">
+                  —{" "}
+                  {m.url ? (
+                    <a
+                      href={m.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-[var(--text)]"
+                    >
+                      {m.title}
+                    </a>
+                  ) : (
+                    m.title
+                  )}
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
@@ -181,10 +231,7 @@ export default async function WorkDetailPage({
 
         {/* Navigation */}
         <nav className="grid border-t border-[var(--border)] py-12 md:grid-cols-3 md:gap-6">
-          <Link
-            href={`/works/${prev.slug}/`}
-            className="group block"
-          >
+          <Link href={`/works/${prev.slug}/`} className="group block">
             <p className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
               ← Prev
             </p>

@@ -19,6 +19,9 @@ export type ProjectMeta = {
   tools?: string[];
   imageCount?: number;
   academicRef?: string;
+  references?: string[];
+  media?: { title: string; url?: string }[];
+  videoUrl?: string;
   cover?: string;
   gallery?: string[];
   subProjects?: { title: string; year: string; description: string }[];
