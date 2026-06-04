@@ -63,21 +63,51 @@ function listContentEntries(kind: Kind) {
   return entries;
 }
 
+const PURE_NUMERIC_RE =
+  /^\d+\.(jpg|jpeg|png|webp|avif|gif)$/i;
+
+function leadingNumber(name: string) {
+  const m = name.match(/^0*(\d+)/);
+  return m ? parseInt(m[1], 10) : Infinity;
+}
+
 function autoCoverAndGallery(kind: Kind, slug: string, folder: string) {
   if (!folder) return { cover: undefined, gallery: [] as string[] };
   const imagesDir = path.join(folder, "images");
   if (!fs.existsSync(imagesDir)) return { cover: undefined, gallery: [] };
 
   const files = fs.readdirSync(imagesDir).filter((f) => !f.startsWith("."));
-  const coverFile = files.find((f) => COVER_RE.test(f));
-  const galleryFiles = files
-    .filter((f) => GALLERY_RE.test(f))
-    .sort((a, b) => a.localeCompare(b));
-
   const urlBase = `/images/${kind}/${slug}`;
+
+  // 数字始まりの画像をソート：番号昇順、同番号なら pure (1.png) を suffixed (01-foo.png) より優先
+  const numbered = files
+    .filter((f) => GALLERY_RE.test(f))
+    .sort((a, b) => {
+      const na = leadingNumber(a);
+      const nb = leadingNumber(b);
+      if (na !== nb) return na - nb;
+      const pa = PURE_NUMERIC_RE.test(a);
+      const pb = PURE_NUMERIC_RE.test(b);
+      if (pa !== pb) return pa ? -1 : 1;
+      return a.localeCompare(b);
+    });
+
+  // カバー優先度:
+  //   1) 1.png / 1.jpg などの数字始まり画像（番号が最小のもの）
+  //   2) なければ cover.{ext} を fallback
+  const explicitCover = files.find((f) => COVER_RE.test(f));
+  let coverFile: string | undefined;
+  let galleryList = numbered;
+  if (numbered.length > 0) {
+    coverFile = numbered[0];
+    galleryList = numbered.slice(1);
+  } else if (explicitCover) {
+    coverFile = explicitCover;
+  }
+
   return {
     cover: coverFile ? `${urlBase}/${coverFile}` : undefined,
-    gallery: galleryFiles.map((f) => `${urlBase}/${f}`),
+    gallery: galleryList.map((f) => `${urlBase}/${f}`),
   };
 }
 
