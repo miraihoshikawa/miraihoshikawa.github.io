@@ -26,7 +26,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
   return (
     <>
       {/* Filters */}
-      <div className="mb-12 flex flex-wrap gap-x-6 gap-y-3 border-b border-[var(--border)] pb-6">
+      <div className="mb-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-b border-[var(--border)] pb-6">
         {FILTERS.map((f) => {
           const count =
             f.key === "all"
@@ -37,17 +37,23 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
             <button
               key={f.key}
               onClick={() => setActive(f.key)}
-              className={`group flex items-baseline gap-1.5 text-[12px] tracking-wider uppercase transition-colors ${
+              className={`group relative flex items-baseline gap-1.5 text-[12px] tracking-wider uppercase transition-colors ${
                 isActive
-                  ? "text-[var(--text)]"
-                  : "text-[var(--text-mute)] hover:text-[var(--text-sub)]"
+                  ? "text-[var(--accent)]"
+                  : "text-[var(--text-mute)] hover:text-[var(--text)]"
               }`}
             >
-              <span className={isActive ? "border-b border-[var(--accent)] pb-1 text-[var(--accent)]" : "pb-1"}>
+              <span
+                className={`pb-1.5 transition-all ${
+                  isActive
+                    ? "border-b-2 border-[var(--accent)]"
+                    : "border-b-2 border-transparent group-hover:border-[var(--text-mute)]"
+                }`}
+              >
                 {f.label}
               </span>
               <span className="font-mono text-[10px] text-[var(--text-mute)]">
-                ({count})
+                ({String(count).padStart(2, "0")})
               </span>
             </button>
           );
@@ -56,61 +62,76 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
 
       {/* List */}
       <ul className="divide-y divide-[var(--border)]">
-        {filtered.map((p) => (
+        {filtered.map((p, i) => (
           <li key={p.slug}>
             <Link
               href={`/works/${p.slug}/`}
-              className="group grid grid-cols-1 gap-6 py-10 md:grid-cols-[1fr_2fr] md:gap-10 md:py-14"
+              className="group grid grid-cols-[auto_1fr] gap-4 py-10 md:grid-cols-[60px_1fr_2fr] md:gap-10 md:py-16"
             >
+              {/* Number column */}
+              <div className="col-span-2 md:col-span-1">
+                <span className="font-mono text-[11px] tracking-[0.25em] text-[var(--accent)] uppercase">
+                  / {p.number}
+                </span>
+              </div>
+
               {/* Image */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-[var(--bg-alt)]">
+              <div className="relative col-span-2 aspect-[16/10] overflow-hidden bg-[var(--bg-alt)] md:col-span-1 md:aspect-[4/3]">
                 {p.cover ? (
                   <img
                     src={p.cover}
                     alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <span className="font-mono text-2xl text-[var(--text-mute)]">
+                    <span className="font-mono text-3xl text-[var(--text-mute)]">
                       {p.number}
                     </span>
                   </div>
                 )}
+                {/* hover overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-[var(--accent)] opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-10" />
               </div>
 
               {/* Text */}
-              <div className="flex flex-col justify-between">
+              <div className="col-span-2 flex flex-col justify-between md:col-span-1">
                 <div>
-                  <div className="flex items-baseline gap-4 text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
-                    <span>{p.number}</span>
+                  <div className="flex items-baseline gap-4 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
                     <span>{p.year}</span>
                     <span>{p.category}</span>
                   </div>
-                  <h3 className="mt-4 text-[clamp(1.4rem,3vw,2.2rem)] font-bold leading-tight tracking-tight text-[var(--text)] transition-colors group-hover:underline">
+                  <h3 className="mt-4 text-[clamp(1.4rem,2.8vw,2rem)] font-bold leading-[1.15] tracking-tight text-[var(--text)] transition-colors duration-300 group-hover:text-[var(--accent)]">
                     {p.title}
                   </h3>
                   {p.subtitle && (
-                    <p className="mt-1 text-sm text-[var(--text-sub)]">
+                    <p className="mt-2 text-sm text-[var(--text-sub)]">
                       {p.subtitle}
                     </p>
                   )}
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-sub)]">
+                  <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--text-body)]">
                     {p.tagline}
                   </p>
                 </div>
-                {p.tools && p.tools.length > 0 && (
-                  <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1">
-                    {p.tools.slice(0, 6).map((t) => (
-                      <span
-                        key={t}
-                        className="text-[10px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div className="mt-6 flex items-center justify-between">
+                  {p.tools && p.tools.length > 0 ? (
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      {p.tools.slice(0, 5).map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <span />
+                  )}
+                  <span className="font-mono text-[11px] tracking-wider text-[var(--text-mute)] uppercase opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100 group-hover:text-[var(--accent)]">
+                    View →
+                  </span>
+                </div>
               </div>
             </Link>
           </li>

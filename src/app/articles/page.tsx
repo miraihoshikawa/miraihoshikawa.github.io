@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllArticles } from "@/lib/content";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export const metadata = {
   title: "Articles | 干川未来",
@@ -11,14 +12,9 @@ export default function ArticlesIndexPage() {
   return (
     <div className="pt-14">
       <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <header className="mb-16 flex items-baseline justify-between">
-          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight">
-            Articles
-          </h1>
-          <p className="hidden text-xs tracking-wider text-[var(--text-sub)] uppercase md:block">
-            {articles.length} posts
-          </p>
-        </header>
+        <SectionHeading jp="記事" sub="制作メモ・展示レポート・覚え書き。">
+          Articles
+        </SectionHeading>
 
         {articles.length === 0 ? (
           <p className="text-sm text-[var(--text-sub)]">

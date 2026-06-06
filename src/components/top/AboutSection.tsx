@@ -6,7 +6,9 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 export function AboutSection() {
   return (
     <SectionWrapper id="about">
-      <SectionHeading>About</SectionHeading>
+      <SectionHeading num="02" jp="自己紹介" sub="研究と表現の境界で、人と環境のあいだに立つシステムを考える。">
+        About
+      </SectionHeading>
 
       <div className="grid gap-12 md:grid-cols-[1fr_2fr] md:gap-16">
         <div>

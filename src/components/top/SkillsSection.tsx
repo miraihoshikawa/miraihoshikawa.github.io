@@ -6,7 +6,9 @@ import { ToolBadge } from "@/components/shared/ToolBadge";
 export function SkillsSection() {
   return (
     <SectionWrapper id="skills">
-      <SectionHeading>Skills &amp; Tools</SectionHeading>
+      <SectionHeading num="03" jp="技術・ツール">
+        Skills
+      </SectionHeading>
       <div className="space-y-10">
         {skills.map((category) => (
           <div

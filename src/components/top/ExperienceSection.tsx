@@ -5,7 +5,9 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 export function ExperienceSection() {
   return (
     <SectionWrapper id="experience">
-      <SectionHeading>Experience</SectionHeading>
+      <SectionHeading num="04" jp="経歴">
+        Experience
+      </SectionHeading>
       <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
         {profile.experiences.map((exp) => (
           <li
