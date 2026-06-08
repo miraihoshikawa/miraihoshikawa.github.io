@@ -10,24 +10,36 @@ export function AboutSection() {
         About
       </SectionHeading>
 
-      <div className="grid gap-12 md:grid-cols-[1fr_2fr] md:gap-16">
+      {/* Top: portrait + bio */}
+      <div className="grid gap-12 md:grid-cols-[280px_1fr] md:gap-16">
         <div>
           <img
             src="/images/profile/portrait.jpeg"
             alt={profile.name}
             className="aspect-[4/5] w-full max-w-xs object-cover grayscale"
           />
+          <div className="mt-6">
+            <h3 className="text-xl font-bold tracking-tight text-[var(--text)]">
+              {profile.name}
+            </h3>
+            <p className="mt-1 text-sm tracking-wide text-[var(--text-mute)]">
+              {profile.nameEn}
+            </p>
+          </div>
         </div>
 
         <div className="space-y-10">
-          <div>
-            <h3 className="text-2xl font-bold tracking-tight text-[var(--text)]">
-              {profile.name}
-            </h3>
-            <p className="mt-1 text-sm tracking-wide text-[var(--text-sub)]">
-              {profile.nameEn}
+          {/* Bio */}
+          <p className="text-base leading-loose text-[var(--text-body)] md:text-lg">
+            {profile.bio}
+          </p>
+
+          {/* Affiliation block */}
+          <div className="border-l-2 border-[var(--accent)] pl-6">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+              Current Affiliation
             </p>
-            <p className="mt-4 text-sm text-[var(--text-sub)]">
+            <p className="mt-2 text-sm text-[var(--text-body)]">
               {profile.university}
             </p>
             <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-sub)]">
@@ -37,16 +49,14 @@ export function AboutSection() {
             </ul>
           </div>
 
+          {/* 3 axes */}
           <div>
-            <p className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              3つの活動軸
+            <p className="mb-5 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+              Three Fields
             </p>
-            <div className="mt-4 grid gap-px bg-[var(--border)] sm:grid-cols-3">
+            <div className="grid gap-px bg-[var(--border)] sm:grid-cols-3">
               {profile.axes.map((axis) => (
-                <div
-                  key={axis.label}
-                  className="bg-[var(--bg)] p-5"
-                >
+                <div key={axis.label} className="bg-[var(--bg)] p-5">
                   <p className="text-sm font-bold text-[var(--text)]">
                     {axis.label}
                   </p>
@@ -58,16 +68,50 @@ export function AboutSection() {
             </div>
           </div>
 
+          {/* Meta */}
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs text-[var(--text-sub)]">
             <span>
-              <span className="text-[var(--text-mute)] uppercase tracking-wider">出身 / </span>
+              <span className="font-mono uppercase tracking-wider text-[var(--text-mute)]">
+                Hometown /{" "}
+              </span>
               {profile.hometown}
             </span>
             <span>
-              <span className="text-[var(--text-mute)] uppercase tracking-wider">趣味 / </span>
+              <span className="font-mono uppercase tracking-wider text-[var(--text-mute)]">
+                Hobbies /{" "}
+              </span>
               {profile.hobbies.join("、")}
             </span>
           </div>
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div className="mt-24 border-t border-[var(--border)] pt-16">
+        <p className="mb-10 font-mono text-[11px] tracking-[0.3em] text-[var(--accent)] uppercase">
+          Timeline · 年表
+        </p>
+        <div className="space-y-10">
+          {profile.timeline.map((entry) => (
+            <div
+              key={entry.year}
+              className="grid gap-3 md:grid-cols-[120px_1fr] md:gap-12"
+            >
+              <p className="font-mono text-xl font-bold tracking-tight text-[var(--text)]">
+                {entry.year}
+              </p>
+              <ul className="space-y-2">
+                {entry.events.map((e) => (
+                  <li
+                    key={e}
+                    className="text-sm leading-relaxed text-[var(--text-body)]"
+                  >
+                    — {e}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </SectionWrapper>

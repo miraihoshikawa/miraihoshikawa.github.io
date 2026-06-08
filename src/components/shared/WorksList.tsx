@@ -60,23 +60,13 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
         })}
       </div>
 
-      {/* List */}
-      <ul className="divide-y divide-[var(--border)]">
-        {filtered.map((p, i) => (
+      {/* 2-column grid (yamaguchi style) */}
+      <ul className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 md:gap-x-10 md:gap-y-20">
+        {filtered.map((p) => (
           <li key={p.slug}>
-            <Link
-              href={`/works/${p.slug}/`}
-              className="group grid grid-cols-[auto_1fr] gap-4 py-10 md:grid-cols-[60px_1fr_2fr] md:gap-10 md:py-16"
-            >
-              {/* Number column */}
-              <div className="col-span-2 md:col-span-1">
-                <span className="font-mono text-[11px] tracking-[0.25em] text-[var(--accent)] uppercase">
-                  / {p.number}
-                </span>
-              </div>
-
-              {/* Image */}
-              <div className="relative col-span-2 aspect-[16/10] overflow-hidden bg-[var(--bg-alt)] md:col-span-1 md:aspect-[4/3]">
+            <Link href={`/works/${p.slug}/`} className="group block">
+              {/* Image dominates */}
+              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]">
                 {p.cover ? (
                   <img
                     src={p.cover}
@@ -90,48 +80,24 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                     </span>
                   </div>
                 )}
-                {/* hover overlay */}
                 <div className="pointer-events-none absolute inset-0 bg-[var(--accent)] opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-10" />
               </div>
 
-              {/* Text */}
-              <div className="col-span-2 flex flex-col justify-between md:col-span-1">
-                <div>
-                  <div className="flex items-baseline gap-4 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
-                    <span>{p.year}</span>
-                    <span>{p.category}</span>
-                  </div>
-                  <h3 className="mt-4 text-[clamp(1.4rem,2.8vw,2rem)] font-bold leading-[1.15] tracking-tight text-[var(--text)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                    {p.title}
-                  </h3>
-                  {p.subtitle && (
-                    <p className="mt-2 text-sm text-[var(--text-sub)]">
-                      {p.subtitle}
-                    </p>
-                  )}
-                  <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--text-body)]">
-                    {p.tagline}
+              {/* Caption (minimal yamaguchi style) */}
+              <div className="mt-5">
+                <div className="flex items-baseline gap-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+                  <span className="text-[var(--accent)]">/ {p.number}</span>
+                  <span>{p.year}</span>
+                  <span>{p.category}</span>
+                </div>
+                <h3 className="mt-2 text-lg font-bold leading-snug tracking-tight text-[var(--text)] transition-colors duration-300 group-hover:text-[var(--accent)] md:text-xl">
+                  {p.title}
+                </h3>
+                {p.subtitle && (
+                  <p className="mt-1 text-sm text-[var(--text-sub)]">
+                    {p.subtitle}
                   </p>
-                </div>
-                <div className="mt-6 flex items-center justify-between">
-                  {p.tools && p.tools.length > 0 ? (
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {p.tools.slice(0, 5).map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  ) : (
-                    <span />
-                  )}
-                  <span className="font-mono text-[11px] tracking-wider text-[var(--text-mute)] uppercase opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100 group-hover:text-[var(--accent)]">
-                    View →
-                  </span>
-                </div>
+                )}
               </div>
             </Link>
           </li>
