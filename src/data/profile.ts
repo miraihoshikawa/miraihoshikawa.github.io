@@ -26,55 +26,35 @@ export const profile = {
     },
   ],
   /**
-   * 年表（新→旧）。年ごとに events を配列で持つ。
-   * 「年 / 内容」「年 / 内容」形式で時系列表示される。
+   * カテゴリ別の経歴・実績（新→旧）。
+   * 「年月 — 内容（場所）」形式の静かなリストで表示される。
    */
-  timeline: [
-    {
-      year: "2026",
-      events: [
-        "日本財団HUMAIプログラム Sメンバー",
-        "2026年度 大学院セミナー 発表（マスター・リモートシステム）",
-        "妖怪EXPO 2026 出展（ばけばけXR）",
-      ],
-    },
-    {
-      year: "2025",
-      events: [
-        "ROCKET PITCH NIGHT 2025 ULTIMATE / Hello, Business Summit 配信運用",
-        "TOKYO NODE XRハッカソン / XR meet up aichi / XR kaigi（ばけばけXR）",
-        "Vital Room（VR感覚ルーム）/ Tsukuba connect #79 出展",
-        "第30回 日本バーチャルリアリティ学会大会 発表（配信統合インターフェース）",
-      ],
-    },
-    {
-      year: "2024",
-      events: [
-        "筑波大学 学士卒業論文「線維芽細胞自動培養のためのロボット化細胞培養装置」",
-        "筑波大学大学院 入学（システム情報工学研究群）",
-      ],
-    },
-    {
-      year: "2023",
-      events: [
-        "J-WAVE INNOVATION WORLD FESTA 2023（Da-iCEライブ演出・音響浮揚作品『音浮』）",
-        "Nu ink. 学生運営チームに参加",
-      ],
-    },
-    {
-      year: "2022",
-      events: [
-        "高専 卒業研究「手書き回路図からのネットリスト生成・電子回路シミュレーション」",
-        "筑波大学 編入学",
-      ],
-    },
-    {
-      year: "2021",
-      events: [
-        "LED Cube Kaleido / 静脈 文化祭展示",
-      ],
-    },
-  ],
+  history: {
+    education: [
+      { date: "現在", text: "筑波大学大学院 知能機能システム学位プログラム 在籍（博士前期課程2年・サイバニクス研究室）" },
+      { date: "2024.03", text: "筑波大学 卒業（卒業研究：ロボット化細胞培養装置）" },
+      { date: "2022.04", text: "筑波大学 編入学" },
+      { date: "2022.03", text: "高専 卒業（卒業研究：手書き回路図からのネットリスト生成・回路シミュレーション）" },
+    ],
+    publications: [
+      { date: "準備中", text: "国際会議論文（マスター・リモートシステム）投稿準備中" },
+      { date: "2026.05", text: "「マルチモーダル生体情報を用いたハイブリッド制御によるマスター・リモートシステムに関する研究」2026年度 大学院セミナー" },
+      { date: "2025.09", text: "「少人数体制での配信操作を支援する演出統合インターフェースの開発と評価」第30回 日本バーチャルリアリティ学会大会" },
+      { date: "2024.03", text: "「線維芽細胞を自動培養するためのロボット化細胞培養装置に関する基礎的研究」筑波大学 卒業論文" },
+    ],
+    exhibitions: [
+      { date: "2026.02", text: "妖怪EXPO 2026（ばけばけXR）" },
+      { date: "2025.12", text: "XR Kaigi 2025（ばけばけXR）" },
+      { date: "2025.11", text: "XR meet up aichi（ばけばけXR）" },
+      { date: "2025.08", text: "TOKYO NODE XRハッカソン（ばけばけXR）" },
+      { date: "2025.07", text: "Tsukuba connect #79（Vital Room / ばけばけXR）" },
+      { date: "2023.10", text: "J-WAVE INNOVATION WORLD FESTA 2023（ライブ映像演出・音響浮揚作品「音浮」）" },
+      { date: "2021.11", text: "高専文化祭（LED Cube Kaleido / 静脈）" },
+    ],
+    operations: [
+      { date: "2025", text: "ROCKET PITCH NIGHT IBARAKI / ULTIMATE、NEP-Lab 2025、Hello, Business Summit 2025 Spring・Autumn ほか — 配信統合システムの実運用" },
+    ],
+  },
   /**
    * 経験：会社・組織との関わり（個別に表示）
    */

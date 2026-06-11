@@ -88,34 +88,47 @@ export function AboutSection() {
         </div>
       </div>
 
-      {/* Timeline */}
-      <div className="mt-24 border-t border-[var(--border)] pt-16">
-        <p className="mb-10 font-mono text-[11px] tracking-[0.3em] text-[var(--accent)] uppercase">
-          Timeline · 年表
-        </p>
-        <div className="space-y-10">
-          {profile.timeline.map((entry) => (
-            <div
-              key={entry.year}
-              className="grid gap-3 md:grid-cols-[120px_1fr] md:gap-12"
-            >
-              <p className="font-mono text-xl font-bold tracking-tight text-[var(--text)]">
-                {entry.year}
-              </p>
-              <ul className="space-y-2">
-                {entry.events.map((e) => (
-                  <li
-                    key={e}
-                    className="text-sm leading-relaxed text-[var(--text-body)]"
-                  >
-                    — {e}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      {/* History — カテゴリ別リスト（年月 — 内容） */}
+      <div className="mt-24 space-y-16 border-t border-[var(--border)] pt-16">
+        <HistoryList title="Education" jp="学歴" items={profile.history.education} />
+        <HistoryList title="Publications" jp="研究発表" items={profile.history.publications} />
+        <HistoryList title="Exhibitions" jp="展示" items={profile.history.exhibitions} />
+        <HistoryList title="Operations" jp="配信・現場運用" items={profile.history.operations} />
       </div>
     </SectionWrapper>
+  );
+}
+
+function HistoryList({
+  title,
+  jp,
+  items,
+}: {
+  title: string;
+  jp: string;
+  items: { date: string; text: string }[];
+}) {
+  return (
+    <div className="grid gap-6 md:grid-cols-[220px_1fr] md:gap-12">
+      <div className="flex items-baseline gap-3 md:block">
+        <h3 className="text-lg font-bold tracking-tight text-[var(--text)]">
+          {title}
+        </h3>
+        <p className="text-xs text-[var(--text-mute)] md:mt-1">{jp}</p>
+      </div>
+      <ul className="divide-y divide-[var(--border)]">
+        {items.map((item) => (
+          <li
+            key={item.date + item.text}
+            className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[90px_1fr] sm:gap-6"
+          >
+            <span className="font-mono text-[12px] text-[var(--text-mute)]">
+              {item.date}
+            </span>
+            <span className="text-[var(--text-body)]">{item.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
