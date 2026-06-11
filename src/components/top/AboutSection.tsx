@@ -16,6 +16,8 @@ export function AboutSection() {
           <img
             src="/images/profile/portrait.jpeg"
             alt={profile.name}
+            loading="lazy"
+            decoding="async"
             className="aspect-[4/5] w-full max-w-xs object-cover grayscale"
           />
           <div className="mt-6">

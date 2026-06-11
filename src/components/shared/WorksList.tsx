@@ -71,6 +71,8 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                   <img
                     src={p.cover}
                     alt={p.title}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
                 ) : (
@@ -86,7 +88,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
               {/* Caption (minimal yamaguchi style) */}
               <div className="mt-5">
                 <div className="flex items-baseline gap-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
-                  <span className="text-[var(--accent)]">/ {p.number}</span>
+                  <span>/ {p.number}</span>
                   <span>{p.year}</span>
                   <span>{p.category}</span>
                 </div>

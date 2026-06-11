@@ -17,7 +17,7 @@ export function SectionHeading({
         </p>
       )}
       <div className="flex items-baseline gap-6">
-        <h2 className="text-[clamp(2.5rem,7vw,5rem)] leading-none font-bold tracking-tight text-[var(--text)]">
+        <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] leading-none font-bold tracking-tight text-[var(--text)]">
           {children}
         </h2>
         {jp && (

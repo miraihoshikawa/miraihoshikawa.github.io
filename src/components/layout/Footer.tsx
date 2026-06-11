@@ -25,7 +25,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
+            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Navigate
             </p>
             <ul className="space-y-2 text-sm text-[var(--text-sub)]">
@@ -54,7 +54,7 @@ export function Footer() {
 
           {/* Focus */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
+            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Focus
             </p>
             <ul className="space-y-2 text-sm text-[var(--text-sub)]">
@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
+            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Contact
             </p>
             <a

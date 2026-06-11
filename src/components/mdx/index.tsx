@@ -30,6 +30,8 @@ export function Fig({ src, alt, caption, imageBase }: ImgProps) {
       <img
         src={resolveSrc(src, imageBase)}
         alt={alt || (typeof caption === "string" ? caption : "")}
+        loading="lazy"
+        decoding="async"
         className="w-full"
       />
       {caption && (
@@ -91,6 +93,8 @@ export function TextImage({
       <img
         src={resolveSrc(figure, imageBase)}
         alt={typeof caption === "string" ? caption : ""}
+        loading="lazy"
+        decoding="async"
         className="w-full"
       />
       {caption && (
@@ -129,6 +133,7 @@ export function Video({
       <iframe
         src={url}
         title={title}
+        loading="lazy"
         className="h-full w-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

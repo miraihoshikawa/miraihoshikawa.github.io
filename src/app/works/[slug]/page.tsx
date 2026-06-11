@@ -21,8 +21,14 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const proj = getProject(slug);
+  if (!proj) return { title: "干川未来 | Portfolio" };
   return {
-    title: proj ? `${proj.meta.title} | 干川未来` : "干川未来 | Portfolio",
+    title: proj.meta.title,
+    description: proj.meta.tagline,
+    openGraph: {
+      images: proj.meta.cover ? [proj.meta.cover] : undefined,
+    },
+    alternates: { canonical: `/works/${slug}/` },
   };
 }
 
@@ -93,6 +99,9 @@ export default async function WorkDetailPage({
                 <img
                   src={src}
                   alt={`${meta.title} ${i + 1}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  fetchPriority={i === 0 ? "high" : undefined}
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -105,6 +114,8 @@ export default async function WorkDetailPage({
             <img
               src={meta.cover}
               alt={meta.title}
+              fetchPriority="high"
+              decoding="async"
               className="aspect-[16/9] w-full object-cover"
             />
           </div>
@@ -118,7 +129,7 @@ export default async function WorkDetailPage({
           <span>{meta.year}</span>
           <span>{meta.category}</span>
         </div>
-        <h1 className="mt-8 text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] font-bold tracking-tight text-[var(--text)]">
+        <h1 className="mt-8 text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.05] font-bold tracking-tight text-[var(--text)]">
           {meta.title}
         </h1>
         {meta.subtitle && (
@@ -200,6 +211,8 @@ export default async function WorkDetailPage({
                 key={src}
                 src={src}
                 alt={`${meta.title} - ${i + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full"
               />
             ))}

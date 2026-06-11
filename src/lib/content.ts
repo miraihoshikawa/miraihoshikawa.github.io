@@ -41,7 +41,8 @@ export type ArticleMeta = {
 type Kind = "projects" | "articles";
 
 const COVER_RE = /^cover\.(jpg|jpeg|png|webp|avif|gif)$/i;
-const GALLERY_RE = /^\d+.*\.(jpg|jpeg|png|webp|avif|gif)$/i;
+// 数字の直後が区切り文字(-_.スペース)か拡張子のもののみ。94C48B1D-…のようなUUID風は除外
+const GALLERY_RE = /^\d+([-_.\s].*)?\.(jpg|jpeg|png|webp|avif|gif)$/i;
 
 function listContentEntries(kind: Kind) {
   const dir = path.join(ROOT, kind);
