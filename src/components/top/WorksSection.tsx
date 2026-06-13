@@ -11,7 +11,7 @@ export function WorksSection() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <SectionHeading
-          num="01"
+          num="02"
           jp="作品"
           sub="研究・エンタメ・実装の3フィールドを横断するプロジェクト。"
         >

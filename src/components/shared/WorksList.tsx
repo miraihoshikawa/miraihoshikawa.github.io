@@ -15,11 +15,14 @@ const FILTERS: { key: ProjectCategory | "all"; label: string }[] = [
 export function WorksList({ projects }: { projects: ProjectMeta[] }) {
   const [active, setActive] = useState<ProjectCategory | "all">("all");
 
+  const inCategory = (p: ProjectMeta, c: ProjectCategory) =>
+    p.category === c || (p.categories?.includes(c) ?? false);
+
   const filtered = useMemo(
     () =>
       active === "all"
         ? projects
-        : projects.filter((p) => p.category === active),
+        : projects.filter((p) => inCategory(p, active)),
     [projects, active]
   );
 
@@ -28,10 +31,11 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
       {/* Filters */}
       <div className="mb-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-b border-[var(--border)] pb-6">
         {FILTERS.map((f) => {
+          const key = f.key;
           const count =
-            f.key === "all"
+            key === "all"
               ? projects.length
-              : projects.filter((p) => p.category === f.key).length;
+              : projects.filter((p) => inCategory(p, key)).length;
           const isActive = active === f.key;
           return (
             <button

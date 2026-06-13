@@ -22,8 +22,8 @@ export function HeroSection() {
             Mirai Hoshikawa
           </span>
           <span className="mt-5 block max-w-2xl text-base leading-relaxed text-[var(--text-sub)] md:text-lg">
-            生体情報で動く支援ロボットの研究から、心拍で変わるVR空間、
-            イベント配信の統合システムまで——研究・表現・実装を一人で往復します。
+            ロボティクス、イベント配信、ライブ演出、HCI、VR——
+            研究と表現を横断して制作しています。
           </span>
           <span className="mt-3 block font-mono text-[11px] tracking-[0.2em] text-[var(--text-mute)] uppercase">
             干川未来 / 筑波大学大学院 サイバニクス研究室 M2

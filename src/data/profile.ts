@@ -26,58 +26,76 @@ export const profile = {
     },
   ],
   /**
-   * カテゴリ別の経歴・実績（新→旧）。
-   * 「年月 — 内容（場所）」形式の静かなリストで表示される。
+   * 会社・組織との関わり。Affiliation ブロック内に小さく併記する。
+   */
+  experiences: [
+    { company: "株式会社Abstract Engine - Rhizomatiks", role: "R&D アルバイト" },
+    { company: "株式会社しびっくぱわー", role: "配信テクニカル（長期インターン）" },
+    { company: "CYBERDYNE株式会社", role: "R&D アルバイト" },
+    {
+      company: "戦略的イノベーション創造プログラム（SIP）",
+      role: "HCPS融合システム化基礎技術開発 リサーチアシスタント",
+    },
+  ],
+  /**
+   * カテゴリ別の経歴・実績。
    */
   history: {
+    // 学歴（日付なし・新→旧）
     education: [
-      { date: "現在", text: "筑波大学大学院 知能機能システム学位プログラム 在籍（博士前期課程2年・サイバニクス研究室）" },
-      { date: "2024.03", text: "筑波大学 卒業（卒業研究：ロボット化細胞培養装置）" },
-      { date: "2022.04", text: "筑波大学 編入学" },
-      { date: "2022.03", text: "高専 卒業（卒業研究：手書き回路図からのネットリスト生成・回路シミュレーション）" },
+      "筑波大学大学院 システム情報工学研究群 知能機能システム学位プログラム 在学",
+      "筑波大学 工学システム学類 卒業（工学）",
+      "筑波大学 工学システム学類 編入学",
+      "群馬工業高等専門学校 電子メディア工学科 卒業",
     ],
+    // 研究発表（引用形式・任意でリンク）
     publications: [
-      { date: "準備中", text: "国際会議論文（マスター・リモートシステム）投稿準備中" },
-      { date: "2026.05", text: "「マルチモーダル生体情報を用いたハイブリッド制御によるマスター・リモートシステムに関する研究」2026年度 大学院セミナー" },
-      { date: "2025.09", text: "「少人数体制での配信操作を支援する演出統合インターフェースの開発と評価」第30回 日本バーチャルリアリティ学会大会" },
-      { date: "2024.03", text: "「線維芽細胞を自動培養するためのロボット化細胞培養装置に関する基礎的研究」筑波大学 卒業論文" },
+      {
+        text: "Akira Uehara, Mirai Hoshikawa, Kazutomo Baba, Andrey Mikhailov, Hiroaki Kawamoto, Yoshiyuki Sankai, “Study on Robotic Cell Culture Systems for Autonomous Cultivation of Fibroblast Cells,” Proceedings of the 2024 IEEE/SICE International Symposium on System Integrations (SII), pp.259–264, 2025.",
+      },
+      {
+        text: "干川未来, 上原皓, “少人数体制での配信操作を支援する演出統合インターフェースの開発と評価,” 第30回 日本バーチャルリアリティ学会大会, 2025年9月.",
+      },
+      {
+        text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
+        url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
+      },
+      { text: "FOSS4G（投稿中・採録）" },
+      { text: "SIGGRAPH Asia 2026（投稿中）" },
     ],
+    // 展示（新→旧）
     exhibitions: [
       { date: "2026.02", text: "妖怪EXPO 2026（ばけばけXR）" },
       { date: "2025.12", text: "XR Kaigi 2025（ばけばけXR）" },
       { date: "2025.11", text: "XR meet up aichi（ばけばけXR）" },
       { date: "2025.08", text: "TOKYO NODE XRハッカソン（ばけばけXR）" },
       { date: "2025.07", text: "Tsukuba connect #79（Vital Room / ばけばけXR）" },
-      { date: "2023.10", text: "J-WAVE INNOVATION WORLD FESTA 2023（ライブ映像演出・音響浮揚作品「音浮」）" },
-      { date: "2021.11", text: "高専文化祭（LED Cube Kaleido / 静脈）" },
+      { date: "2023", text: "干川未来「音浮」J-WAVE INNOVATION WORLD FESTA 2023" },
     ],
-    operations: [
-      { date: "2025", text: "ROCKET PITCH NIGHT IBARAKI / ULTIMATE、NEP-Lab 2025、Hello, Business Summit 2025 Spring・Autumn ほか — 配信統合システムの実運用" },
-    ],
+    // 配信・現場運用
+    operations: {
+      summaryCount: "140+",
+      summaryNote: "配信現場数（2025/09/30時点）",
+      // 自作の配信システム運用を含む主な現場
+      venues: [
+        "毎週水曜 つくばスタートアップパーク イベント",
+        "毎週木曜 Venture Café Tokyo Thursday Gathering",
+        "産総研 オープンイノベーションの社会実装戦略",
+        "防災科研（NIED）セミナー配信",
+        "GTIE イベント配信 @CiC Tokyo",
+        "水夜サイエンスカフェ 2024",
+        "Business Challenge Program（県北BCP）",
+        "県北 Business Start School（県北BSS）",
+      ],
+      // 主なピッチ・ビジネスイベント（新→旧）
+      highlights: [
+        { date: "2025.12", text: "Business Challenge Program（県北BCP）最終発表" },
+        { date: "2025.05", text: "ROCKET PITCH NIGHT ULTIMATE" },
+        { date: "2025.04", text: "Hello, Business Summit 2025 Autumn" },
+        { date: "2025.03", text: "NEP事業ピッチイベント「NEP-Lab（ねぷらぼ）2025」" },
+        { date: "2025.01", text: "ROCKET PITCH NIGHT IBARAKI 2025" },
+        { date: "2025.01", text: "Business Challenge Program（県北BCP）最終発表" },
+      ],
+    },
   },
-  /**
-   * 経験：会社・組織との関わり（個別に表示）
-   */
-  experiences: [
-    {
-      company: "株式会社Abstract Engine Rhizomatiks",
-      role: "開発補助",
-      type: "インターン" as const,
-    },
-    {
-      company: "株式会社しびっくぱわー",
-      role: "配信テクニカル",
-      type: "長期インターンシップ" as const,
-    },
-    {
-      company: "CYBERDYNE株式会社",
-      role: "R&D アルバイト",
-      type: "アルバイト" as const,
-    },
-    {
-      company: "戦略的イノベーション創造プログラム（SIP）",
-      role: "HCPS融合システム化基礎技術開発 リサーチアシスタント",
-      type: "RA" as const,
-    },
-  ],
 };

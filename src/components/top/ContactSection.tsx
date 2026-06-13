@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 export function ContactSection() {
   return (
     <SectionWrapper id="contact">
-      <SectionHeading num="05" jp="連絡先" sub="研究・展示・実装に関するご相談を歓迎しています。お気軽にご連絡ください。">
+      <SectionHeading num="04" jp="連絡先" sub="研究・展示・実装に関するご相談を歓迎しています。お気軽にご連絡ください。">
         Contact
       </SectionHeading>
       <div className="space-y-2">

@@ -12,6 +12,7 @@ export type ProjectMeta = {
   title: string;
   subtitle?: string;
   category: ProjectCategory;
+  categories?: ProjectCategory[]; // フィルタで複数カテゴリに出したい場合（任意）
   year: string;
   tagline: string;
   team?: string;
