@@ -179,7 +179,7 @@ export function AboutSection() {
 
           {/* Venues */}
           <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
-            主な配信現場（自作システム運用を含む）
+            継続・定期で運用している配信現場
           </p>
           <ul className="mb-8 grid gap-x-8 gap-y-1.5 text-sm text-[var(--text-body)] sm:grid-cols-2">
             {profile.history.operations.venues.map((v) => (
@@ -189,7 +189,7 @@ export function AboutSection() {
 
           {/* Highlights */}
           <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
-            主なピッチ・ビジネスイベント
+            自作の配信システムを運用した主なイベント
           </p>
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.operations.highlights.map((item) => (

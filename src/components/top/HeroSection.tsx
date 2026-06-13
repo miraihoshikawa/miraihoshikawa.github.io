@@ -21,12 +21,8 @@ export function HeroSection() {
           <span className="block text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-[1.05] tracking-tight text-[var(--text)]">
             Mirai Hoshikawa
           </span>
-          <span className="mt-5 block max-w-2xl text-base leading-relaxed text-[var(--text-sub)] md:text-lg">
-            ロボティクス、イベント配信、ライブ演出、HCI、VR——
-            研究と表現を横断して制作しています。
-          </span>
-          <span className="mt-3 block font-mono text-[11px] tracking-[0.2em] text-[var(--text-mute)] uppercase">
-            干川未来 / 筑波大学大学院 サイバニクス研究室 M2
+          <span className="mt-5 block max-w-xl text-pretty text-lg leading-relaxed text-[var(--text-sub)] md:text-xl">
+            研究と表現のあいだで、人と環境をつなぐものをつくる。
           </span>
         </h1>
 
