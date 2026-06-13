@@ -183,7 +183,10 @@ export function AboutSection() {
           </p>
           <ul className="mb-8 grid gap-x-8 gap-y-1.5 text-sm text-[var(--text-body)] sm:grid-cols-2">
             {profile.history.operations.venues.map((v) => (
-              <li key={v}>— {v}</li>
+              <li key={v.text}>
+                — {v.text}
+                {v.url && <ExtLink href={v.url} />}
+              </li>
             ))}
           </ul>
 
@@ -200,13 +203,32 @@ export function AboutSection() {
                 <span className="font-mono text-[12px] text-[var(--text-mute)]">
                   {item.date}
                 </span>
-                <span className="text-[var(--text-body)]">{item.text}</span>
+                <span className="text-[var(--text-body)]">
+                  {item.text}
+                  {"url" in item && item.url && <ExtLink href={item.url} />}
+                </span>
               </li>
             ))}
           </ul>
         </HistoryBlock>
       </div>
     </SectionWrapper>
+  );
+}
+
+function ExtLink({ href }: { href: string }) {
+  return (
+    <>
+      {" "}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+      >
+        (Link)
+      </a>
+    </>
   );
 }
 

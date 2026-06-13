@@ -76,24 +76,24 @@ export const profile = {
     operations: {
       summaryCount: "140+",
       summaryNote: "配信現場数（2025/09/30時点）",
-      // 自作の配信システム運用を含む主な現場
+      // 継続・定期で運用している配信現場
       venues: [
-        "毎週水曜 つくばスタートアップパーク イベント",
-        "毎週木曜 Venture Café Tokyo Thursday Gathering",
-        "産総研 オープンイノベーションの社会実装戦略",
-        "防災科研（NIED）セミナー配信",
-        "GTIE イベント配信 @CiC Tokyo",
-        "水夜サイエンスカフェ 2024",
-        "Business Challenge Program（県北BCP）",
-        "県北 Business Start School（県北BSS）",
+        { text: "毎週水曜 つくばスタートアップパーク イベント", url: "https://tsukuba-stapa.jp/" },
+        { text: "毎週木曜 Venture Café Tokyo Thursday Gathering", url: "https://venturecafetokyo.org/programs/thursday-gathering/" },
+        { text: "産総研 オープンイノベーションの社会実装戦略", url: "https://www.aist-solutions.co.jp/events_webinars/page000196/" },
+        { text: "防災科研（NIED）セミナー配信" },
+        { text: "GTIE イベント配信 @CiC Tokyo" },
+        { text: "水夜サイエンスカフェ 2024", url: "https://co-en.space/co-event/1689/" },
+        { text: "Business Challenge Program（県北BCP）", url: "https://civicpower.jp/bcp/" },
+        { text: "県北 Business Start School（県北BSS）" },
       ],
-      // 主なピッチ・ビジネスイベント（新→旧）
+      // 自作の配信システムを運用した主なイベント（新→旧）
       highlights: [
         { date: "2025.12", text: "Business Challenge Program（県北BCP）最終発表" },
-        { date: "2025.05", text: "ROCKET PITCH NIGHT ULTIMATE" },
-        { date: "2025.04", text: "Hello, Business Summit 2025 Autumn" },
-        { date: "2025.03", text: "NEP事業ピッチイベント「NEP-Lab（ねぷらぼ）2025」" },
-        { date: "2025.01", text: "ROCKET PITCH NIGHT IBARAKI 2025" },
+        { date: "2025.10", text: "Hello, Business Summit 2025 Autumn" },
+        { date: "2025.05", text: "ROCKET PITCH NIGHT ULTIMATE", url: "https://prtimes.jp/main/html/rd/p/000000045.000060032.html" },
+        { date: "2025.03", text: "NEP事業ピッチイベント「NEP-Lab（ねぷらぼ）2025」", url: "https://www.nedo.go.jp/events/CA_100288.html" },
+        { date: "2025.01", text: "ROCKET PITCH NIGHT IBARAKI 2025", url: "https://prtimes.jp/main/html/rd/p/000000039.000060032.html" },
         { date: "2025.01", text: "Business Challenge Program（県北BCP）最終発表" },
       ],
     },
