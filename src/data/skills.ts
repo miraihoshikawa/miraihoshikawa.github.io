@@ -22,7 +22,20 @@ export const tools: SkillCategory[] = [
   { label: "CAD", items: ["SolidWorks", "Fusion 360"] },
 ];
 
-/** 扱える機材・設備（写真は後日追加） */
+/** 機材・設備の写真（Skillsに小さく掲載） */
+export const equipmentPhotos: { file: string; label: string }[] = [
+  { file: "fortus450.jpg", label: "Fortus 450mc（業務用3Dプリンタ）" },
+  { file: "fortus170.jpg", label: "Fortus 170（3Dプリンタ）" },
+  { file: "vacuum-casting.jpg", label: "真空注型機" },
+  { file: "robodrill.jpg", label: "ロボドリル（CNC加工機）" },
+  { file: "robot-arm.jpg", label: "7軸ロボットアーム" },
+  { file: "mocap.jpg", label: "モーションキャプチャ" },
+  { file: "clean-bench.jpg", label: "クリーンベンチ（安全キャビネット）" },
+  { file: "microscope.jpg", label: "蛍光顕微鏡" },
+  { file: "cell-sorter.jpg", label: "セルソーター" },
+];
+
+/** 扱える機材・設備 */
 export const equipment: SkillCategory[] = [
   {
     label: "Electrical / Measurement",

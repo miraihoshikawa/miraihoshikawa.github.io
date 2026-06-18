@@ -5,13 +5,10 @@ export function HeroSection() {
 
       {/* Center content */}
       <div className="relative z-[1] px-6 text-center fade-up">
-        <p className="font-mono text-[10px] tracking-[0.5em] text-[var(--accent)] uppercase">
+        <p className="font-mono text-[11px] tracking-[0.5em] text-[var(--accent)] uppercase">
           Portfolio
         </p>
-        <h1 className="mt-5 text-[clamp(1.8rem,5vw,3.25rem)] leading-tight font-bold tracking-tight text-white">
-          Mirai Hoshikawa
-        </h1>
-        <p className="mt-4 text-pretty text-xs leading-relaxed text-[var(--text-sub)] md:text-sm">
+        <p className="mt-5 text-pretty text-sm leading-relaxed text-[var(--text-sub)] md:text-base">
           研究と表現のあいだで、人と環境をつなぐものをつくる。
         </p>
       </div>

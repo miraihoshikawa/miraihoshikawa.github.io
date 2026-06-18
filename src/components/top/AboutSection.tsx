@@ -6,8 +6,8 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 export function AboutSection() {
   return (
     <SectionWrapper id="about">
-      <SectionHeading num="01" jp="自己紹介">
-        About
+      <SectionHeading num="01" jp="About / 自己紹介">
+        干川未来 / Mirai Hoshikawa
       </SectionHeading>
 
       {/* Top: portrait + content */}
@@ -20,11 +20,6 @@ export function AboutSection() {
             decoding="async"
             className="aspect-[4/5] w-full max-w-xs object-cover grayscale"
           />
-          <div className="mt-6">
-            <h3 className="text-xl font-bold tracking-tight text-[var(--text)]">
-              {profile.name.replace(/\s+/g, "")} ／ {profile.nameEn}
-            </h3>
-          </div>
         </div>
 
         <div className="space-y-10">

@@ -1,4 +1,10 @@
-import { tools, equipment, type SkillCategory } from "@/data/skills";
+/* eslint-disable @next/next/no-img-element */
+import {
+  tools,
+  equipment,
+  equipmentPhotos,
+  type SkillCategory,
+} from "@/data/skills";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ToolBadge } from "@/components/shared/ToolBadge";
@@ -24,6 +30,26 @@ export function SkillsSection() {
           jp="扱える機材・設備"
           categories={equipment}
         />
+
+        {/* 機材写真（小さく） */}
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {equipmentPhotos.map((p) => (
+            <figure key={p.file} className="group">
+              <div className="overflow-hidden rounded-sm border border-[var(--border)] bg-[var(--bg-alt)]">
+                <img
+                  src={`/images/skills/${p.file}`}
+                  alt={p.label}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                />
+              </div>
+              <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+                {p.label}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   );
