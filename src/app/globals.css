@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* 水・明色パレット */
-  --bg: #f4f9fd;
-  --bg-alt: #e7f1fa;
-  --card: #ffffff;
-  --border: #d3e3f0;
-  --border-strong: #0a1a2f;
-  --text: #0a1a2f;
-  --text-body: #1b2c40;
-  --text-sub: #45596d;
-  --text-mute: #647889; /* WCAG AA: ~4.7:1 on --bg */
-  /* アクセント（水のブルー） */
-  --accent: #1668d6;
-  --accent-soft: rgba(22, 104, 214, 0.1);
+  /* 濃いめの青（ダーク・水）パレット */
+  --bg: #07162b;
+  --bg-alt: #0d2545;
+  --card: #0d2545;
+  --border: #1d3a5e;
+  --border-strong: #eaf2fb;
+  --text: #eaf2fb;
+  --text-body: #cad9ec;
+  --text-sub: #95acc6;
+  --text-mute: #708aa6; /* AA on --bg */
+  /* アクセント（水のシアンブルー） */
+  --accent: #46b6ff;
+  --accent-soft: rgba(70, 182, 255, 0.14);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -62,14 +62,36 @@
   }
 }
 
+/* スクロールに応じたリビール（ikumidesign 風）。
+   JS有効時のみ html.reveal-on が付与され、初期状態を隠す。
+   no-JS ではそのまま表示される（FOUC/不可視を防止）。 */
+.reveal-on .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-on .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, var(--font-jp),
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   color: var(--text);
-  /* 上が明るく、下にかけてほのかな水色に沈むグラデーション */
+  /* 上に水面の光、下にかけて深い青へ沈む */
   background:
-    radial-gradient(120% 60% at 50% -10%, #ffffff 0%, transparent 60%),
-    linear-gradient(180deg, #f4f9fd 0%, #eaf3fb 55%, #e3eef9 100%);
+    radial-gradient(120% 70% at 50% 0%, rgba(54, 110, 180, 0.35) 0%, transparent 55%),
+    linear-gradient(180deg, #07162b 0%, #0a2044 55%, #06142a 100%);
   background-attachment: fixed;
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;

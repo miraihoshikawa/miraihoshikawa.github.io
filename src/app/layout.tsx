@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WaterBackground } from "@/components/layout/WaterBackground";
+import { ScrollReveal } from "@/components/layout/ScrollReveal";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -53,10 +54,16 @@ export default function RootLayout({
     <html lang="ja" className={notoSansJP.variable}>
       <body className="text-[var(--text)] antialiased">
         <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('reveal-on')",
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <WaterBackground />
+        <ScrollReveal />
         <Header />
         <main className="relative z-[1]">{children}</main>
         <Footer />

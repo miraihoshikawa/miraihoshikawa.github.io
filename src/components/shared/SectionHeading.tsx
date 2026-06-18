@@ -10,7 +10,7 @@ export function SectionHeading({
   num?: string;
 }) {
   return (
-    <div className="mb-16 fade-up">
+    <div className="mb-16 reveal">
       {num && (
         <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--accent)] uppercase">
           [{num}]

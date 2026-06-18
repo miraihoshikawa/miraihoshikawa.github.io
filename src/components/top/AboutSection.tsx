@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export function AboutSection() {
   return (
-    <SectionWrapper id="about" noBorder className="pt-14">
+    <SectionWrapper id="about">
       <SectionHeading num="01" jp="自己紹介">
         About
       </SectionHeading>
@@ -235,7 +235,7 @@ function HistoryBlock({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid gap-6 md:grid-cols-[220px_1fr] md:gap-12">
+    <div className="reveal grid gap-6 md:grid-cols-[220px_1fr] md:gap-12">
       <div className="flex items-baseline gap-3 md:block">
         <h3 className="text-lg font-bold tracking-tight text-[var(--text)]">
           {title}
