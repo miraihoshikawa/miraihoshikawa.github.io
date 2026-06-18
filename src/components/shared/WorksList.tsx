@@ -67,7 +67,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
       {/* 3-column grid */}
       <ul className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-16">
         {filtered.map((p) => (
-          <li key={p.slug} className="reveal">
+          <li key={p.slug}>
             <Link href={`/works/${p.slug}/`} className="group block">
               {/* Image dominates */}
               <div className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]">

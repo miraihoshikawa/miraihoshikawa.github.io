@@ -22,11 +22,8 @@ export function AboutSection() {
           />
           <div className="mt-6">
             <h3 className="text-xl font-bold tracking-tight text-[var(--text)]">
-              {profile.name}
+              {profile.name.replace(/\s+/g, "")} ／ {profile.nameEn}
             </h3>
-            <p className="mt-1 text-sm tracking-wide text-[var(--text-mute)]">
-              {profile.nameEn}
-            </p>
           </div>
         </div>
 

@@ -8,10 +8,10 @@ export function HeroSection() {
         <p className="font-mono text-[10px] tracking-[0.5em] text-[var(--accent)] uppercase">
           Portfolio
         </p>
-        <h1 className="mt-6 text-[clamp(2.8rem,9vw,6.5rem)] leading-[0.95] font-bold tracking-tight text-white">
+        <h1 className="mt-5 text-[clamp(1.8rem,5vw,3.25rem)] leading-tight font-bold tracking-tight text-white">
           Mirai Hoshikawa
         </h1>
-        <p className="mt-6 text-pretty text-sm leading-relaxed text-[var(--text-sub)] md:text-base">
+        <p className="mt-4 text-pretty text-xs leading-relaxed text-[var(--text-sub)] md:text-sm">
           研究と表現のあいだで、人と環境をつなぐものをつくる。
         </p>
       </div>
