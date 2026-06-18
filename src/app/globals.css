@@ -116,12 +116,13 @@ section {
   bottom: -10vh;
   border-radius: 9999px;
   background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.8),
-    rgba(120, 180, 235, 0.18) 45%,
-    rgba(120, 180, 235, 0) 70%
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.95),
+    rgba(110, 190, 255, 0.4) 42%,
+    rgba(110, 190, 255, 0) 72%
   );
-  border: 1px solid rgba(120, 180, 235, 0.18);
+  border: 1px solid rgba(150, 205, 255, 0.45);
+  box-shadow: 0 0 12px rgba(110, 190, 255, 0.25);
   opacity: 0;
   animation: bubbleRise linear infinite;
 }
@@ -130,14 +131,14 @@ section {
     transform: translateY(0) translateX(0) scale(0.9);
     opacity: 0;
   }
-  10% {
-    opacity: 0.5;
+  12% {
+    opacity: 0.75;
   }
   50% {
     transform: translateY(-55vh) translateX(12px) scale(1);
   }
-  90% {
-    opacity: 0.35;
+  88% {
+    opacity: 0.6;
   }
   100% {
     transform: translateY(-110vh) translateX(-8px) scale(1.05);

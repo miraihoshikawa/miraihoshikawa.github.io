@@ -1,12 +1,7 @@
-import { HeroFluid } from "@/components/top/HeroFluid";
-
 export function HeroSection() {
   return (
-    <section className="relative flex h-[100svh] min-h-[560px] items-center justify-center overflow-hidden">
-      {/* Fluid background */}
-      <HeroFluid />
-      {/* 下端のなじませグラデーション */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[var(--bg)]" />
+    <section className="relative flex h-[100svh] min-h-[520px] items-center justify-center overflow-hidden">
+      {/* 背景は全体共通の泡（WaterBackground）がそのまま透ける */}
 
       {/* Center content */}
       <div className="relative z-[1] px-6 text-center fade-up">
