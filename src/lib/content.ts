@@ -15,6 +15,7 @@ export type ProjectMeta = {
   categories?: ProjectCategory[]; // フィルタで複数カテゴリに出したい場合（任意）
   year: string;
   tagline: string;
+  abstract?: string; // 詳細ページ冒頭の要約（左画像・右テキスト）。無ければ tagline を使う
   team?: string;
   achievements?: string[];
   tools?: string[];

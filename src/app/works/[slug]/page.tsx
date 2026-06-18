@@ -64,66 +64,15 @@ export default async function WorkDetailPage({
   const imageBase = `/images/projects/${meta.slug}`;
   const components = mdxComponents(imageBase);
 
-  // ヒーロー画像の決定:
-  //   1) heroImages frontmatter (ファイル名指定) → ストリップ
-  //   2) cover + gallery 最大3枚 → ストリップ
-  //   3) cover 単体 → 16:9
-  const heroStripUrls = (() => {
-    if (meta.heroImages && meta.heroImages.length > 0) {
-      return meta.heroImages.map((f) =>
-        /^https?:\/\//.test(f) || f.startsWith("/")
-          ? f
-          : `${imageBase}/${f}`
-      );
-    }
-    if (meta.cover && meta.gallery && meta.gallery.length >= 3) {
-      return [meta.cover, ...meta.gallery.slice(0, 3)];
-    }
-    return null;
-  })();
-
   let sectionIdx = 0;
   const nextNum = () => String(++sectionIdx).padStart(2, "0");
 
+  const abstractText = meta.abstract || meta.tagline;
+
   return (
     <article className="pt-14">
-      {/* Hero — コンテンツ幅に収めて4枚並べ */}
-      {heroStripUrls ? (
-        <div className="mx-auto mt-4 max-w-7xl px-6 md:px-10">
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-            {heroStripUrls.map((src, i) => (
-              <div
-                key={src + i}
-                className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]"
-              >
-                <img
-                  src={src}
-                  alt={`${meta.title} ${i + 1}`}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  fetchPriority={i === 0 ? "high" : undefined}
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : meta.cover ? (
-        <div className="mx-auto mt-4 max-w-7xl px-6 md:px-10">
-          <div className="overflow-hidden bg-[var(--bg-alt)]">
-            <img
-              src={meta.cover}
-              alt={meta.title}
-              fetchPriority="high"
-              decoding="async"
-              className="aspect-[16/9] w-full object-cover"
-            />
-          </div>
-        </div>
-      ) : null}
-
       {/* Title block */}
-      <header className="mx-auto max-w-5xl px-6 pt-20 pb-16 md:px-10 md:pt-28 md:pb-20">
+      <header className="mx-auto max-w-6xl px-6 pt-20 pb-12 md:px-10 md:pt-28 md:pb-16">
         <div className="flex items-baseline gap-5 font-mono text-[11px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
           <span>{meta.number}</span>
           <span>{meta.year}</span>
@@ -137,10 +86,34 @@ export default async function WorkDetailPage({
             {meta.subtitle}
           </p>
         )}
-        <p className="mt-10 max-w-3xl text-base leading-loose text-[var(--text-body)] md:text-lg">
-          {meta.tagline}
-        </p>
       </header>
+
+      {/* Abstract — 左に画像・右に説明（これだけ読めば概要がわかる） */}
+      <section className="mx-auto max-w-6xl px-6 pb-16 md:px-10 md:pb-24">
+        <div className="grid items-start gap-8 md:grid-cols-2 md:gap-12">
+          {meta.cover ? (
+            <div className="overflow-hidden bg-[var(--bg-alt)]">
+              <img
+                src={meta.cover}
+                alt={meta.title}
+                fetchPriority="high"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+          ) : (
+            <div />
+          )}
+          <div className="md:pt-2">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
+              Abstract
+            </p>
+            <p className="mt-5 text-pretty text-base leading-loose text-[var(--text-body)] md:text-lg">
+              {abstractText}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Video */}
       {meta.videoUrl && (
