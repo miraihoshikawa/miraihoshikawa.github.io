@@ -5,8 +5,8 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export function AboutSection() {
   return (
-    <SectionWrapper id="about">
-      <SectionHeading num="01" jp="自己紹介" sub="研究と表現の境界で、人と環境のあいだに立つシステムを考える。">
+    <SectionWrapper id="about" noBorder className="pt-14">
+      <SectionHeading num="01" jp="自己紹介">
         About
       </SectionHeading>
 
@@ -82,27 +82,11 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Meta */}
-          <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs text-[var(--text-sub)]">
-            <span>
-              <span className="font-mono uppercase tracking-wider text-[var(--text-mute)]">
-                Hometown /{" "}
-              </span>
-              {profile.hometown}
-            </span>
-            <span>
-              <span className="font-mono uppercase tracking-wider text-[var(--text-mute)]">
-                Hobbies /{" "}
-              </span>
-              {profile.hobbies.join("、")}
-            </span>
-          </div>
         </div>
       </div>
 
-      {/* History */}
-      <div className="mt-24 space-y-16 border-t border-[var(--border)] pt-16">
-        {/* Education */}
+      {/* Education（About はここまで。Works の後に Records が続く） */}
+      <div className="mt-24 border-t border-[var(--border)] pt-16">
         <HistoryBlock title="Education" jp="学歴">
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.education.map((e) => (
@@ -115,7 +99,16 @@ export function AboutSection() {
             ))}
           </ul>
         </HistoryBlock>
+      </div>
+    </SectionWrapper>
+  );
+}
 
+/** Works の後に置く、研究発表・展示・配信運用の記録 */
+export function RecordsSection() {
+  return (
+    <SectionWrapper id="records">
+      <div className="space-y-16">
         {/* Publications */}
         <HistoryBlock title="Publications" jp="研究発表">
           <ol className="space-y-4">

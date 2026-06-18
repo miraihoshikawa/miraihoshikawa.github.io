@@ -64,8 +64,8 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
         })}
       </div>
 
-      {/* 2-column grid (yamaguchi style) */}
-      <ul className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 md:gap-x-10 md:gap-y-20">
+      {/* 3-column grid */}
+      <ul className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-16">
         {filtered.map((p) => (
           <li key={p.slug}>
             <Link href={`/works/${p.slug}/`} className="group block">
