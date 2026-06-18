@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #fafafa;
-  --bg-alt: #f0f0f0;
+  /* 水・明色パレット */
+  --bg: #f4f9fd;
+  --bg-alt: #e7f1fa;
   --card: #ffffff;
-  --border: #e5e5e5;
-  --border-strong: #1a1a1a;
-  --text: #0a0a0a;
-  --text-body: #1f1f1f;
-  --text-sub: #4a4a4a;
-  --text-mute: #6f6f6f; /* WCAG AA: 4.8:1 on #fafafa */
-  /* 近未来感のアクセントブルー */
-  --accent: #2563eb;
-  --accent-soft: rgba(37, 99, 235, 0.1);
+  --border: #d3e3f0;
+  --border-strong: #0a1a2f;
+  --text: #0a1a2f;
+  --text-body: #1b2c40;
+  --text-sub: #45596d;
+  --text-mute: #647889; /* WCAG AA: ~4.7:1 on --bg */
+  /* アクセント（水のブルー） */
+  --accent: #1668d6;
+  --accent-soft: rgba(22, 104, 214, 0.1);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -65,13 +66,66 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, var(--font-jp),
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   color: var(--text);
-  background: var(--bg);
+  /* 上が明るく、下にかけてほのかな水色に沈むグラデーション */
+  background:
+    radial-gradient(120% 60% at 50% -10%, #ffffff 0%, transparent 60%),
+    linear-gradient(180deg, #f4f9fd 0%, #eaf3fb 55%, #e3eef9 100%);
+  background-attachment: fixed;
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;
 }
 
 section {
   scroll-margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 泡（バブル）背景レイヤー ===== */
+.water-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.water-bg .bubble {
+  position: absolute;
+  bottom: -10vh;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(120, 180, 235, 0.18) 45%,
+    rgba(120, 180, 235, 0) 70%
+  );
+  border: 1px solid rgba(120, 180, 235, 0.18);
+  opacity: 0;
+  animation: bubbleRise linear infinite;
+}
+@keyframes bubbleRise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.9);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-55vh) translateX(12px) scale(1);
+  }
+  90% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-8px) scale(1.05);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .water-bg {
+    display: none;
+  }
 }
 
 /* MDX 本文の基本タイポグラフィ */

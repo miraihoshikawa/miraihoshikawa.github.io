@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WaterBackground } from "@/components/layout/WaterBackground";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -50,13 +51,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className={notoSansJP.variable}>
-      <body className="bg-[var(--bg)] text-[var(--text)] antialiased">
+      <body className="text-[var(--text)] antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <WaterBackground />
         <Header />
-        <main>{children}</main>
+        <main className="relative z-[1]">{children}</main>
         <Footer />
       </body>
     </html>

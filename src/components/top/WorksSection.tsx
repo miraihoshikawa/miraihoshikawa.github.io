@@ -7,7 +7,7 @@ export function WorksSection() {
   return (
     <section
       id="works"
-      className="border-t border-[var(--border)] bg-[var(--bg)]"
+      className="border-t border-[var(--border)]"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <SectionHeading
