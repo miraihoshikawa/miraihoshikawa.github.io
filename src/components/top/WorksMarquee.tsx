@@ -13,23 +13,25 @@ export function WorksMarquee() {
   const items = [...projects, ...projects];
 
   return (
-    <div className="relative w-full overflow-hidden pt-14">
-      <div className="works-marquee-track flex">
-        {items.map((p, i) => (
-          <div
-            key={`${p.slug}-${i}`}
-            aria-hidden={i >= projects.length}
-            className="mr-4 aspect-[4/3] h-[clamp(150px,24vw,280px)] shrink-0 overflow-hidden bg-[var(--bg-alt)]"
-          >
-            <img
-              src={p.cover}
-              alt={p.title}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        ))}
+    <div className="relative w-full pt-14">
+      <div className="works-marquee-strip">
+        <div className="works-marquee-track flex">
+          {items.map((p, i) => (
+            <div
+              key={`${p.slug}-${i}`}
+              aria-hidden={i >= projects.length}
+              className="mr-4 aspect-[4/3] h-[clamp(120px,19vw,224px)] shrink-0 overflow-hidden bg-[var(--bg-alt)]"
+            >
+              <img
+                src={p.cover}
+                alt={p.title}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

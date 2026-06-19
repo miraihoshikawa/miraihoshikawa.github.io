@@ -151,21 +151,77 @@ section {
   }
 }
 
-/* Works マーキー（作品画像が左から右へゆっくり流れる） */
+/* Works マーキー（作品画像が右から左へゆっくり流れる + 縁を流体的に） */
+.works-marquee-strip {
+  position: relative;
+  overflow: hidden;
+  /* 左右の縁を、画像が溶けて出入りするようにフェード */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
 .works-marquee-track {
   width: max-content;
-  animation: worksMarquee 55s linear infinite;
+  animation: worksMarquee 80s linear infinite;
 }
 @keyframes worksMarquee {
   from {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
   to {
-    transform: translateX(0);
+    transform: translateX(-50%);
+  }
+}
+/* 上下の縁に、水流のような光が右→左へ流れる演出 */
+.works-marquee-strip::before,
+.works-marquee-strip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(110, 190, 255, 0) 0px,
+    rgba(150, 210, 255, 0.85) 60px,
+    rgba(110, 190, 255, 0) 120px
+  );
+  filter: drop-shadow(0 0 5px rgba(110, 190, 255, 0.6));
+  animation: marqueeEdgeFlow 8s linear infinite;
+}
+.works-marquee-strip::before {
+  top: 0;
+}
+.works-marquee-strip::after {
+  bottom: 0;
+  animation-duration: 11s;
+  opacity: 0.85;
+}
+@keyframes marqueeEdgeFlow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -240px 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .works-marquee-track {
+  .works-marquee-track,
+  .works-marquee-strip::before,
+  .works-marquee-strip::after {
     animation: none;
   }
 }
