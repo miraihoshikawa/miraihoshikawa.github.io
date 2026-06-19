@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <WorksMarquee />
-      <AboutSection />
+      <AboutSection noBorder />
       <WorksSection />
       <RecordsSection />
       <SkillsSection />

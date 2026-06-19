@@ -5,11 +5,13 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export function AboutSection({
   detailed = false,
+  noBorder = false,
 }: {
   detailed?: boolean;
+  noBorder?: boolean;
 }) {
   return (
-    <SectionWrapper id="about">
+    <SectionWrapper id="about" noBorder={noBorder}>
       <SectionHeading
         num="01"
         jp="About / 自己紹介"
