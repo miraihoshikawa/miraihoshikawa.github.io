@@ -10,7 +10,12 @@ export function AboutSection({
 }) {
   return (
     <SectionWrapper id="about">
-      <SectionHeading num="01" jp="About / 自己紹介" serif>
+      <SectionHeading
+        num="01"
+        jp="About / 自己紹介"
+        serif
+        titleClassName="text-[clamp(1.65rem,4vw,2.9rem)]"
+      >
         干川未来 / Mirai Hoshikawa
       </SectionHeading>
 
@@ -29,23 +34,23 @@ export function AboutSection({
         <div className="space-y-10">
           {/* Affiliation block (上) */}
           <div className="border-l-2 border-[var(--accent)] pl-6">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Current Affiliation
             </p>
-            <p className="mt-2 text-base text-[var(--text-body)]">
+            <p className="mt-2 text-xl text-[var(--text-body)]">
               {profile.university}
             </p>
-            <ul className="mt-2 space-y-0.5 text-base text-[var(--text-sub)]">
+            <ul className="mt-2 space-y-0.5 text-xl text-[var(--text-sub)]">
               {profile.labs.map((lab) => (
                 <li key={lab}>— {lab}</li>
               ))}
             </ul>
 
             {/* Experience を小さく併記 */}
-            <p className="mt-5 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="mt-5 font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Experience
             </p>
-            <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-body)]">
+            <ul className="mt-2 space-y-0.5 text-lg text-[var(--text-body)]">
               {profile.experiences.map((exp) => (
                 <li key={exp.company}>
                   — {exp.company}　{exp.role}
@@ -174,6 +179,20 @@ export function RecordsSection() {
               {profile.history.operations.summaryNote}
             </span>
           </div>
+
+          {/* 配信オペレーション写真（小さく） */}
+          <figure className="mb-8 max-w-sm">
+            <img
+              src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
+              alt="自作の演出統合インターフェースによる配信オペレーション"
+              loading="lazy"
+              decoding="async"
+              className="w-full border border-[var(--border)] object-cover"
+            />
+            <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+              自作の演出統合インターフェースを用いた配信オペレーション卓
+            </figcaption>
+          </figure>
 
           {/* Venues */}
           <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">

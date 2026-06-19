@@ -4,12 +4,14 @@ export function SectionHeading({
   sub,
   num,
   serif = false,
+  titleClassName = "text-[clamp(2rem,4.5vw,3.25rem)]",
 }: {
   children: React.ReactNode;
   jp?: string;
   sub?: string;
   num?: string;
   serif?: boolean;
+  titleClassName?: string;
 }) {
   return (
     <div className="mb-16 reveal">
@@ -20,7 +22,7 @@ export function SectionHeading({
       )}
       <div className="flex items-baseline gap-6">
         <h2
-          className="text-[clamp(2rem,4.5vw,3.25rem)] leading-none font-bold tracking-tight text-[var(--text)]"
+          className={`${titleClassName} leading-none font-bold tracking-tight text-[var(--text)]`}
           style={
             serif
               ? {

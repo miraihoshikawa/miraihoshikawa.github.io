@@ -151,6 +151,25 @@ section {
   }
 }
 
+/* Works マーキー（作品画像が左から右へゆっくり流れる） */
+.works-marquee-track {
+  width: max-content;
+  animation: worksMarquee 55s linear infinite;
+}
+@keyframes worksMarquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .works-marquee-track {
+    animation: none;
+  }
+}
+
 /* MDX 本文の基本タイポグラフィ */
 .mdx-body {
   font-size: 1.0625rem; /* 17px */
