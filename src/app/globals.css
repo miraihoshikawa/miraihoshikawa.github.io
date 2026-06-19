@@ -173,7 +173,7 @@ section {
 }
 .works-marquee-track {
   width: max-content;
-  animation: worksMarquee 80s linear infinite;
+  animation: worksMarquee 160s linear infinite;
 }
 @keyframes worksMarquee {
   from {
