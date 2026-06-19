@@ -55,25 +55,6 @@ export function AboutSection() {
             {profile.bio}
           </p>
 
-          {/* 3 axes */}
-          <div>
-            <p className="mb-5 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
-              Three Fields
-            </p>
-            <div className="grid gap-px bg-[var(--border)] sm:grid-cols-3">
-              {profile.axes.map((axis) => (
-                <div key={axis.label} className="bg-[var(--bg)] p-5">
-                  <p className="text-sm font-bold text-[var(--text)]">
-                    {axis.label}
-                  </p>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-sub)]">
-                    {axis.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
       </div>
 
