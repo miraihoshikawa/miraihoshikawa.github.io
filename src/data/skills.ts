@@ -6,7 +6,7 @@ export type SkillCategory = {
 
 /** ソフトウェア・フレームワーク */
 export const tools: SkillCategory[] = [
-  { label: "Programming", items: ["Python", "TypeScript", "C++"] },
+  { label: "Programming", items: ["Python", "C++"] },
   {
     label: "Creative",
     items: [
@@ -21,6 +21,22 @@ export const tools: SkillCategory[] = [
   { label: "Robotics / Embedded", items: ["ROS2", "Arduino", "KiCAD"] },
   { label: "CAD", items: ["SolidWorks", "Fusion 360"] },
 ];
+
+/** ツール名 → ロゴ画像（public/images/logos/）。無いものはテキストのみ表示 */
+export const toolLogos: Record<string, string> = {
+  "C++": "cpp.png",
+  TouchDesigner: "touchdesigner.jpg",
+  Unity: "unity.jpg",
+  "After Effects": "after-effects.png",
+  "Premiere Pro": "premiere-pro.png",
+  Photoshop: "photoshop.png",
+  Lightroom: "lightroom.png",
+  ROS2: "ros2.png",
+  Arduino: "arduino.jpg",
+  KiCAD: "kicad.jpg",
+  SolidWorks: "solidworks.jpg",
+  "Fusion 360": "fusion360.png",
+};
 
 /** 機材・設備の写真（Skillsに小さく掲載） */
 export const equipmentPhotos: { file: string; label: string }[] = [

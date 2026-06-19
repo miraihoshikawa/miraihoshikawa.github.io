@@ -3,6 +3,7 @@ import {
   tools,
   equipment,
   equipmentPhotos,
+  toolLogos,
   type SkillCategory,
 } from "@/data/skills";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
@@ -88,7 +89,7 @@ function SkillGroup({
             </div>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
-                <ToolBadge key={item} name={item} />
+                <ToolBadge key={item} name={item} logo={toolLogos[item]} />
               ))}
             </div>
           </div>
