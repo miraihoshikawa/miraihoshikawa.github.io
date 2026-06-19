@@ -24,6 +24,7 @@ export const tools: SkillCategory[] = [
 
 /** ツール名 → ロゴ画像（public/images/logos/）。無いものはテキストのみ表示 */
 export const toolLogos: Record<string, string> = {
+  Python: "python.webp",
   "C++": "cpp.png",
   TouchDesigner: "touchdesigner.jpg",
   Unity: "unity.jpg",
