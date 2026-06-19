@@ -28,10 +28,10 @@ export function AboutSection() {
             <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Current Affiliation
             </p>
-            <p className="mt-2 text-sm text-[var(--text-body)]">
+            <p className="mt-2 text-base text-[var(--text-body)]">
               {profile.university}
             </p>
-            <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-sub)]">
+            <ul className="mt-2 space-y-0.5 text-base text-[var(--text-sub)]">
               {profile.labs.map((lab) => (
                 <li key={lab}>— {lab}</li>
               ))}
@@ -41,7 +41,7 @@ export function AboutSection() {
             <p className="mt-5 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Experience
             </p>
-            <ul className="mt-2 space-y-0.5 text-xs text-[var(--text-sub)]">
+            <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-sub)]">
               {profile.experiences.map((exp) => (
                 <li key={exp.company}>
                   — {exp.company}　{exp.role}
@@ -51,7 +51,7 @@ export function AboutSection() {
           </div>
 
           {/* Bio (下・Affiliationと同じくらいのサイズ) */}
-          <p className="text-sm leading-relaxed text-[var(--text-body)]">
+          <p className="text-base leading-relaxed text-[var(--text-body)]">
             {profile.bio}
           </p>
 
@@ -77,8 +77,16 @@ export function AboutSection() {
         </div>
       </div>
 
-      {/* Education（About はここまで。Works の後に Records が続く） */}
-      <div className="mt-24 border-t border-[var(--border)] pt-16">
+    </SectionWrapper>
+  );
+}
+
+/** Works の後に置く、研究発表・展示・配信運用の記録 */
+export function RecordsSection() {
+  return (
+    <SectionWrapper id="records">
+      <div className="space-y-16">
+        {/* Education（Works の後に表示） */}
         <HistoryBlock title="Education" jp="学歴">
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.education.map((e) => (
@@ -91,16 +99,7 @@ export function AboutSection() {
             ))}
           </ul>
         </HistoryBlock>
-      </div>
-    </SectionWrapper>
-  );
-}
 
-/** Works の後に置く、研究発表・展示・配信運用の記録 */
-export function RecordsSection() {
-  return (
-    <SectionWrapper id="records">
-      <div className="space-y-16">
         {/* Publications */}
         <HistoryBlock title="Publications" jp="研究発表">
           <ol className="space-y-4">
