@@ -1,38 +1,31 @@
-/* eslint-disable @next/next/no-img-element */
 import { getAllProjects } from "@/lib/content";
+import { WorksMarqueeClient, type MarqueeItem } from "./WorksMarqueeClient";
 
 /**
- * 作品カバー画像を左から右へゆっくり流す横スライド（マーキー）。
- * ページ最上部（About 見出しの上）に置く。高さは自己紹介ポートレートの横幅程度。
- * シームレスループのため同じ並びを 2 周分つなげて -50% → 0 でアニメーションさせる。
+ * 作品カバー＋追加の代表画像を、ページ最上部で右→左へゆっくり流すマーキー。
+ * 並び順はクライアント側で初回ロード時に一度シャッフルして確定し、1巡内で重複しない。
  */
 export function WorksMarquee() {
-  const projects = getAllProjects().filter((p) => p.cover);
-  if (projects.length === 0) return null;
+  const covers: MarqueeItem[] = getAllProjects()
+    .filter((p) => p.cover)
+    .map((p) => ({ src: p.cover as string, alt: p.title, key: p.slug }));
 
-  const items = [...projects, ...projects];
+  // カバー以外に流したい代表画像
+  const extras: MarqueeItem[] = [
+    {
+      src: "/images/projects/02-streaming-interface/Fig_stage.jpg",
+      alt: "ピッチイベントでの映像・照明演出",
+      key: "extra-pitch-stage",
+    },
+    {
+      src: "/images/projects/08-relational-coral/Fig_touch.png",
+      alt: "触れると白化するインタラクション（Relational Coral）",
+      key: "extra-coral-touch",
+    },
+  ];
 
-  return (
-    <div className="relative w-full pt-14">
-      <div className="works-marquee-strip">
-        <div className="works-marquee-track flex">
-          {items.map((p, i) => (
-            <div
-              key={`${p.slug}-${i}`}
-              aria-hidden={i >= projects.length}
-              className="mr-4 aspect-[4/3] h-[clamp(120px,19vw,224px)] shrink-0 overflow-hidden bg-[var(--bg-alt)]"
-            >
-              <img
-                src={p.cover}
-                alt={p.title}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  const items = [...covers, ...extras];
+  if (items.length === 0) return null;
+
+  return <WorksMarqueeClient items={items} />;
 }

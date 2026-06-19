@@ -99,8 +99,8 @@ export const profile = {
     ],
     // 配信・現場運用
     operations: {
-      summaryCount: "140+",
-      summaryNote: "配信現場数（2025/09/30時点）",
+      summaryCount: "180+",
+      summaryNote: "配信現場数（2026/06/19時点）",
       // 継続・定期で運用している配信現場
       venues: [
         { text: "毎週水曜 つくばスタートアップパーク イベント", url: "https://tsukuba-stapa.jp/" },
