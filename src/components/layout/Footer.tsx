@@ -30,17 +30,17 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-sm text-[var(--text-sub)]">
               <li>
-                <Link href="/#works" className="transition-colors hover:text-[var(--text)]">
+                <Link href="/works/" className="transition-colors hover:text-[var(--text)]">
                   Works
                 </Link>
               </li>
               <li>
-                <Link href="/#skills" className="transition-colors hover:text-[var(--text)]">
+                <Link href="/skills/" className="transition-colors hover:text-[var(--text)]">
                   Skills
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="transition-colors hover:text-[var(--text)]">
+                <Link href="/about/" className="transition-colors hover:text-[var(--text)]">
                   About
                 </Link>
               </li>
