@@ -3,10 +3,14 @@ import { profile } from "@/data/profile";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
-export function AboutSection() {
+export function AboutSection({
+  detailed = false,
+}: {
+  detailed?: boolean;
+}) {
   return (
     <SectionWrapper id="about">
-      <SectionHeading num="01" jp="About / 自己紹介">
+      <SectionHeading num="01" jp="About / 自己紹介" serif>
         干川未来 / Mirai Hoshikawa
       </SectionHeading>
 
@@ -41,7 +45,7 @@ export function AboutSection() {
             <p className="mt-5 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Experience
             </p>
-            <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-sub)]">
+            <ul className="mt-2 space-y-0.5 text-sm text-[var(--text-body)]">
               {profile.experiences.map((exp) => (
                 <li key={exp.company}>
                   — {exp.company}　{exp.role}
@@ -54,6 +58,35 @@ export function AboutSection() {
           <p className="text-base leading-relaxed text-[var(--text-body)]">
             {profile.bio}
           </p>
+
+          {/* Experience 詳細（/about 詳細ページのみ） */}
+          {detailed && (
+            <div>
+              <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+                Experience / 活動内容
+              </p>
+              <div className="space-y-6">
+                {profile.experiences
+                  .filter((exp) => exp.detail)
+                  .map((exp) => (
+                    <div
+                      key={exp.company}
+                      className="border-l-2 border-[var(--border)] pl-5"
+                    >
+                      <p className="text-sm font-bold text-[var(--text)]">
+                        {exp.company}
+                      </p>
+                      <p className="mt-0.5 font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase">
+                        {exp.role}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
+                        {exp.detail}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
 
         </div>
       </div>

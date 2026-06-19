@@ -3,11 +3,13 @@ export function SectionHeading({
   jp,
   sub,
   num,
+  serif = false,
 }: {
   children: React.ReactNode;
   jp?: string;
   sub?: string;
   num?: string;
+  serif?: boolean;
 }) {
   return (
     <div className="mb-16 reveal">
@@ -17,7 +19,17 @@ export function SectionHeading({
         </p>
       )}
       <div className="flex items-baseline gap-6">
-        <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] leading-none font-bold tracking-tight text-[var(--text)]">
+        <h2
+          className="text-[clamp(2rem,4.5vw,3.25rem)] leading-none font-bold tracking-tight text-[var(--text)]"
+          style={
+            serif
+              ? {
+                  fontFamily:
+                    'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
+                }
+              : undefined
+          }
+        >
           {children}
         </h2>
         {jp && (
