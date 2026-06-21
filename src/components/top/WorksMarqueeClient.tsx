@@ -24,7 +24,7 @@ export function WorksMarqueeClient({ items }: { items: MarqueeItem[] }) {
   const loop = [...order, ...order];
 
   return (
-    <div className="relative w-full pt-14 -mb-12 md:-mb-16">
+    <div className="relative w-full pt-14">
       <div className="works-marquee-strip">
         <div className="works-marquee-track flex">
           {loop.map((it, i) => (
