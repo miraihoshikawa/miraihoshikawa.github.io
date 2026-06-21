@@ -21,7 +21,7 @@ export function SkillsSection() {
       {/* Capabilities */}
       <CapabilityGroup
         title="Capabilities"
-        jp="できること"
+        jp="経験"
         categories={capabilities}
       />
 
