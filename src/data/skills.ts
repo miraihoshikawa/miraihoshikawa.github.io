@@ -6,7 +6,7 @@ export type SkillCategory = {
 
 /** ソフトウェア・フレームワーク */
 export const tools: SkillCategory[] = [
-  { label: "Programming", items: ["Python", "C++", "C", "C#"] },
+  { label: "Programming", items: ["Python", "C", "C++", "C#"] },
   {
     label: "Creative",
     items: [
@@ -26,8 +26,8 @@ export const tools: SkillCategory[] = [
 /** ツール名 → ロゴ画像（public/images/logos/）。無いものはテキストのみ表示 */
 export const toolLogos: Record<string, string> = {
   Python: "python.webp",
+  C: "c.jpg",
   "C++": "cpp.png",
-  C: "c.webp",
   "C#": "csharp.png",
   TouchDesigner: "touchdesigner.jpg",
   Unity: "unity.jpg",
