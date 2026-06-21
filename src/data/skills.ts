@@ -4,6 +4,50 @@ export type SkillCategory = {
   items: string[];
 };
 
+/** 実務でできること（設計〜製作〜現場運用までの領域別） */
+export const capabilities: SkillCategory[] = [
+  {
+    label: "Hardware Development",
+    jp: "ハードウェア開発",
+    items: [
+      "CAD設計（SOLIDWORKS / Fusion 360）",
+      "3Dプリンタによる試作・筐体プロトタイピング",
+      "ロボドリル・工作機械による金属加工",
+      "真空注型機を用いたシリコン成形",
+    ],
+  },
+  {
+    label: "Electronics & Embedded",
+    jp: "電子回路・組み込み",
+    items: [
+      "KiCADによる回路・基板設計",
+      "基板加工・実装・デバッグ",
+      "センサ統合と筐体への組み込み",
+      "Arduino / ESP32 / Raspberry Pi / NVIDIA Jetson",
+    ],
+  },
+  {
+    label: "Interactive / Spatial Computing",
+    jp: "インタラクション・空間演出",
+    items: [
+      "TouchDesignerによるインタラクション設計",
+      "DMX / Art-Net による照明制御",
+      "Computer Vision・AI・ロボティクスの応用",
+      "XR・フィジカルコンピューティング開発",
+    ],
+  },
+  {
+    label: "Installation & Operation",
+    jp: "設営・テクニカルオペレーション",
+    items: [
+      "配信現場での映像・音響・照明オペレーション",
+      "インスタレーション作品の設営・運用",
+      "空間演出システムの実装・調整",
+      "展示現場でのトラブルシューティング",
+    ],
+  },
+];
+
 /** ソフトウェア・フレームワーク */
 export const tools: SkillCategory[] = [
   { label: "Programming", items: ["Python", "C", "C++", "C#"] },

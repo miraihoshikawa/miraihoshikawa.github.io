@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import {
+  capabilities,
   tools,
   equipment,
   equipmentPhotos,
@@ -17,12 +18,21 @@ export function SkillsSection() {
         Skills
       </SectionHeading>
 
-      {/* Software & Tools */}
-      <SkillGroup
-        title="Software & Tools"
-        jp="ソフトウェア"
-        categories={tools}
+      {/* Capabilities */}
+      <CapabilityGroup
+        title="Capabilities"
+        jp="できること"
+        categories={capabilities}
       />
+
+      {/* Software & Tools */}
+      <div className="mt-20">
+        <SkillGroup
+          title="Software & Tools"
+          jp="ソフトウェア"
+          categories={tools}
+        />
+      </div>
 
       {/* Equipment */}
       <div className="mt-20">
@@ -92,6 +102,57 @@ function SkillGroup({
                 <ToolBadge key={item} name={item} logo={toolLogos[item]} large />
               ))}
             </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CapabilityGroup({
+  title,
+  jp,
+  categories,
+}: {
+  title: string;
+  jp: string;
+  categories: SkillCategory[];
+}) {
+  return (
+    <div>
+      <div className="mb-10 flex items-baseline gap-4">
+        <h3 className="text-2xl font-bold tracking-tight text-[var(--text)]">
+          {title}
+        </h3>
+        <span className="text-base text-[var(--text-mute)]">{jp}</span>
+      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        {categories.map((category) => (
+          <div
+            key={category.label}
+            className="border-l-2 border-[var(--accent)] bg-[var(--bg-alt)] py-5 pr-5 pl-6"
+          >
+            <div className="flex items-baseline gap-3">
+              <h4 className="text-lg font-bold tracking-tight text-[var(--text)]">
+                {category.label}
+              </h4>
+              {category.jp && (
+                <span className="text-[13px] text-[var(--text-mute)]">
+                  {category.jp}
+                </span>
+              )}
+            </div>
+            <ul className="mt-4 space-y-2.5">
+              {category.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-2.5 text-[15px] leading-snug text-[var(--text-body)]"
+                >
+                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
