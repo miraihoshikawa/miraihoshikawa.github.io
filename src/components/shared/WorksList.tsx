@@ -4,6 +4,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { ProjectMeta, ProjectCategory } from "@/lib/content";
+import { TeamBadge } from "@/components/shared/TeamBadge";
 
 const FILTERS: { key: ProjectCategory | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -104,6 +105,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                     {p.subtitle}
                   </p>
                 )}
+                {p.teamType && <TeamBadge type={p.teamType} className="mt-3" />}
               </div>
             </Link>
           </li>

@@ -17,6 +17,7 @@ export type ProjectMeta = {
   tagline: string;
   abstract?: string; // 詳細ページ冒頭の要約（左画像・右テキスト）。無ければ tagline を使う
   team?: string;
+  teamType?: "個人" | "チーム"; // 一覧カード・詳細に出すタグ。制作体制の概略
   aiUsage?: string; // AI利用の明記（どの工程・範囲でAIを使ったか）。あれば詳細ページに表示
   repoUrl?: string; // コード/リポジトリへのリンク。あればタイトル直下に表示
   achievements?: string[];

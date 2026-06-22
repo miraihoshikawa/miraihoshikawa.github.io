@@ -8,6 +8,7 @@ import {
   getAdjacentProjects,
 } from "@/lib/content";
 import { ToolBadge } from "@/components/shared/ToolBadge";
+import { TeamBadge } from "@/components/shared/TeamBadge";
 import { Video, mdxComponents } from "@/components/mdx";
 
 export function generateStaticParams() {
@@ -86,15 +87,20 @@ export default async function WorkDetailPage({
             {meta.subtitle}
           </p>
         )}
-        {meta.repoUrl && (
-          <a
-            href={meta.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.2em] text-[var(--accent)] uppercase underline-offset-4 hover:underline"
-          >
-            Source Code ↗
-          </a>
+        {(meta.teamType || meta.repoUrl) && (
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            {meta.teamType && <TeamBadge type={meta.teamType} />}
+            {meta.repoUrl && (
+              <a
+                href={meta.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.2em] text-[var(--accent)] uppercase underline-offset-4 hover:underline"
+              >
+                Source Code ↗
+              </a>
+            )}
+          </div>
         )}
       </header>
 
