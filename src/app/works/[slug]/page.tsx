@@ -86,6 +86,16 @@ export default async function WorkDetailPage({
             {meta.subtitle}
           </p>
         )}
+        {meta.repoUrl && (
+          <a
+            href={meta.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-7 inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.2em] text-[var(--accent)] uppercase underline-offset-4 hover:underline"
+          >
+            Source Code ↗
+          </a>
+        )}
       </header>
 
       {/* Abstract — 左に画像・右に説明（これだけ読めば概要がわかる） */}
@@ -167,6 +177,18 @@ export default async function WorkDetailPage({
             <SectionHead num={nextNum()} label="制作体制" />
             <p className="max-w-2xl whitespace-pre-line text-lg leading-relaxed text-[var(--text-body)]">
               {meta.team}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* AI Usage */}
+      {meta.aiUsage && (
+        <section className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
+            <SectionHead num={nextNum()} label="AI利用" />
+            <p className="max-w-2xl whitespace-pre-line text-lg leading-relaxed text-[var(--text-body)]">
+              {meta.aiUsage}
             </p>
           </div>
         </section>
