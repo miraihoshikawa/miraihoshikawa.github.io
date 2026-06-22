@@ -64,8 +64,13 @@ export const profile = {
       "筑波大学 工学システム学類 編入学",
       "群馬工業高等専門学校 電子メディア工学科 卒業",
     ],
-    // 奨学・採択（受賞・採用枠など）
-    awards: [
+    // 奨学・採択（採用枠・選出など）
+    honors: [
+      {
+        date: "2026.06–",
+        text: "日本財団 HUMAIプログラム GS枠（Giant Step）Sメンバー",
+        url: "https://zen.ac.jp/humai",
+      },
       {
         date: "2019–2021",
         text: "公益財団法人 川村育英会 奨学生 採択",

@@ -121,10 +121,10 @@ export function RecordsSection() {
           </ul>
         </HistoryBlock>
 
-        {/* Awards */}
-        <HistoryBlock title="Awards" jp="奨学・採択">
+        {/* Honors */}
+        <HistoryBlock title="Honors" jp="奨学・採択">
           <ul className="divide-y divide-[var(--border)]">
-            {profile.history.awards.map((item) => (
+            {profile.history.honors.map((item) => (
               <li
                 key={item.date + item.text}
                 className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
