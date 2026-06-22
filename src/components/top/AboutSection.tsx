@@ -121,6 +121,38 @@ export function RecordsSection() {
           </ul>
         </HistoryBlock>
 
+        {/* Awards */}
+        <HistoryBlock title="Awards" jp="奨学・採択">
+          <ul className="divide-y divide-[var(--border)]">
+            {profile.history.awards.map((item) => (
+              <li
+                key={item.date + item.text}
+                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
+              >
+                <span className="font-mono text-[12px] text-[var(--text-mute)]">
+                  {item.date}
+                </span>
+                <span className="text-[var(--text-body)]">
+                  {item.text}
+                  {item.url && (
+                    <>
+                      {" "}
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+                      >
+                        [link]
+                      </a>
+                    </>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </HistoryBlock>
+
         {/* Publications */}
         <HistoryBlock title="Publications" jp="研究発表">
           <ol className="space-y-4">

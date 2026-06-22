@@ -64,6 +64,14 @@ export const profile = {
       "筑波大学 工学システム学類 編入学",
       "群馬工業高等専門学校 電子メディア工学科 卒業",
     ],
+    // 奨学・採択（受賞・採用枠など）
+    awards: [
+      {
+        date: "2019–2021",
+        text: "公益財団法人 川村育英会 奨学生 採択",
+        url: "https://kawamura-ikueikai.or.jp/",
+      },
+    ],
     // 研究発表（引用形式・任意でリンク）
     publications: [
       {
