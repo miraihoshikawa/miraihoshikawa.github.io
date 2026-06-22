@@ -185,12 +185,35 @@ export function Callout({
 }
 
 /**
+ * 画像を掲載できない箇所のプレースホルダ（著作権等で非掲載の作業）。
+ * 使い方:
+ *   <NoImage caption="Da-iCE ライブ映像演出 — 著作権の関係で非掲載" />
+ */
+export function NoImage({ caption }: { caption?: ReactNode }) {
+  return (
+    <figure className="my-10">
+      <div className="flex aspect-video w-full items-center justify-center border border-dashed border-[var(--border)] bg-[var(--bg-alt)]">
+        <span className="font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+          No Image
+        </span>
+      </div>
+      {caption && (
+        <figcaption className="mt-3 text-center text-xs text-[var(--text-mute)]">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+/**
  * MDXRemote の components prop に渡すマップ。
  * imageBase を子コンポーネントに自動で注入するため、ラッパーでカリー化する。
  */
 export function mdxComponents(imageBase: string) {
   return {
     Fig: (props: ImgProps) => <Fig {...props} imageBase={imageBase} />,
+    NoImage,
     FigGrid: (props: { children: ReactNode; cols?: 2 | 3 | 4 }) => (
       <FigGrid {...props} />
     ),

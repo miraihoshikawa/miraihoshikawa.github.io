@@ -18,6 +18,7 @@ export type ProjectMeta = {
   abstract?: string; // 詳細ページ冒頭の要約（左画像・右テキスト）。無ければ tagline を使う
   team?: string;
   teamType?: "個人" | "チーム"; // 一覧カード・詳細に出すタグ。制作体制の概略
+  tags?: string[]; // 文脈タグ（修士課程研究 / 長期インターン 等）。制作体制タグの隣に表示
   aiUsage?: string; // AI利用の明記（どの工程・範囲でAIを使ったか）。あれば詳細ページに表示
   repoUrl?: string; // コード/リポジトリへのリンク。あればタイトル直下に表示
   achievements?: string[];
@@ -30,6 +31,7 @@ export type ProjectMeta = {
   heroImages?: string[]; // frontmatterで指定した場合、ヒーロー4枚ストリップに使用（ファイル名）
   cover?: string;
   gallery?: string[];
+  galleryLayout?: "grid" | "full"; // "grid"で小さめのカラム表示。既定はfull（全幅）
   subProjects?: { title: string; year: string; description: string }[];
 };
 

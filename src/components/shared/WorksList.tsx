@@ -4,7 +4,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { ProjectMeta, ProjectCategory } from "@/lib/content";
-import { TeamBadge } from "@/components/shared/TeamBadge";
+import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
 
 const FILTERS: { key: ProjectCategory | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -105,7 +105,12 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                     {p.subtitle}
                   </p>
                 )}
-                {p.teamType && <TeamBadge type={p.teamType} className="mt-3" />}
+                {(p.teamType || p.tags?.length) && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {p.teamType && <TeamBadge type={p.teamType} />}
+                    {p.tags?.map((t) => <Tag key={t} label={t} />)}
+                  </div>
+                )}
               </div>
             </Link>
           </li>

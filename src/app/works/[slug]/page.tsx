@@ -8,7 +8,7 @@ import {
   getAdjacentProjects,
 } from "@/lib/content";
 import { ToolBadge } from "@/components/shared/ToolBadge";
-import { TeamBadge } from "@/components/shared/TeamBadge";
+import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
 import { Video, mdxComponents } from "@/components/mdx";
 
 export function generateStaticParams() {
@@ -87,9 +87,10 @@ export default async function WorkDetailPage({
             {meta.subtitle}
           </p>
         )}
-        {(meta.teamType || meta.repoUrl) && (
+        {(meta.teamType || meta.tags?.length || meta.repoUrl) && (
           <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
             {meta.teamType && <TeamBadge type={meta.teamType} />}
+            {meta.tags?.map((t) => <Tag key={t} label={t} />)}
             {meta.repoUrl && (
               <a
                 href={meta.repoUrl}
@@ -206,7 +207,13 @@ export default async function WorkDetailPage({
           <div className="mx-auto max-w-5xl px-6 pt-16 md:px-10 md:pt-20">
             <SectionHead num={nextNum()} label="Gallery" />
           </div>
-          <div className="mx-auto max-w-7xl space-y-3 px-6 pb-16 md:px-10 md:pb-20">
+          <div
+            className={`mx-auto px-6 pb-16 md:px-10 md:pb-20 ${
+              meta.galleryLayout === "grid"
+                ? "grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3"
+                : "max-w-7xl space-y-3"
+            }`}
+          >
             {meta.gallery.map((src, i) => (
               <img
                 key={src}
@@ -214,7 +221,11 @@ export default async function WorkDetailPage({
                 alt={`${meta.title} - ${i + 1}`}
                 loading="lazy"
                 decoding="async"
-                className="w-full"
+                className={
+                  meta.galleryLayout === "grid"
+                    ? "aspect-[4/3] w-full object-cover"
+                    : "w-full"
+                }
               />
             ))}
           </div>
