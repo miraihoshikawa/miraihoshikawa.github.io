@@ -128,7 +128,11 @@ export default async function WorkDetailPage({
                 alt={meta.title}
                 fetchPriority="high"
                 decoding="async"
-                className="aspect-[4/3] w-full object-cover"
+                className={
+                  meta.cardFit === "contain"
+                    ? "w-full object-contain"
+                    : "aspect-[4/3] w-full object-cover"
+                }
               />
             </div>
           ) : (
