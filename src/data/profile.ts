@@ -24,13 +24,6 @@ export const profile = {
       description: "配信・演出統合システム、現場運用",
     },
   ],
-  /** トップで一目で見せる実績ハイライト */
-  highlights: [
-    { value: "180+", label: "配信現場の運用" },
-    { value: "6+", label: "展示・発表の会場" },
-    { value: "国際会議", label: "IEEE SII 2025 で査読発表" },
-    { value: "HUMAI GS", label: "Giant Step枠 採択" },
-  ],
   /**
    * 会社・組織との関わり。Affiliation ブロック内に小さく併記する。
    * detail は About 詳細ページ（/about）でのみ表示する活動内容。
