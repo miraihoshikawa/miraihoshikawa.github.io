@@ -32,6 +32,7 @@ export type ProjectMeta = {
   cover?: string;
   gallery?: string[];
   galleryLayout?: "grid" | "full"; // "grid"で小さめのカラム表示。既定はfull（全幅）
+  cardImages?: string[]; // 一覧カードで2枚を重ねて表示（[前面/左下, 背面/右上]）。frontmatterはファイル名、読み込み時にURL化
   subProjects?: { title: string; year: string; description: string }[];
 };
 
@@ -136,6 +137,12 @@ function readProject(entry: { slug: string; mdxPath: string; folder: string }) {
   } as ProjectMeta;
   // dataを後から展開してslug/cover/galleryを上書きしないよう、再度slugを正規化
   meta.slug = slug;
+  // cardImages はファイル名指定 → URL に解決
+  if (Array.isArray(data.cardImages)) {
+    meta.cardImages = data.cardImages.map(
+      (f: string) => `/images/projects/${slug}/${f}`
+    );
+  }
   return { meta, body: content };
 }
 

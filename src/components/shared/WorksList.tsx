@@ -72,7 +72,26 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
             <Link href={`/works/${p.slug}/`} className="group block">
               {/* Image dominates */}
               <div className="relative aspect-[4/3] overflow-hidden bg-[var(--bg-alt)]">
-                {p.cover ? (
+                {p.cardImages && p.cardImages.length === 2 ? (
+                  <>
+                    {/* 背面・右上 */}
+                    <img
+                      src={p.cardImages[1]}
+                      alt={p.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute top-0 right-0 aspect-[4/3] w-[62%] border border-[var(--border)] object-cover transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1"
+                    />
+                    {/* 前面・左下 */}
+                    <img
+                      src={p.cardImages[0]}
+                      alt={p.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute bottom-0 left-0 z-10 aspect-[4/3] w-[62%] border border-[var(--border)] object-cover shadow-lg transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1"
+                    />
+                  </>
+                ) : p.cover ? (
                   <img
                     src={p.cover}
                     alt={p.title}
