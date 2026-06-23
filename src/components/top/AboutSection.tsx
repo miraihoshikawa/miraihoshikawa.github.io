@@ -23,7 +23,7 @@ export function AboutSection({
             textShadow: "0 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5)",
           }}
         >
-          〜テクノロジーで日常にワクワクを〜
+          〜テクノロジーで日々の日常に感動を〜
         </p>
       )}
       <SectionHeading
