@@ -3,7 +3,9 @@ import { getAllArticles } from "@/lib/content";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export const metadata = {
-  title: "Articles | 干川未来",
+  title: "Articles",
+  description: "干川未来の記事・制作メモ・展示レポート・覚え書き。",
+  alternates: { canonical: "/articles/" },
 };
 
 export default function ArticlesIndexPage() {
@@ -12,7 +14,7 @@ export default function ArticlesIndexPage() {
   return (
     <div className="pt-14">
       <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <SectionHeading jp="記事" sub="制作メモ・展示レポート・覚え書き。">
+        <SectionHeading as="h1" jp="記事" sub="制作メモ・展示レポート・覚え書き。">
           Articles
         </SectionHeading>
 

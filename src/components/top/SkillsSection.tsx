@@ -11,10 +11,14 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ToolBadge } from "@/components/shared/ToolBadge";
 
-export function SkillsSection() {
+export function SkillsSection({
+  headingAs = "h2",
+}: {
+  headingAs?: "h1" | "h2";
+}) {
   return (
     <SectionWrapper id="skills">
-      <SectionHeading num="03" jp="技術・機材">
+      <SectionHeading num="03" jp="技術・機材" as={headingAs}>
         Skills
       </SectionHeading>
 

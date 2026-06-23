@@ -2,7 +2,11 @@ import { getAllProjects } from "@/lib/content";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { WorksList } from "@/components/shared/WorksList";
 
-export function WorksSection() {
+export function WorksSection({
+  headingAs = "h2",
+}: {
+  headingAs?: "h1" | "h2";
+}) {
   const projects = getAllProjects();
   return (
     <section
@@ -13,6 +17,7 @@ export function WorksSection() {
         <SectionHeading
           num="02"
           jp="作品"
+          as={headingAs}
           sub="研究・エンタメ・実装の3フィールドを横断するプロジェクト。"
         >
           Works

@@ -23,13 +23,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const proj = getProject(slug);
   if (!proj) return { title: "干川未来 | Portfolio" };
+  const { title, tagline, cover } = proj.meta;
+  const images = cover ? [cover] : undefined;
+  const url = `/works/${slug}/`;
   return {
-    title: proj.meta.title,
-    description: proj.meta.tagline,
+    title,
+    description: tagline,
     openGraph: {
-      images: proj.meta.cover ? [proj.meta.cover] : undefined,
+      type: "article",
+      title: `${title} | 干川未来`,
+      description: tagline,
+      url,
+      images,
     },
-    alternates: { canonical: `/works/${slug}/` },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | 干川未来`,
+      description: tagline,
+      images,
+    },
+    alternates: { canonical: url },
   };
 }
 

@@ -6,9 +6,11 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 export function AboutSection({
   detailed = false,
   noBorder = false,
+  headingAs = "h2",
 }: {
   detailed?: boolean;
   noBorder?: boolean;
+  headingAs?: "h1" | "h2";
 }) {
   return (
     <SectionWrapper id="about" noBorder={noBorder}>
@@ -21,6 +23,7 @@ export function AboutSection({
         num="01"
         jp="About / 自己紹介"
         serif
+        as={headingAs}
         titleClassName="text-[clamp(1.65rem,4vw,2.9rem)]"
       >
         干川未来 / Mirai Hoshikawa

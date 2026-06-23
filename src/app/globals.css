@@ -10,7 +10,7 @@
   --text: #eaf2fb;
   --text-body: #cad9ec;
   --text-sub: #95acc6;
-  --text-mute: #708aa6; /* AA on --bg */
+  --text-mute: #7e98b4; /* WCAG AA: 5.15:1 on --bg-alt, 6.07:1 on --bg */
   /* アクセント（水のシアンブルー） */
   --accent: #46b6ff;
   --accent-soft: rgba(70, 182, 255, 0.14);

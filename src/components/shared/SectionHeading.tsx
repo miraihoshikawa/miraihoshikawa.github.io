@@ -4,6 +4,7 @@ export function SectionHeading({
   sub,
   num,
   serif = false,
+  as: Heading = "h2",
   titleClassName = "text-[clamp(2rem,4.5vw,3.25rem)]",
 }: {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ export function SectionHeading({
   sub?: string;
   num?: string;
   serif?: boolean;
+  as?: "h1" | "h2" | "h3";
   titleClassName?: string;
 }) {
   return (
@@ -21,7 +23,7 @@ export function SectionHeading({
         </p>
       )}
       <div className="flex items-baseline gap-6">
-        <h2
+        <Heading
           className={`${titleClassName} leading-none font-bold tracking-tight text-[var(--text)]`}
           style={
             serif
@@ -33,7 +35,7 @@ export function SectionHeading({
           }
         >
           {children}
-        </h2>
+        </Heading>
         {jp && (
           <span className="text-base font-medium text-[var(--text-mute)] tracking-wider">
             {jp}
