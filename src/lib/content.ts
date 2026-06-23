@@ -17,6 +17,7 @@ export type ProjectMeta = {
   tagline: string;
   abstract?: string; // 詳細ページ冒頭の要約（左画像・右テキスト）。無ければ tagline を使う
   team?: string;
+  keyPoints?: { label: string; text: string }[]; // 詳細冒頭のスキャン用要点（課題/アプローチ/成果 等）。あればabstract段落の代わりに表示
   teamType?: "個人" | "チーム"; // 一覧カード・詳細に出すタグ。制作体制の概略
   tags?: string[]; // 文脈タグ（修士課程研究 / 長期インターン 等）。制作体制タグの隣に表示
   aiUsage?: string; // AI利用の明記（どの工程・範囲でAIを使ったか）。あれば詳細ページに表示

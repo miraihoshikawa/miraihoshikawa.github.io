@@ -139,12 +139,32 @@ export default async function WorkDetailPage({
             <div />
           )}
           <div className="md:pt-2">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
-              Abstract
-            </p>
-            <p className="mt-5 text-pretty text-base leading-loose text-[var(--text-body)] md:text-lg">
-              {abstractText}
-            </p>
+            {meta.keyPoints && meta.keyPoints.length > 0 ? (
+              <div className="space-y-5">
+                {meta.keyPoints.map((kp) => (
+                  <div
+                    key={kp.label}
+                    className="border-l-2 border-[var(--accent)] pl-4"
+                  >
+                    <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)] uppercase">
+                      {kp.label}
+                    </p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--text-body)] md:text-base">
+                      {kp.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--accent)] uppercase">
+                  Abstract
+                </p>
+                <p className="mt-5 text-pretty text-base leading-loose text-[var(--text-body)] md:text-lg">
+                  {abstractText}
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
