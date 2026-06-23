@@ -53,6 +53,24 @@ export const profile = {
       detail: "",
     },
   ],
+  /** 所属企業（About 下にカラム表示。外部リンク付き） */
+  companies: [
+    {
+      name: "しびっくぱわー",
+      role: "配信テクニカル（長期インターン）",
+      url: "https://civicpower.jp/",
+    },
+    {
+      name: "CYBERDYNE",
+      role: "R&D アルバイト",
+      url: "https://www.cyberdyne.jp/",
+    },
+    {
+      name: "Rhizomatiks",
+      role: "R&D アルバイト",
+      url: "https://rhizomatiks.com/",
+    },
+  ],
   /**
    * カテゴリ別の経歴・実績。
    */

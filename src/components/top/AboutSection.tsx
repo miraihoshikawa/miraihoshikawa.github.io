@@ -98,6 +98,36 @@ export function AboutSection({
         </div>
       </div>
 
+      {/* 所属企業（Aboutの下に3カラム） */}
+      <div className="mt-14 border-t border-[var(--border)] pt-10">
+        <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          Affiliated Companies / 所属企業
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {profile.companies.map((c) => (
+            <a
+              key={c.name}
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col justify-between border border-[var(--border)] bg-[var(--bg-alt)] p-5 transition-colors hover:border-[var(--accent)]"
+            >
+              <div>
+                <p className="text-lg font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+                  {c.name}
+                </p>
+                <p className="mt-1 font-mono text-[11px] tracking-wider text-[var(--text-mute)] uppercase">
+                  {c.role}
+                </p>
+              </div>
+              <p className="mt-5 font-mono text-[11px] tracking-wider text-[var(--accent)]">
+                {new URL(c.url).host.replace(/^www\./, "")} ↗
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+
     </SectionWrapper>
   );
 }
