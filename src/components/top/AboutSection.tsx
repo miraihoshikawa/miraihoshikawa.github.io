@@ -16,7 +16,7 @@ export function AboutSection({
     <SectionWrapper id="about" noBorder={noBorder}>
       {!detailed && (
         <p
-          className="reveal reveal-slow mb-6 text-center text-[clamp(1.65rem,4vw,2.9rem)] font-bold tracking-[0.05em] text-[var(--accent)]"
+          className="reveal reveal-slow mt-6 mb-10 text-center text-[clamp(1.65rem,4vw,2.9rem)] font-bold tracking-[0.05em] text-[var(--accent)]"
           style={{
             fontFamily:
               'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
