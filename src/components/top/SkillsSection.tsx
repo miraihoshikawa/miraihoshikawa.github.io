@@ -59,7 +59,7 @@ export function SkillsSection({
                   className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                 />
               </div>
-              <figcaption className="mt-1.5 text-[14px] leading-tight text-[var(--text-mute)]">
+              <figcaption className="mt-1.5 text-xs leading-tight text-[var(--text-mute)]">
                 {p.label}
               </figcaption>
             </figure>

@@ -1,18 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about/" },
-  { label: "Work", href: "/works/" },
+  { label: "Works", href: "/works/" },
   { label: "Skills", href: "/skills/" },
   { label: "Contact", href: "/#contact" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => {
+    if (href.startsWith("/#")) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href);
+  };
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-sm">
@@ -26,8 +33,11 @@ export function Header() {
 
         <nav className="hidden gap-8 md:flex">
           {navItems.map((item) => {
-            const cls =
-              "text-[12px] tracking-wider text-[var(--text-sub)] uppercase transition-colors hover:text-[var(--text)]";
+            const cls = `text-[12px] tracking-wider uppercase transition-colors ${
+              isActive(item.href)
+                ? "text-[var(--accent)]"
+                : "text-[var(--text-sub)] hover:text-[var(--text)]"
+            }`;
             return item.href.startsWith("/#") ? (
               <a key={item.href} href={item.href} className={cls}>
                 {item.label}
@@ -78,8 +88,11 @@ export function Header() {
           className="border-t border-[var(--border)] bg-[var(--bg)] px-6 py-4 md:hidden"
         >
           {navItems.map((item) => {
-            const cls =
-              "block py-2 text-[12px] tracking-wider text-[var(--text-sub)] uppercase hover:text-[var(--text)]";
+            const cls = `block py-2 text-[12px] tracking-wider uppercase ${
+              isActive(item.href)
+                ? "text-[var(--accent)]"
+                : "text-[var(--text-sub)] hover:text-[var(--text)]"
+            }`;
             return item.href.startsWith("/#") ? (
               <a
                 key={item.href}

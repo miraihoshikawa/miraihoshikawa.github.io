@@ -12,6 +12,7 @@ export function WorksMarquee() {
       src: (p.marqueeImage ?? p.cover) as string,
       alt: p.title,
       key: p.slug,
+      slug: p.slug,
     }));
 
   // カバー以外に流したい代表画像
@@ -20,11 +21,13 @@ export function WorksMarquee() {
       src: "/images/projects/02-streaming-interface/Fig_stage.jpg",
       alt: "ピッチイベントでの映像・照明演出",
       key: "extra-pitch-stage",
+      slug: "02-streaming-interface",
     },
     {
       src: "/images/projects/08-relational-coral/Fig_touch.png",
       alt: "触れると白化するインタラクション（Relational Coral）",
       key: "extra-coral-touch",
+      slug: "08-relational-coral",
     },
   ];
 

@@ -341,7 +341,7 @@ export default async function WorkDetailPage({
             </p>
           </Link>
           <Link
-            href="/#works"
+            href="/works/"
             className="hidden self-center text-center md:block"
           >
             <p className="text-[11px] font-mono tracking-[0.25em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]">

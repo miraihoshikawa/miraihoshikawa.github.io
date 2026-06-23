@@ -1,14 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * `.reveal` クラスを持つ要素が画面に入ったら `.is-visible` を付与する。
  * 一度表示したら監視解除（再生は1回）。
+ * SPA遷移（Linkでのページ切替）でもレイアウトは再マウントされないため、
+ * pathname を依存にして遷移ごとに新ページの未表示要素を再監視する。
  */
 export function ScrollReveal() {
+  const pathname = usePathname();
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>(".reveal:not(.is-visible)")
+    );
     if (els.length === 0) return;
 
     const reduce = window.matchMedia(
@@ -32,7 +38,7 @@ export function ScrollReveal() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }

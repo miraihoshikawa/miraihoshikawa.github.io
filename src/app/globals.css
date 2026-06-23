@@ -190,6 +190,10 @@ section {
     transparent 100%
   );
 }
+/* ホバー中はスクロールを止めて、タイル（作品リンク）を押しやすくする */
+.works-marquee-strip:hover .works-marquee-track {
+  animation-play-state: paused;
+}
 .works-marquee-track {
   width: max-content;
   animation: worksMarquee 160s linear infinite;
