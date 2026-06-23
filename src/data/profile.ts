@@ -53,13 +53,13 @@ export const profile = {
       detail: "",
     },
   ],
-  /** 所属企業（About詳細ページにOGP画像つきリンクカードで表示） */
+  /** 所属企業（About詳細ページにロゴ入りリンクカードで表示） */
   companies: [
     {
-      name: "しびっくぱわー",
-      role: "配信テクニカル（長期インターン）",
-      url: "https://civicpower.jp/",
-      image: "/images/companies/civicpower.jpg",
+      name: "Rhizomatiks",
+      role: "R&D アルバイト",
+      url: "https://rhizomatiks.com/",
+      image: "/images/companies/rhizomatiks.png",
     },
     {
       name: "CYBERDYNE",
@@ -68,10 +68,10 @@ export const profile = {
       image: "/images/companies/cyberdyne.png",
     },
     {
-      name: "Rhizomatiks",
-      role: "R&D アルバイト",
-      url: "https://rhizomatiks.com/",
-      image: "/images/companies/rhizomatiks.png",
+      name: "しびっくぱわー",
+      role: "配信テクニカル（長期インターン）",
+      url: "https://civicpower.jp/",
+      image: "/images/companies/civicpower-logo.png",
     },
   ],
   /**

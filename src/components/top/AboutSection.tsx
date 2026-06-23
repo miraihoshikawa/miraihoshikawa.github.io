@@ -113,13 +113,13 @@ export function AboutSection({
                 rel="noopener noreferrer"
                 className="group flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)] transition-colors hover:border-[var(--accent)]"
               >
-                <div className="aspect-video overflow-hidden bg-[var(--bg)]">
+                <div className="flex aspect-video items-center justify-center overflow-hidden bg-white p-6">
                   <img
                     src={c.image}
                     alt={c.name}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-4">
