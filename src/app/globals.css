@@ -226,6 +226,13 @@ section {
   }
 }
 
+/* WORKS カード 2枚重ねの前面画像：内側（右上）コーナーを柔らかくフェードし、
+   重なり部分だけを背面画像に自然になじませる。 */
+.card-duo-blend {
+  -webkit-mask-image: radial-gradient(70% 70% at 100% 0%, transparent 12%, #000 55%);
+  mask-image: radial-gradient(70% 70% at 100% 0%, transparent 12%, #000 55%);
+}
+
 /* MDX 本文の基本タイポグラフィ */
 .mdx-body {
   font-size: 1.0625rem; /* 17px */
