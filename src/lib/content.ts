@@ -32,6 +32,7 @@ export type ProjectMeta = {
   cover?: string;
   gallery?: string[];
   galleryLayout?: "grid" | "full"; // "grid"で小さめのカラム表示。既定はfull（全幅）
+  marqueeImage?: string; // トップのマーキー表示だけ差し替える画像。frontmatterはファイル名、読み込み時にURL化
   cardImages?: string[]; // 一覧カード画像の上書き。2枚=重ね表示（[前面/左下, 背面/右上]）、1枚=単一差し替え。frontmatterはファイル名、読み込み時にURL化
   cardFit?: "cover" | "contain"; // 単一cardImages時の表示。containで横を切らず全体表示。既定cover
   subProjects?: { title: string; year: string; description: string }[];
@@ -143,6 +144,10 @@ function readProject(entry: { slug: string; mdxPath: string; folder: string }) {
     meta.cardImages = data.cardImages.map(
       (f: string) => `/images/projects/${slug}/${f}`
     );
+  }
+  // marqueeImage もファイル名指定 → URL に解決
+  if (typeof data.marqueeImage === "string") {
+    meta.marqueeImage = `/images/projects/${slug}/${data.marqueeImage}`;
   }
   return { meta, body: content };
 }

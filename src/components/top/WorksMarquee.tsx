@@ -8,7 +8,11 @@ import { WorksMarqueeClient, type MarqueeItem } from "./WorksMarqueeClient";
 export function WorksMarquee() {
   const covers: MarqueeItem[] = getAllProjects()
     .filter((p) => p.cover)
-    .map((p) => ({ src: p.cover as string, alt: p.title, key: p.slug }));
+    .map((p) => ({
+      src: (p.marqueeImage ?? p.cover) as string,
+      alt: p.title,
+      key: p.slug,
+    }));
 
   // カバー以外に流したい代表画像
   const extras: MarqueeItem[] = [
