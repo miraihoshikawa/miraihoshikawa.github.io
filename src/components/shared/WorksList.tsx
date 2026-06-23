@@ -1,73 +1,14 @@
-"use client";
-
 /* eslint-disable @next/next/no-img-element */
-import { useState, useMemo } from "react";
 import Link from "next/link";
-import type { ProjectMeta, ProjectCategory } from "@/lib/content";
+import type { ProjectMeta } from "@/lib/content";
 import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
 
-const FILTERS: { key: ProjectCategory | "all"; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "research", label: "Research" },
-  { key: "entertainment", label: "Entertainment" },
-  { key: "implementation", label: "Implementation" },
-];
-
 export function WorksList({ projects }: { projects: ProjectMeta[] }) {
-  const [active, setActive] = useState<ProjectCategory | "all">("all");
-
-  const inCategory = (p: ProjectMeta, c: ProjectCategory) =>
-    p.category === c || (p.categories?.includes(c) ?? false);
-
-  const filtered = useMemo(
-    () =>
-      active === "all"
-        ? projects
-        : projects.filter((p) => inCategory(p, active)),
-    [projects, active]
-  );
-
   return (
     <>
-      {/* Filters */}
-      <div className="mb-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-b border-[var(--border)] pb-6">
-        {FILTERS.map((f) => {
-          const key = f.key;
-          const count =
-            key === "all"
-              ? projects.length
-              : projects.filter((p) => inCategory(p, key)).length;
-          const isActive = active === f.key;
-          return (
-            <button
-              key={f.key}
-              onClick={() => setActive(f.key)}
-              className={`group relative flex items-baseline gap-1.5 text-[12px] tracking-wider uppercase transition-colors ${
-                isActive
-                  ? "text-[var(--accent)]"
-                  : "text-[var(--text-mute)] hover:text-[var(--text)]"
-              }`}
-            >
-              <span
-                className={`pb-1.5 transition-all ${
-                  isActive
-                    ? "border-b-2 border-[var(--accent)]"
-                    : "border-b-2 border-transparent group-hover:border-[var(--text-mute)]"
-                }`}
-              >
-                {f.label}
-              </span>
-              <span className="font-mono text-[10px] text-[var(--text-mute)]">
-                ({String(count).padStart(2, "0")})
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
       {/* 3-column grid */}
       <ul className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-16">
-        {filtered.map((p) => (
+        {projects.map((p) => (
           <li key={p.slug}>
             <Link href={`/works/${p.slug}/`} className="group block">
               {/* Image dominates */}
@@ -145,12 +86,6 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
           </li>
         ))}
       </ul>
-
-      {filtered.length === 0 && (
-        <p className="py-12 text-center text-sm text-[var(--text-sub)]">
-          該当するプロジェクトがありません。
-        </p>
-      )}
     </>
   );
 }
