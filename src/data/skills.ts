@@ -10,7 +10,7 @@ export const capabilities: SkillCategory[] = [
     label: "Hardware Development",
     jp: "ハードウェア開発",
     items: [
-      "CAD設計（SOLIDWORKS / Fusion 360）",
+      "CAD設計（SolidWorks / Fusion 360）",
       "3Dプリンタによる試作・筐体プロトタイピング",
       "ロボドリル・工作機械による金属加工",
       "真空注型機を用いたシリコン成形",
