@@ -50,7 +50,7 @@ export function SkillsSection({
         <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {equipmentPhotos.map((p) => (
             <figure key={p.file} className="group">
-              <div className="overflow-hidden rounded-sm border border-[var(--border)] bg-[var(--bg-alt)]">
+              <div className="overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)]">
                 <img
                   src={`/images/skills/${p.file}`}
                   alt={p.label}

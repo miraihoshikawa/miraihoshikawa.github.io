@@ -23,7 +23,7 @@ export function ToolBadge({
           decoding="async"
           className={`${
             large ? "h-5 w-5" : "h-4 w-4"
-          } shrink-0 rounded-[2px] object-contain`}
+          } shrink-0 object-contain`}
         />
       )}
       {name}

@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr] md:gap-10">
           {/* Identity */}
           <div>
-            <p className="font-mono text-[10px] tracking-[0.4em] text-[var(--text-mute)] uppercase">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
               Portfolio · 2026
             </p>
             <p className="mt-6 text-[clamp(1.6rem,3vw,2.4rem)] leading-none font-bold tracking-tight text-[var(--text)]">
