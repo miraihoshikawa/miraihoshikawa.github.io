@@ -106,6 +106,47 @@ export function AboutSection({
         </div>
       </div>
 
+      {/* 制作の3フィールド ＋ 実績ハイライト（一目で「何をする人か／何が強いか」） */}
+      <div className="mt-14 border-t border-[var(--border)] pt-10">
+        <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          Fields / 制作の3フィールド
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {profile.axes.map((ax, i) => (
+            <div
+              key={ax.label}
+              className="border-t-2 border-[var(--accent)] bg-[var(--bg-alt)] p-5"
+            >
+              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)]">
+                0{i + 1}
+              </p>
+              <p className="mt-2 text-base font-bold text-[var(--text)]">
+                {ax.label}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
+                {ax.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-12 font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          Highlights / 主な実績
+        </p>
+        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+          {profile.highlights.map((h) => (
+            <div key={h.label}>
+              <p className="text-[clamp(1.4rem,2.6vw,1.9rem)] font-bold leading-none tracking-tight text-[var(--accent)]">
+                {h.value}
+              </p>
+              <p className="mt-2 text-xs leading-snug text-[var(--text-mute)]">
+                {h.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* 所属企業（詳細ページのAboutのみ・OGP画像つきリンクカード） */}
       {detailed && (
         <div className="mt-14 border-t border-[var(--border)] pt-10">
