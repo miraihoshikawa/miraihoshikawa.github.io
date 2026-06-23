@@ -91,6 +91,16 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                       className="card-duo-blend absolute bottom-0 left-0 z-10 aspect-[4/3] w-[62%] object-cover drop-shadow-md transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1"
                     />
                   </>
+                ) : p.cardImages && p.cardImages.length === 1 ? (
+                  <img
+                    src={p.cardImages[0]}
+                    alt={p.title}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
+                      p.cardFit === "contain" ? "object-contain" : "object-cover"
+                    }`}
+                  />
                 ) : p.cover ? (
                   <img
                     src={p.cover}

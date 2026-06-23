@@ -32,7 +32,8 @@ export type ProjectMeta = {
   cover?: string;
   gallery?: string[];
   galleryLayout?: "grid" | "full"; // "grid"で小さめのカラム表示。既定はfull（全幅）
-  cardImages?: string[]; // 一覧カードで2枚を重ねて表示（[前面/左下, 背面/右上]）。frontmatterはファイル名、読み込み時にURL化
+  cardImages?: string[]; // 一覧カード画像の上書き。2枚=重ね表示（[前面/左下, 背面/右上]）、1枚=単一差し替え。frontmatterはファイル名、読み込み時にURL化
+  cardFit?: "cover" | "contain"; // 単一cardImages時の表示。containで横を切らず全体表示。既定cover
   subProjects?: { title: string; year: string; description: string }[];
 };
 
