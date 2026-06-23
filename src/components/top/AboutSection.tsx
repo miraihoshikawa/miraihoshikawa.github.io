@@ -13,7 +13,7 @@ export function AboutSection({
   return (
     <SectionWrapper id="about" noBorder={noBorder}>
       {!detailed && (
-        <p className="reveal mb-6 text-center text-base font-medium tracking-[0.2em] text-[var(--accent)] md:text-lg">
+        <p className="reveal mb-6 text-center text-lg font-medium tracking-[0.2em] text-[var(--accent)] md:text-2xl">
           〜テクノロジーで日常にワクワクを〜
         </p>
       )}
