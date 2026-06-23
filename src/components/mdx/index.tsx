@@ -207,6 +207,61 @@ export function NoImage({ caption }: { caption?: ReactNode }) {
 }
 
 /**
+ * 外部サイトへのリッチリンクカード（記事の埋め込みリンク風）。
+ * 使い方:
+ *   <LinkCard src="Fig_official.jpg" href="https://..." title="..." description="..." />
+ */
+export function LinkCard({
+  src,
+  href,
+  title,
+  description,
+  imageBase,
+}: {
+  src: string;
+  href: string;
+  title: string;
+  description?: ReactNode;
+  imageBase?: string;
+}) {
+  let host = href;
+  try {
+    host = new URL(href).host.replace(/^www\./, "");
+  } catch {}
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group my-10 flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)] no-underline transition-colors hover:border-[var(--accent)] sm:flex-row"
+    >
+      <div className="aspect-[1200/630] w-full shrink-0 overflow-hidden bg-[var(--bg)] sm:aspect-auto sm:w-[44%]">
+        <img
+          src={resolveSrc(src, imageBase)}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col justify-center gap-2 p-5">
+        <p className="text-sm font-bold leading-snug text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+          {title}
+        </p>
+        {description && (
+          <p className="line-clamp-2 text-xs leading-relaxed text-[var(--text-mute)]">
+            {description}
+          </p>
+        )}
+        <p className="mt-1 font-mono text-[10px] tracking-wider text-[var(--text-mute)]">
+          {host} ↗
+        </p>
+      </div>
+    </a>
+  );
+}
+
+/**
  * MDXRemote の components prop に渡すマップ。
  * imageBase を子コンポーネントに自動で注入するため、ラッパーでカリー化する。
  */
@@ -214,6 +269,12 @@ export function mdxComponents(imageBase: string) {
   return {
     Fig: (props: ImgProps) => <Fig {...props} imageBase={imageBase} />,
     NoImage,
+    LinkCard: (props: {
+      src: string;
+      href: string;
+      title: string;
+      description?: ReactNode;
+    }) => <LinkCard {...props} imageBase={imageBase} />,
     FigGrid: (props: { children: ReactNode; cols?: 2 | 3 | 4 }) => (
       <FigGrid {...props} />
     ),
