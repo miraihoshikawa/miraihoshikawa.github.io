@@ -20,6 +20,8 @@ export function AboutSection({
           style={{
             fontFamily:
               'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
+            WebkitTextStroke: "2px #ffffff",
+            paintOrder: "stroke fill",
           }}
         >
           〜テクノロジーで日常にワクワクを〜
@@ -50,7 +52,7 @@ export function AboutSection({
         <div className="space-y-10">
           {/* Affiliation block (上) */}
           <div className="border-l-2 border-[var(--accent)] pl-6">
-            <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
               Current Affiliation
             </p>
             <p className="mt-2 text-xl text-[var(--text-body)]">
@@ -63,7 +65,7 @@ export function AboutSection({
             </ul>
 
             {/* Experience を小さく併記 */}
-            <p className="mt-5 font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="mt-5 font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
               Experience
             </p>
             <ul className="mt-2 space-y-0.5 text-lg text-[var(--text-body)]">
@@ -83,7 +85,7 @@ export function AboutSection({
           {/* Experience 詳細（/about 詳細ページのみ） */}
           {detailed && (
             <div>
-              <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+              <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
                 Experience / 活動内容
               </p>
               <div className="space-y-6">
@@ -114,7 +116,7 @@ export function AboutSection({
 
       {/* 制作の3フィールド（一目で「何をする人か」を伝える） */}
       <div className="mt-14 border-t border-[var(--border)] pt-10">
-        <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+        <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
           Fields / 制作の3フィールド
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
@@ -140,7 +142,7 @@ export function AboutSection({
       {/* 所属企業（詳細ページのAboutのみ・OGP画像つきリンクカード） */}
       {detailed && (
         <div className="mt-14 border-t border-[var(--border)] pt-10">
-          <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
             Affiliated Companies / 所属企業
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
@@ -294,19 +296,33 @@ export function RecordsSection() {
             </span>
           </div>
 
-          {/* 配信オペレーション写真（小さく） */}
-          <figure className="mb-8 max-w-sm">
-            <img
-              src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
-              alt="自作の演出統合インターフェースによる配信オペレーション"
-              loading="lazy"
-              decoding="async"
-              className="w-full border border-[var(--border)] object-cover"
-            />
-            <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
-              自作の演出統合インターフェースを用いた配信オペレーション卓
-            </figcaption>
-          </figure>
+          {/* 配信オペレーション写真（2枚並べて横を埋める） */}
+          <div className="mb-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+            <figure>
+              <img
+                src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
+                alt="自作の演出統合インターフェースによる配信オペレーション"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
+              />
+              <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+                自作の演出統合インターフェースを用いた配信オペレーション卓
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                src="/images/projects/02-streaming-interface/Fig_setup.jpg"
+                alt="実イベント会場での配信オペレーション準備"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
+              />
+              <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+                実イベント会場での配信オペレーション準備
+              </figcaption>
+            </figure>
+          </div>
 
           {/* Venues */}
           <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
