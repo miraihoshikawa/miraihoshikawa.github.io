@@ -12,6 +12,11 @@ export function AboutSection({
 }) {
   return (
     <SectionWrapper id="about" noBorder={noBorder}>
+      {!detailed && (
+        <p className="reveal mb-6 text-center text-base font-medium tracking-[0.2em] text-[var(--accent)] md:text-lg">
+          〜テクノロジーで日常にワクワクを〜
+        </p>
+      )}
       <SectionHeading
         num="01"
         jp="About / 自己紹介"
