@@ -80,7 +80,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                       alt={p.title}
                       loading="lazy"
                       decoding="async"
-                      className="absolute top-0 right-0 aspect-[4/3] w-[62%] object-cover transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1"
+                      className="absolute top-0 right-0 h-[62%] w-[62%] object-cover transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1"
                     />
                     {/* 前面・左下（内側コーナーをフェードして重なりを自然に） */}
                     <img
@@ -88,7 +88,7 @@ export function WorksList({ projects }: { projects: ProjectMeta[] }) {
                       alt={p.title}
                       loading="lazy"
                       decoding="async"
-                      className="card-duo-blend absolute bottom-0 left-0 z-10 aspect-[4/3] w-[62%] object-cover drop-shadow-md transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1"
+                      className="card-duo-blend absolute bottom-0 left-0 z-10 h-[62%] w-[62%] object-cover drop-shadow-md transition-transform duration-500 ease-out group-hover:-translate-x-1 group-hover:translate-y-1"
                     />
                   </>
                 ) : p.cardImages && p.cardImages.length === 1 ? (

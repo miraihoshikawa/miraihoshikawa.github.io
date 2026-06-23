@@ -98,35 +98,46 @@ export function AboutSection({
         </div>
       </div>
 
-      {/* 所属企業（Aboutの下に3カラム） */}
-      <div className="mt-14 border-t border-[var(--border)] pt-10">
-        <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
-          Affiliated Companies / 所属企業
-        </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {profile.companies.map((c) => (
-            <a
-              key={c.name}
-              href={c.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col justify-between border border-[var(--border)] bg-[var(--bg-alt)] p-5 transition-colors hover:border-[var(--accent)]"
-            >
-              <div>
-                <p className="text-lg font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
-                  {c.name}
-                </p>
-                <p className="mt-1 font-mono text-[11px] tracking-wider text-[var(--text-mute)] uppercase">
-                  {c.role}
-                </p>
-              </div>
-              <p className="mt-5 font-mono text-[11px] tracking-wider text-[var(--accent)]">
-                {new URL(c.url).host.replace(/^www\./, "")} ↗
-              </p>
-            </a>
-          ))}
+      {/* 所属企業（詳細ページのAboutのみ・OGP画像つきリンクカード） */}
+      {detailed && (
+        <div className="mt-14 border-t border-[var(--border)] pt-10">
+          <p className="font-mono text-[12px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            Affiliated Companies / 所属企業
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {profile.companies.map((c) => (
+              <a
+                key={c.name}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)] transition-colors hover:border-[var(--accent)]"
+              >
+                <div className="aspect-video overflow-hidden bg-[var(--bg)]">
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-4">
+                  <p className="text-sm font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+                    {c.name}
+                  </p>
+                  <p className="mt-1 font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase">
+                    {c.role}
+                  </p>
+                  <p className="mt-3 font-mono text-[10px] tracking-wider text-[var(--accent)]">
+                    {new URL(c.url).host.replace(/^www\./, "")} ↗
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
     </SectionWrapper>
   );
