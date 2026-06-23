@@ -20,8 +20,7 @@ export function AboutSection({
           style={{
             fontFamily:
               'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
-            WebkitTextStroke: "2px #ffffff",
-            paintOrder: "stroke fill",
+            textShadow: "0 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5)",
           }}
         >
           〜テクノロジーで日常にワクワクを〜
@@ -297,7 +296,7 @@ export function RecordsSection() {
           </div>
 
           {/* 配信オペレーション写真（2枚並べて横を埋める） */}
-          <div className="mb-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+          <div className="mb-8 grid max-w-2xl gap-5 sm:grid-cols-2">
             <figure>
               <img
                 src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
