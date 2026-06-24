@@ -295,11 +295,28 @@ export default async function WorkDetailPage({
           <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
             <SectionHead num={nextNum()} label="書誌情報" />
             <ol className="list-decimal space-y-4 pl-6 text-[var(--text-body)]">
-              {meta.references?.map((r, i) => (
-                <li key={i} className="leading-relaxed">
-                  {r}
-                </li>
-              ))}
+              {meta.references?.map((r, i) => {
+                const text = typeof r === "string" ? r : r.text;
+                const url = typeof r === "string" ? undefined : r.url;
+                return (
+                  <li key={i} className="leading-relaxed">
+                    {text}
+                    {url && (
+                      <>
+                        {" "}
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+                        >
+                          [link]
+                        </a>
+                      </>
+                    )}
+                  </li>
+                );
+              })}
               {meta.academicRef && !meta.references && (
                 <li className="leading-relaxed">{meta.academicRef}</li>
               )}

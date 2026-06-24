@@ -102,9 +102,11 @@ export const profile = {
     publications: [
       {
         text: "Akira Uehara, Mirai Hoshikawa, Kazutomo Baba, Andrey Mikhailov, Hiroaki Kawamoto, Yoshiyuki Sankai, “Study on Robotic Cell Culture Systems for Autonomous Cultivation of Fibroblast Cells,” Proceedings of the 2024 IEEE/SICE International Symposium on System Integrations (SII), pp.259–264, 2025.",
+        url: "https://ieeexplore.ieee.org/document/10870591",
       },
       {
         text: "干川未来, 上原皓, “少人数体制での配信操作を支援する演出統合インターフェースの開発と評価,” 第30回 日本バーチャルリアリティ学会大会, 2025年9月.",
+        url: "https://conference.vrsj.org/ac2025/program/doc/2B2-07.pdf",
       },
       {
         text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
@@ -124,12 +126,20 @@ export const profile = {
         date: "2026.07",
         text: "アート＆テクノロジー東北 2026（Augmented Hanahuda・展示予定）",
       },
-      { date: "2026.02", text: "妖怪EXPO 2026（ばけばけXR）" },
+      {
+        date: "2026.02",
+        text: "妖怪EXPO 2026（ばけばけXR）",
+        url: "https://www.yokaiexpo.com/#booth",
+      },
       { date: "2025.12", text: "XR Kaigi 2025（ばけばけXR）" },
       { date: "2025.11", text: "XR meet up aichi（ばけばけXR）" },
       { date: "2025.08", text: "TOKYO NODE XRハッカソン（ばけばけXR）" },
       { date: "2025.07", text: "Tsukuba connect #79（Vital Room / ばけばけXR）" },
-      { date: "2023", text: "干川未来「音浮」J-WAVE INNOVATION WORLD FESTA 2023" },
+      {
+        date: "2023",
+        text: "干川未来「音浮」J-WAVE INNOVATION WORLD FESTA 2023",
+        url: "https://www.j-wave.co.jp/iwf2023/",
+      },
     ],
     // 配信・現場運用
     operations: {

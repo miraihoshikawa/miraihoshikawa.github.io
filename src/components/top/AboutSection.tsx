@@ -277,7 +277,10 @@ export function RecordsSection() {
                 <span className="font-mono text-[12px] text-[var(--text-mute)]">
                   {item.date}
                 </span>
-                <span className="text-[var(--text-body)]">{item.text}</span>
+                <span className="text-[var(--text-body)]">
+                  {item.text}
+                  {"url" in item && item.url && <ExtLink href={item.url} />}
+                </span>
               </li>
             ))}
           </ul>
