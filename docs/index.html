@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>ポートフォリオ 保守・作品追加ガイド</title>
+<style>
+  :root{
+    --bg:#0a1a30; --panel:#0f2545; --border:#1d3a5e; --line:#24456e;
+    --text:#eaf2fb; --body:#cddcef; --mute:#93acc9; --accent:#57bbff; --warn:#ffcf6b; --ok:#7bd88f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.85;font-size:15px}
+  .wrap{max-width:940px;margin:0 auto;padding:40px 22px 120px}
+  h1{color:var(--text);font-size:30px;line-height:1.3;margin:0 0 6px}
+  .sub{color:var(--mute);margin:0 0 28px}
+  h2{color:var(--text);font-size:22px;margin:52px 0 14px;padding-top:14px;border-top:1px solid var(--border)}
+  h3{color:var(--accent);font-size:16px;margin:28px 0 8px;letter-spacing:.02em}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:#08213f;color:#d9e6f7;padding:2px 6px;border-radius:4px;font-size:13px;
+    font-family:"SFMono-Regular",Menlo,Consolas,monospace}
+  pre{background:#08182e;border:1px solid var(--border);border-left:3px solid var(--accent);
+    border-radius:6px;padding:14px 16px;overflow-x:auto;margin:12px 0}
+  pre code{background:none;padding:0;font-size:12.5px;line-height:1.7;color:#d5e3f6}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#0f2a4e;color:var(--text);white-space:nowrap}
+  td code{font-size:12px}
+  .req{color:var(--warn);font-weight:700}
+  .opt{color:var(--mute)}
+  .toc{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:0 0 20px}
+  .toc ol{margin:6px 0 0;padding-left:22px;columns:2;column-gap:28px}
+  .toc li{margin:3px 0}
+  .box{border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:14px 0;background:var(--panel)}
+  .note{border-left:3px solid var(--accent)}
+  .warn{border-left:3px solid var(--warn)}
+  .tip{border-left:3px solid var(--ok)}
+  .box .tag{display:inline-block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--mute);margin-bottom:4px}
+  ul.check{list-style:none;padding-left:0}
+  ul.check li{padding:4px 0 4px 30px;position:relative}
+  ul.check li::before{content:"☐";position:absolute;left:2px;color:var(--accent);font-size:16px}
+  ul.steps{padding-left:20px}
+  ul.steps>li{margin:10px 0}
+  .kbd{background:#0f2a4e;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+  .small{font-size:13px;color:var(--mute)}
+  hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+  .top{position:fixed;right:18px;bottom:18px;background:var(--panel);border:1px solid var(--border);
+    color:var(--accent);border-radius:20px;padding:8px 14px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>ポートフォリオ 保守・作品追加ガイド</h1>
+  <p class="sub">干川未来ポートフォリオ（Next.js 静的サイト）の作品記事を追加・点検・保守するための手順書。<br>
+  リポジトリ：<code>/Users/mirai/dev/portfolio</code> ／ 公開：<a href="https://miraihoshikawa.github.io">miraihoshikawa.github.io</a>（<code>main</code>にpush→GitHub Actionsで数分後に反映）</p>
+
+  <div class="box note">
+    <span class="tag">このファイルについて</span>
+    <code>docs/index.html</code> は<strong>公開サイトには載りません</strong>（デプロイ対象は <code>out/</code> のみ）。ブラウザでこのファイルを直接開いて使ってください。内容を変えたい時は誰かに「docs のガイドを更新して」と頼めばOK。
+  </div>
+
+  <div class="toc">
+    <strong>目次</strong>
+    <ol>
+      <li><a href="#quick">クイックスタート</a></li>
+      <li><a href="#add">新しい作品を追加する</a></li>
+      <li><a href="#fm">frontmatter リファレンス</a></li>
+      <li><a href="#img">画像のルール</a></li>
+      <li><a href="#comp">本文コンポーネント</a></li>
+      <li><a href="#style">書き方の統一ルール</a></li>
+      <li><a href="#checklist">公開前チェックリスト</a></li>
+      <li><a href="#deploy">デプロイ & トラブル対処</a></li>
+      <li><a href="#maint">定期 保守・点検</a></li>
+      <li><a href="#seo">検索・SEO</a></li>
+    </ol>
+  </div>
+
+  <!-- ============ QUICK ============ -->
+  <h2 id="quick">1. クイックスタート</h2>
+  <p>作品を1つ足す最短の流れ。詳細は次章。</p>
+  <pre><code># 0) 作業ディレクトリへ（ずれると npm がエラーになるので毎回確認）
+cd /Users/mirai/dev/portfolio
+
+# 1) 作品フォルダを作る（NN=連番, slug=英小文字ハイフン）
+mkdir -p content/projects/10-your-slug/images
+
+# 2) index.mdx を作成（frontmatter + 本文）… ※3章の例をコピー
+#    画像を content/projects/10-your-slug/images/ に置く
+
+# 3) ローカルで確認（http://localhost:3000）
+npm run dev
+
+# 4) 本番ビルドが通るか確認
+npm run build
+
+# 5) 公開（main へ push → 数分で反映）
+git add -A
+git commit -m "作品10 追加: ◯◯"
+git push origin main</code></pre>
+  <div class="box tip"><span class="tag">ポイント</span>
+    <code>dev</code>/<code>build</code> の直前に <code>sync-images</code> が自動で走り、<code>content/…/images</code> の画像を圧縮して <code>public/images</code> にコピーします。画像は<strong>content側に置くだけ</strong>でOK。</div>
+
+  <!-- ============ ADD ============ -->
+  <h2 id="add">2. 新しい作品を追加する</h2>
+  <ul class="steps">
+    <li><strong>フォルダ</strong>：<code>content/projects/NN-slug/</code> を作り、中に <code>index.mdx</code> と <code>images/</code> を置く。
+      <br><span class="small">NN は連番（並び順は number の昇順。既存が 01〜09 なので次は <code>10</code>）。slug は英小文字＋ハイフン。</span></li>
+    <li><strong>index.mdx</strong>：先頭に <code>---</code> で囲む frontmatter、その後に本文（Markdown/MDX）。3章の完全な例をコピーして書き換えるのが速い。</li>
+    <li><strong>画像</strong>：<code>images/</code> に置く。<code>1.jpg</code> がカバー、<code>Fig_◯◯.jpg</code> が本文図（4章参照）。</li>
+    <li><strong>プレビュー</strong>：<code>npm run dev</code> → <code>/works/NN-slug/</code> を開いて確認。</li>
+    <li><strong>ビルド確認 → push</strong>：<code>npm run build</code> が通ったら <code>git push</code>。sitemap・一覧・マーキー・詳細ページは<strong>自動で反映</strong>（手動登録不要）。</li>
+  </ul>
+
+  <!-- ============ FRONTMATTER ============ -->
+  <h2 id="fm">3. frontmatter リファレンス</h2>
+  <p><span class="req">必須</span> ／ <span class="opt">任意</span>。型は <code>src/lib/content.ts</code> の <code>ProjectMeta</code> が正。</p>
+  <table>
+    <tr><th>キー</th><th>要否</th><th>意味・使い方</th></tr>
+    <tr><td><code>number</code></td><td class="req">必須</td><td>連番の文字列 <code>"10"</code>。一覧の並び順を決める（昇順）。</td></tr>
+    <tr><td><code>title</code></td><td class="req">必須</td><td>作品名。詳細ページ見出し・一覧・OGP・タブに使用。</td></tr>
+    <tr><td><code>subtitle</code></td><td class="opt">任意</td><td>一覧カードとタイトル下に出る補足。</td></tr>
+    <tr><td><code>category</code></td><td class="req">必須</td><td><code>research</code> / <code>entertainment</code> / <code>implementation</code> のいずれか。</td></tr>
+    <tr><td><code>year</code></td><td class="req">必須</td><td><code>"2026"</code> など。</td></tr>
+    <tr><td><code>tagline</code></td><td class="req">必須</td><td>一文キャッチ。<strong>検索の説明文(meta description)・OGP</strong>にも使われる。</td></tr>
+    <tr><td><code>keyPoints</code></td><td class="opt">推奨</td><td>詳細冒頭のスキャン用3点。<code>{label,text}</code> の配列。<strong>あれば長いabstract段落の代わりに表示</strong>。ラベルは 研究/ツール=「課題」、作品=「着想」→「アプローチ」→「成果」。</td></tr>
+    <tr><td><code>abstract</code></td><td class="opt">任意</td><td>詳細冒頭の要約（keyPoints が無いとき表示）。<strong>tagline の丸写しにしない</strong>（6章）。</td></tr>
+    <tr><td><code>team</code></td><td class="opt">推奨</td><td>制作体制・担当。個人は <code>"個人制作"</code>、チームは <code>"グループ制作 / 干川は◯◯を担当"</code>。複数行は <code>|</code> で。</td></tr>
+    <tr><td><code>teamType</code></td><td class="opt">推奨</td><td><code>"個人"</code> / <code>"チーム"</code>。カード・詳細に出る制作体制タグ。</td></tr>
+    <tr><td><code>tags</code></td><td class="opt">任意</td><td>文脈タグ配列（例 <code>修士課程研究</code> / <code>長期インターン</code>）。</td></tr>
+    <tr><td><code>aiUsage</code></td><td class="opt">推奨</td><td>AI利用の明記（複数行）。選考等で重要。書式は6章。</td></tr>
+    <tr><td><code>tools</code></td><td class="opt">任意</td><td>使用ツールの配列。バッジ表示（<code>src/data/skills.ts</code> にロゴがあれば付く）。</td></tr>
+    <tr><td><code>achievements</code></td><td class="opt">任意</td><td>導入・展示実績の配列（文字列）。<span class="small">※「発表予定/投稿中」は原則載せない方針（6章）。</span></td></tr>
+    <tr><td><code>references</code></td><td class="opt">任意</td><td>書誌情報。<code>"文字列"</code> か <code>{text, url}</code>。url を付けると <code>[link]</code> になる。</td></tr>
+    <tr><td><code>cardImages</code></td><td class="opt">任意</td><td>一覧カードの画像上書き。<strong>1枚=単純差し替え／2枚=重ね表示</strong>（<code>[前面/左下, 背面/右上]</code>）。ファイル名で指定。</td></tr>
+    <tr><td><code>cardFit</code></td><td class="opt">任意</td><td><code>"contain"</code> で横を切らず全体表示（単一カード＋<strong>詳細のabstract画像</strong>にも適用）。既定 <code>cover</code>。</td></tr>
+    <tr><td><code>marqueeImage</code></td><td class="opt">任意</td><td>トップの横スライド（マーキー）だけ差し替える画像ファイル名。</td></tr>
+    <tr><td><code>galleryLayout</code></td><td class="opt">任意</td><td><code>"grid"</code> でギャラリーを小さめカラム表示。既定 <code>full</code>（全幅）。</td></tr>
+    <tr><td><code>cover</code></td><td class="opt">任意</td><td>カバー画像を明示指定（<strong>フルパス</strong> <code>/images/projects/NN/xxx.png</code>）。未指定なら <code>1.*</code> が自動カバー。</td></tr>
+    <tr><td><code>heroImages</code></td><td class="opt">任意</td><td>ヒーロー用ファイル名配列（任意）。</td></tr>
+  </table>
+
+  <h3>完全な例（コピーして書き換え）</h3>
+  <pre><code>---
+number: "10"
+title: "作品タイトル"
+subtitle: "一覧カードに出る短い説明"
+category: "entertainment"        # research | entertainment | implementation
+year: "2026"
+tagline: "一文キャッチ（検索の説明文・OGPに使われる）"
+
+keyPoints:                       # 詳細冒頭の要点3点（スキャン用）
+  - label: "着想"                #  ← 研究/ツールなら "課題"
+    text: "この作品が生まれた観察・問い。"
+  - label: "アプローチ"
+    text: "何をどう作ったか。技術・手法。"
+  - label: "成果"
+    text: "結果・展示実績・担当範囲（チームなら誰が何を）。"
+
+team: "個人制作"                 # チーム例: "グループ制作 / 干川は◯◯を担当"
+teamType: "個人"                 # 個人 | チーム
+tags:
+  - "修士課程研究"
+
+aiUsage: |
+  ◯◯の処理：自身で実装。
+  映像：生成AIで作成し、自身で編集。
+
+tools:
+  - Python
+  - TouchDesigner
+
+achievements:
+  - "◯◯展 出展（2026/7）"
+
+references:
+  - text: '著者, "タイトル," 学会, 2026年.'
+    url: "https://example.org/paper"
+
+# 画像まわり（任意・必要な時だけ）
+cardImages:                      # 2枚=重ね / 1枚=差し替え
+  - "1.jpg"                      #   [前面/左下, 背面/右上]
+  - "Fig_setup.jpg"
+cardFit: "cover"                 # contain=横を全部見せる
+galleryLayout: "full"
+---
+
+## 作品概要
+
+本文をここに。段落は短めに。
+
+&lt;TextImage figure="Fig_system.jpg" caption="システム構成" side="right"&gt;
+図の横に置く説明テキスト。
+&lt;/TextImage&gt;
+
+## 仕組み
+
+&lt;Fig src="Fig_detail.jpg" caption="動作の様子" /&gt;
+</code></pre>
+
+  <!-- ============ IMAGES ============ -->
+  <h2 id="img">4. 画像のルール</h2>
+  <p>置き場所は必ず <code>content/projects/NN/images/</code>。ビルド時に <code>scripts/sync-images.mjs</code> が
+  <strong>最大幅1920pxに縮小＋圧縮</strong>して <code>public/images/projects/NN/</code> へミラーします（jpg=mozjpeg, png=パレット圧縮, webp等はそのままコピー）。</p>
+  <table>
+    <tr><th>命名</th><th>役割</th></tr>
+    <tr><td><code>1.jpg</code> / <code>1.png</code>（数字始まり）</td><td>一番小さい番号が<strong>自動カバー</strong>。残りの数字画像は<strong>ギャラリー</strong>に並ぶ。</td></tr>
+    <tr><td><code>Fig_◯◯.jpg</code>（数字で始まらない）</td><td>ギャラリーには入らない。<strong>本文の &lt;Fig&gt; / &lt;TextImage&gt; で使う</strong>用。</td></tr>
+  </table>
+  <div class="box warn"><span class="tag">重複に注意</span>
+    カバー(<code>1.jpg</code>)を本文の <code>&lt;Fig&gt;</code> でもう一度出すと<strong>同じ画像が二重表示</strong>になる。本文で使う図は <code>Fig_◯◯</code> のような<strong>数字始まりでない名前</strong>にする（＝ギャラリー重複も回避）。</div>
+  <div class="box tip"><span class="tag">豆知識</span>
+    <strong>2枚重ねカード</strong>の前面はマスク処理する関係で、プログレッシブJPEGだと稀に表示されないことがある。前面用は <strong>WebP</strong>（例 <code>Fig_front.webp</code>）にすると確実。<br>
+    大きすぎる元画像（10MB超）は事前に少し縮小してからコミットするとリポジトリが軽い（公開版はどのみち1920pxに圧縮される）。</div>
+
+  <!-- ============ COMPONENTS ============ -->
+  <h2 id="comp">5. 本文で使えるコンポーネント</h2>
+  <p>MDX本文（<code>##</code> 見出しなどの間）で使えるタグ。<code>src</code>/<code>figure</code> は<strong>ファイル名だけ</strong>でOK（<code>images/</code> から自動解決）。</p>
+  <table>
+    <tr><th>タグ</th><th>用途 / 例</th></tr>
+    <tr><td><code>&lt;Fig&gt;</code></td><td>1枚の図＋キャプション（中央）。<br><code>&lt;Fig src="Fig_x.jpg" caption="説明" /&gt;</code></td></tr>
+    <tr><td><code>&lt;TextImage&gt;</code></td><td>図とテキストを左右に。<br><code>&lt;TextImage figure="Fig_x.jpg" caption="説明" side="right"&gt;本文…&lt;/TextImage&gt;</code></td></tr>
+    <tr><td><code>&lt;FigGrid&gt;</code></td><td>図を横並び。中に <code>&lt;Fig&gt;</code> を複数。<br><code>&lt;FigGrid cols={2}&gt; …&lt;Fig/&gt;… &lt;/FigGrid&gt;</code></td></tr>
+    <tr><td><code>&lt;LinkCard&gt;</code></td><td>外部サイトのリッチリンク（記事埋め込み風）。著作権等で自前画像が出せない時にも。<br><code>&lt;LinkCard src="Fig_x.jpg" href="https://…" title="…" description="…" /&gt;</code></td></tr>
+    <tr><td><code>&lt;Video&gt;</code></td><td>YouTube/Vimeo 埋め込み。<br><code>&lt;Video src="https://youtu.be/XXXX" /&gt;</code></td></tr>
+    <tr><td><code>&lt;Callout&gt;</code></td><td>強調ボックス。<br><code>&lt;Callout title="補足"&gt;…&lt;/Callout&gt;</code></td></tr>
+    <tr><td><code>&lt;NoImage&gt;</code></td><td>「画像なし」のプレースホルダ。<br><code>&lt;NoImage caption="著作権の都合で非掲載" /&gt;</code></td></tr>
+  </table>
+
+  <!-- ============ STYLE RULES ============ -->
+  <h2 id="style">6. 書き方の統一ルール</h2>
+  <p>これまで整えてきた方針。<strong>作品ごとにブレないこと</strong>が読みやすさに直結する。</p>
+
+  <h3>要点(keyPoints)のラベル</h3>
+  <ul>
+    <li><strong>研究・実務ツール</strong>（実問題を解くもの）＝「<strong>課題</strong>」</li>
+    <li><strong>アート寄りの作品</strong>＝「<strong>着想</strong>」（作品が生まれた考え・観察）</li>
+    <li>共通で 「課題/着想」→「アプローチ」→「成果」の3点。成果にはチームなら担当範囲も。</li>
+  </ul>
+
+  <h3>abstract / 本文</h3>
+  <ul>
+    <li>abstract は tagline の<strong>丸写しにしない</strong>。課題・着想から書き出す。</li>
+    <li>段落は短く。長い一段落は分割 or 箇条書きに。</li>
+    <li>生の<strong>数値表（平均±SD等）は載せない</strong>。要点は本文で1文にまとめる（例「操作を約6.4秒短縮、誤操作6→2」）。</li>
+    <li>内部用の記号・略語（例 “a論理”）は残さない。読者に伝わる言葉に。</li>
+  </ul>
+
+  <h3>AI利用(aiUsage)</h3>
+  <ul>
+    <li>工程ごとに「◯◯：自身で実装／△△：生成AIで作成」の形で明記。</li>
+    <li>未使用なら定型で：<code>本作では生成AIを使用していない。制作当時（YYYY年）は…、…自身で…した。</code></li>
+  </ul>
+
+  <h3>表記の統一</h3>
+  <ul>
+    <li><code>Fusion 360</code>（間にスペース）／ <code>SolidWorks</code> ／ <code>アート＆テクノロジー東北</code>（全角＆）</li>
+    <li>和文内の区切りは全角「／」、英字列挙は半角「/」。</li>
+    <li>1作品の中で「珊瑚／サンゴ」等の表記を混ぜない。</li>
+    <li>Skills の見出しラベル「<strong>経験</strong>」は確定済み（“できること”に戻さない）。</li>
+  </ul>
+
+  <h3>実績・書誌</h3>
+  <ul>
+    <li>「<strong>発表予定・投稿中</strong>」の論文/展示は原則載せない。載せるなら「（予定）」と明記。</li>
+    <li>掲載済みの論文・展示には<strong>URL</strong>を付ける（<code>references</code> の <code>url</code>、または profile.ts の publications/exhibitions）。</li>
+  </ul>
+
+  <!-- ============ CHECKLIST ============ -->
+  <h2 id="checklist">7. 公開前チェックリスト</h2>
+  <ul class="check">
+    <li>number / title / subtitle / category / year / tagline を記入</li>
+    <li>keyPoints 3点（課題 or 着想 / アプローチ / 成果）</li>
+    <li>team ＋ teamType（＋必要なら tags）。チームは担当範囲を明記</li>
+    <li>aiUsage を明記</li>
+    <li>画像を配置（カバー=<code>1.*</code>／本文図=<code>Fig_*</code>／必要なら cardImages）</li>
+    <li>本文の図は数字始まりでない名前（カバー重複・ギャラリー重複を回避）</li>
+    <li>tools を記入</li>
+    <li>表記統一（Fusion 360 / SolidWorks / 全角＆ 等）をチェック</li>
+    <li>数値表を1文要約に、予定/投稿中の書誌を載せていないか確認</li>
+    <li><code>npm run build</code> が成功する</li>
+    <li><code>git push</code> → 数分後にライブで反映を確認</li>
+  </ul>
+
+  <!-- ============ DEPLOY ============ -->
+  <h2 id="deploy">8. デプロイ & トラブル対処</h2>
+  <p><code>main</code> に push すると GitHub Actions「Deploy to GitHub Pages」が走り、数分で <a href="https://miraihoshikawa.github.io">公開サイト</a>へ反映。</p>
+  <table>
+    <tr><th>症状</th><th>対処</th></tr>
+    <tr><td>npm がエラー（package.json が見つからない）</td><td>作業ディレクトリのズレ。<code>cd /Users/mirai/dev/portfolio</code> してから実行。</td></tr>
+    <tr><td>画像が出ない</td><td><code>content/…/images/</code> に置いたか確認 → <code>npm run build</code>（sync-imagesが public へコピー）→ ファイル名とfrontmatter/本文の綴り一致を確認。</td></tr>
+    <tr><td>変更が反映されない</td><td>Actions のデプロイ完了を待つ（数分）→ ブラウザをスーパーリロード（<span class="kbd">⌘⇧R</span>）。</td></tr>
+    <tr><td>2枚重ねカードの前面が出ない</td><td>前面画像を WebP にする（プログレッシブJPEG＋マスクの不具合回避）。</td></tr>
+    <tr><td>ページ遷移で見出しが消える</td><td><code>ScrollReveal</code> が pathname 依存で再監視する実装済み。もし再発したら「reveal が新ページで効いていない」と伝える。</td></tr>
+  </table>
+  <div class="box note"><span class="tag">よく使うコマンド</span>
+    <code>npm run dev</code>（ローカル確認）・<code>npm run build</code>（本番ビルド）・<code>npm run sync-images</code>（画像だけ手動ミラー）。</div>
+
+  <!-- ============ MAINTENANCE ============ -->
+  <h2 id="maint">9. 定期 保守・点検</h2>
+  <ul>
+    <li><strong>リンク点検</strong>：外部リンク（論文・展示・所属企業）が生きているか時々確認。切れたら url を更新/削除。</li>
+    <li><strong>実績の更新</strong>：展示・発表が「予定」→「実施済み」になったら文言とURLを更新。新しい登壇・受賞・採択は profile.ts（Records）へ。</li>
+    <li><strong>配信現場数</strong>：<code>src/data/profile.ts</code> の <code>operations.summaryCount</code> / <code>summaryNote</code> を随時更新。</li>
+    <li><strong>プロフィール</strong>：所属・学年・bio は <code>src/data/profile.ts</code>。フッターの年表記等もここ・各コンポーネント。</li>
+    <li><strong>ビルド健全性</strong>：たまに <code>npm run build</code> を通し、警告・エラーが無いか確認。</li>
+    <li><strong>依存更新</strong>：Next等のアップデートは <code>npm install</code> 後に必ず <code>npm run build</code> で確認してから push。</li>
+  </ul>
+  <div class="box tip"><span class="tag">データはどこ？</span>
+    作品＝<code>content/projects/</code> ／ 人物・経歴・実績・所属企業＝<code>src/data/profile.ts</code> ／ スキル・機材＝<code>src/data/skills.ts</code> ／ 見た目＝<code>src/components/</code> ＋ <code>src/app/globals.css</code>。</div>
+
+  <!-- ============ SEO ============ -->
+  <h2 id="seo">10. 検索・SEO</h2>
+  <ul>
+    <li>新しい作品は <strong>sitemap に自動追加</strong>（<code>src/app/sitemap.ts</code>）。各作品ページの title/description/OGP も自動生成。</li>
+    <li>大きな追加をしたら、Google Search Console で該当URLを「URL検査 → インデックス登録をリクエスト」すると拾われが早い。</li>
+    <li>検索順位は<strong>時間＋被リンク</strong>で上がる。GitHubプロフィール・SNS・研究室ページ等にサイトURLを貼るのが最も効く。</li>
+    <li>所有権確認ファイル <code>public/google6128a553499c9afa.html</code> はそのまま残す（消すと確認が外れる）。</li>
+  </ul>
+
+  <hr>
+  <p class="small">このガイドは <code>docs/index.html</code>。手順やルールを変えたら、このファイルも合わせて更新してください。</p>
+
+</div>
+<a class="top" href="#">↑ 上へ</a>
+</body>
+</html>
