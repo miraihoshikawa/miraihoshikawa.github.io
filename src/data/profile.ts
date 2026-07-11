@@ -85,8 +85,16 @@ export const profile = {
       "筑波大学 工学システム学類 編入学",
       "群馬工業高等専門学校 電子メディア工学科 卒業",
     ],
-    // 奨学・採択（採用枠・選出など）
+    // 受賞・奨学・採択（新→旧）
     honors: [
+      {
+        date: "2026.07",
+        text: "アート＆テクノロジー東北 2026 最優秀賞（Relational Coral・インタラクティブ作品部門）",
+      },
+      {
+        date: "2026.07",
+        text: "アート＆テクノロジー東北 2026 優秀賞（Augmented Hanahuda）",
+      },
       {
         date: "2026.06–",
         text: "日本財団 HUMAIプログラム GS枠（Giant Step）Sメンバー",
@@ -120,11 +128,11 @@ export const profile = {
     exhibitions: [
       {
         date: "2026.07",
-        text: "アート＆テクノロジー東北 2026（Relational Coral・展示予定）",
+        text: "アート＆テクノロジー東北 2026（Relational Coral・最優秀賞）",
       },
       {
         date: "2026.07",
-        text: "アート＆テクノロジー東北 2026（Augmented Hanahuda・展示予定）",
+        text: "アート＆テクノロジー東北 2026（Augmented Hanahuda・優秀賞）",
       },
       {
         date: "2026.02",

@@ -203,7 +203,7 @@ export function RecordsSection() {
         </HistoryBlock>
 
         {/* Honors */}
-        <HistoryBlock title="Honors" jp="奨学・採択">
+        <HistoryBlock title="Honors" jp="受賞・奨学・採択">
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.honors.map((item) => (
               <li
