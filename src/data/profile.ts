@@ -121,7 +121,6 @@ export const profile = {
         url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
       },
       { text: "日本バーチャルリアリティ学会大会 2026（投稿予定）" },
-      { text: "FOSS4G（投稿中・採録）" },
       { text: "SIGGRAPH Asia 2026（投稿中）" },
     ],
     // 展示（新→旧）
