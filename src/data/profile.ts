@@ -120,7 +120,6 @@ export const profile = {
         text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
         url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
       },
-      { text: "日本バーチャルリアリティ学会大会 2026（投稿予定）" },
       { text: "SIGGRAPH Asia 2026（投稿中）" },
     ],
     // 展示（新→旧）
