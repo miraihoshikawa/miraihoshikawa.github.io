@@ -11,6 +11,10 @@ import { ToolBadge } from "@/components/shared/ToolBadge";
 import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
 import { Video, mdxComponents } from "@/components/mdx";
 
+// 作品詳細の「AI利用」セクションの表示切り替え（就活用）。
+// 表示したい時は true にするだけ。各作品の aiUsage データはそのまま残す。
+const SHOW_AI_USAGE = false;
+
 export function generateStaticParams() {
   return getAllProjects().map((p) => ({ slug: p.slug }));
 }
@@ -226,8 +230,8 @@ export default async function WorkDetailPage({
         </section>
       )}
 
-      {/* AI Usage */}
-      {meta.aiUsage && (
+      {/* AI Usage（SHOW_AI_USAGE で表示切替。就活用にオフ中） */}
+      {SHOW_AI_USAGE && meta.aiUsage && (
         <section className="border-t border-[var(--border)]">
           <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-20">
             <SectionHead num={nextNum()} label="AI利用" />
