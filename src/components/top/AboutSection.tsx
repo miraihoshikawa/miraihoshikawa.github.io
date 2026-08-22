@@ -14,18 +14,6 @@ export function AboutSection({
 }) {
   return (
     <SectionWrapper id="about" noBorder={noBorder}>
-      {!detailed && (
-        <p
-          className="reveal reveal-slow mt-6 mb-10 text-center text-[clamp(1.65rem,4vw,2.9rem)] font-bold tracking-[0.05em] text-[var(--accent)]"
-          style={{
-            fontFamily:
-              'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
-            textShadow: "0 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5)",
-          }}
-        >
-          〜テクノロジーで日々の日常に感動を〜
-        </p>
-      )}
       <SectionHeading
         num="01"
         jp="About / 自己紹介"
