@@ -9,6 +9,7 @@ export type ProjectCategory = "research" | "entertainment" | "implementation";
 export type ProjectMeta = {
   slug: string;
   number: string;
+  hidden?: boolean; // trueで一覧・マーキー・詳細・sitemapから除外（一時非表示）
   title: string;
   subtitle?: string;
   category: ProjectCategory;
@@ -170,6 +171,7 @@ function readArticle(entry: { slug: string; mdxPath: string; folder: string }) {
 export function getAllProjects(): ProjectMeta[] {
   return listContentEntries("projects")
     .map((e) => readProject(e).meta)
+    .filter((m) => !m.hidden) // hidden: true の作品は一覧・マーキー・詳細・sitemapから除外
     .sort((a, b) => a.number.localeCompare(b.number));
 }
 
