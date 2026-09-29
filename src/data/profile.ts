@@ -96,6 +96,10 @@ export const profile = {
         text: "アート＆テクノロジー東北 2026 優秀賞（Augmented Hanahuda）",
       },
       {
+        date: "2026–",
+        text: "富山文化財団 第8期奨学生 採択",
+      },
+      {
         date: "2026.06–",
         text: "日本財団 HUMAIプログラム GS枠（Giant Step）Sメンバー",
         url: "https://zen.ac.jp/humai",
@@ -109,6 +113,18 @@ export const profile = {
     // 研究発表（引用形式・任意でリンク）
     publications: [
       {
+        text: "Kosuke Shimizu, Riri Ikebe, Hiroki Ichikura, Mirai Hoshikawa, “Naming the Inexplicable: A Generative Apparatus for Rehearsing Yōkai-Making in Compressed Communal Time,” SIGGRAPH Asia 2026 Art Papers, 2026年12月.",
+        url: "https://doi.org/10.1145/3829215.3843681",
+      },
+      {
+        text: "Kosuke Shimizu, Riri Ikebe, Hiroki Ichikura, Mirai Hoshikawa, “BAKEBAKE: Making Ambiguous Experiences Visible through Generative Yōkai,” Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), ACM, 2026年11月.",
+        url: "https://doi.org/10.1145/3841580.3845680",
+      },
+      {
+        text: "Kosuke Shimizu, Hiroki Ichikura, Riri Ikebe, Mirai Hoshikawa, “From Point Anchors to Geospatial Support: A Resolution-Aware Representation of Toponymic and Non-Toponymic Place Evidence in a Japanese Yokai Archive,” Int. Arch. Photogramm. Remote Sens. Spatial Inf. Sci., L-4/W1-2026, pp. 283–290, 2026年8月.",
+        url: "https://doi.org/10.5194/isprs-archives-L-4-W1-2026-283-2026",
+      },
+      {
         text: "Akira Uehara, Mirai Hoshikawa, Kazutomo Baba, Andrey Mikhailov, Hiroaki Kawamoto, Yoshiyuki Sankai, “Study on Robotic Cell Culture Systems for Autonomous Cultivation of Fibroblast Cells,” Proceedings of the 2024 IEEE/SICE International Symposium on System Integrations (SII), pp.259–264, 2025.",
         url: "https://ieeexplore.ieee.org/document/10870591",
       },
@@ -120,7 +136,6 @@ export const profile = {
         text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
         url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
       },
-      { text: "SIGGRAPH Asia 2026（投稿中）" },
     ],
     // 展示（新→旧）
     exhibitions: [
