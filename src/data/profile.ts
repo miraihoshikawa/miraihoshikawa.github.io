@@ -6,6 +6,7 @@ export const profile = {
   labs: [
     "サイバニクス研究室（システム情報系）",
     "日本財団HUMAIプログラム GS枠採択（Sメンバー）",
+    "富山文化財団 第8期奨学生",
   ],
   email: "hoshikawa.153@gmail.com",
   hometown: "群馬県草津町",
