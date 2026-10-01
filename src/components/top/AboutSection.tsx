@@ -224,16 +224,16 @@ export function RecordsSection() {
 
         {/* Publications */}
         <HistoryBlock title="Publications" jp="研究発表">
-          <ol className="space-y-4">
-            {profile.history.publications.map((p, i) => (
+          <ul className="divide-y divide-[var(--border)]">
+            {profile.history.publications.map((p) => (
               <li
                 key={p.text}
-                className="grid grid-cols-[1.5rem_1fr] gap-2 text-sm leading-relaxed text-[var(--text-body)]"
+                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
               >
                 <span className="font-mono text-[12px] text-[var(--text-mute)]">
-                  {String(i + 1).padStart(2, "0")}
+                  {p.date}
                 </span>
-                <span>
+                <span className="text-[var(--text-body)]">
                   {p.text}
                   {p.url && (
                     <>
@@ -251,7 +251,7 @@ export function RecordsSection() {
                 </span>
               </li>
             ))}
-          </ol>
+          </ul>
         </HistoryBlock>
 
         {/* Exhibitions */}

@@ -114,28 +114,34 @@ export const profile = {
     // 研究発表（引用形式・任意でリンク）
     publications: [
       {
+        date: "2026.12",
         text: "Kosuke Shimizu, Riri Ikebe, Hiroki Ichikura, Mirai Hoshikawa, “Naming the Inexplicable: A Generative Apparatus for Rehearsing Yōkai-Making in Compressed Communal Time,” SIGGRAPH Asia 2026 Art Papers, 2026年12月.",
         url: "https://doi.org/10.1145/3829215.3843681",
       },
       {
+        date: "2026.11",
         text: "Kosuke Shimizu, Riri Ikebe, Hiroki Ichikura, Mirai Hoshikawa, “BAKEBAKE: Making Ambiguous Experiences Visible through Generative Yōkai,” Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), ACM, 2026年11月.",
         url: "https://doi.org/10.1145/3841580.3845680",
       },
       {
+        date: "2026.08",
         text: "Kosuke Shimizu, Hiroki Ichikura, Riri Ikebe, Mirai Hoshikawa, “From Point Anchors to Geospatial Support: A Resolution-Aware Representation of Toponymic and Non-Toponymic Place Evidence in a Japanese Yokai Archive,” Int. Arch. Photogramm. Remote Sens. Spatial Inf. Sci., L-4/W1-2026, pp. 283–290, 2026年8月.",
         url: "https://doi.org/10.5194/isprs-archives-L-4-W1-2026-283-2026",
       },
       {
-        text: "Akira Uehara, Mirai Hoshikawa, Kazutomo Baba, Andrey Mikhailov, Hiroaki Kawamoto, Yoshiyuki Sankai, “Study on Robotic Cell Culture Systems for Autonomous Cultivation of Fibroblast Cells,” Proceedings of the 2024 IEEE/SICE International Symposium on System Integrations (SII), pp.259–264, 2025.",
-        url: "https://ieeexplore.ieee.org/document/10870591",
+        date: "2025.12",
+        text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
+        url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
       },
       {
+        date: "2025.09",
         text: "干川未来, 上原皓, “少人数体制での配信操作を支援する演出統合インターフェースの開発と評価,” 第30回 日本バーチャルリアリティ学会大会, 2025年9月.",
         url: "https://conference.vrsj.org/ac2025/program/doc/2B2-07.pdf",
       },
       {
-        text: "一倉弘毅, 清水紘輔, 干川未来, 池辺莉々, “没入型技術とAIを活用した妖怪のインタラクティブなデジタルプラットフォーム『ばけばけXR』の取り組み,” デジタルアーカイブ学会誌, 9巻, 2025.",
-        url: "https://www.jstage.jst.go.jp/article/jsda/9/s2/9_s226/_article/-char/ja",
+        date: "2025.01",
+        text: "Akira Uehara, Mirai Hoshikawa, Kazutomo Baba, Andrey Mikhailov, Hiroaki Kawamoto, Yoshiyuki Sankai, “Study on Robotic Cell Culture Systems for Autonomous Cultivation of Fibroblast Cells,” Proceedings of the 2024 IEEE/SICE International Symposium on System Integrations (SII), pp.259–264, 2025.",
+        url: "https://ieeexplore.ieee.org/document/10870591",
       },
     ],
     // 展示（新→旧）
