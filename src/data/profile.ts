@@ -128,6 +128,11 @@ export const profile = {
         url: "https://doi.org/10.1145/3841580.3845680",
       },
       {
+        date: "2026.11",
+        text: "池辺莉々, 一倉弘毅, 干川未来, 清水紘輔, “デジタルアーカイブを基盤とした不可解な体験の記述に向けた妖怪生成システムの開発：生成AIと妖怪・怪異データベースを用いた実践と課題,” デジタルアーカイブ学会誌, Vol. 10, No. s2, pp. s59–s62, 2026年11月.",
+        url: "https://doi.org/10.24506/jsda.10.s2_s59",
+      },
+      {
         date: "2026.08",
         text: "Kosuke Shimizu, Hiroki Ichikura, Riri Ikebe, Mirai Hoshikawa, “From Point Anchors to Geospatial Support: A Resolution-Aware Representation of Toponymic and Non-Toponymic Place Evidence in a Japanese Yokai Archive,” Int. Arch. Photogramm. Remote Sens. Spatial Inf. Sci., L-4/W1-2026, pp. 283–290, 2026年8月.",
         url: "https://doi.org/10.5194/isprs-archives-L-4-W1-2026-283-2026",
@@ -166,7 +171,7 @@ export const profile = {
       { date: "2025.12", text: "XR Kaigi 2025（ばけばけXR）" },
       { date: "2025.11", text: "XR meet up aichi（ばけばけXR）" },
       { date: "2025.08", text: "TOKYO NODE XRハッカソン（ばけばけXR）" },
-      { date: "2025.07", text: "Tsukuba connect #79（Vital Room / ばけばけXR）" },
+      { date: "2025.08", text: "Tsukuba connect #79（Vital Room / ばけばけXR）" },
       {
         date: "2023",
         text: "干川未来「音浮」J-WAVE INNOVATION WORLD FESTA 2023",
