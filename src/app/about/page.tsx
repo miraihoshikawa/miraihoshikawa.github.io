@@ -10,8 +10,8 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-14">
-      <AboutSection detailed headingAs="h1" />
-      <RecordsSection />
+      <AboutSection detailed headingAs="h1" num={null} />
+      <RecordsSection num={null} />
     </div>
   );
 }

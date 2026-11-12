@@ -13,12 +13,14 @@ import { ToolBadge } from "@/components/shared/ToolBadge";
 
 export function SkillsSection({
   headingAs = "h2",
+  num = "04",
 }: {
   headingAs?: "h1" | "h2";
+  num?: string | null;
 }) {
   return (
     <SectionWrapper id="skills">
-      <SectionHeading num="03" jp="技術・機材" as={headingAs}>
+      <SectionHeading num={num} jp="技術・機材" as={headingAs}>
         Skills
       </SectionHeading>
 
@@ -81,11 +83,11 @@ function SkillGroup({
 }) {
   return (
     <div>
-      <div className="mb-10 flex items-baseline gap-4">
+      <div className="mb-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <h3 className="text-2xl font-bold tracking-tight text-[var(--text)]">
           {title}
         </h3>
-        <span className="text-base text-[var(--text-mute)]">{jp}</span>
+        <span className="text-base whitespace-nowrap text-[var(--text-sub)]">{jp}</span>
       </div>
       <div className="space-y-8">
         {categories.map((category) => (
@@ -93,10 +95,10 @@ function SkillGroup({
             key={category.label}
             className="grid gap-4 md:grid-cols-[1fr_3fr] md:gap-12"
           >
-            <div className="font-mono text-[14px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+            <div className="font-mono text-[14px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
               <span>{category.label}</span>
               {category.jp && (
-                <span className="ml-2 normal-case tracking-normal text-[var(--text-mute)]">
+                <span className="ml-2 whitespace-nowrap normal-case tracking-normal text-[var(--text-mute)]">
                   {category.jp}
                 </span>
               )}
@@ -124,11 +126,11 @@ function CapabilityGroup({
 }) {
   return (
     <div>
-      <div className="mb-10 flex items-baseline gap-4">
+      <div className="mb-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <h3 className="text-2xl font-bold tracking-tight text-[var(--text)]">
           {title}
         </h3>
-        <span className="text-base text-[var(--text-mute)]">{jp}</span>
+        <span className="text-base whitespace-nowrap text-[var(--text-sub)]">{jp}</span>
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
         {categories.map((category) => (
@@ -136,12 +138,12 @@ function CapabilityGroup({
             key={category.label}
             className="border-l-2 border-[var(--accent)] bg-[var(--bg-alt)] py-5 pr-5 pl-6"
           >
-            <div className="flex items-baseline gap-3">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <h4 className="text-lg font-bold tracking-tight text-[var(--text)]">
                 {category.label}
               </h4>
               {category.jp && (
-                <span className="text-[13px] text-[var(--text-mute)]">
+                <span className="text-[13px] whitespace-nowrap text-[var(--text-sub)]">
                   {category.jp}
                 </span>
               )}
@@ -150,7 +152,7 @@ function CapabilityGroup({
               {category.items.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-2.5 text-[15px] leading-snug text-[var(--text-body)]"
+                  className="jp-phrase flex gap-2.5 text-[15px] leading-snug text-[var(--text-body)]"
                 >
                   <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
                   <span>{item}</span>

@@ -36,13 +36,13 @@ export default async function ArticlePage({
         {/* Header */}
         <header className="border-b border-[var(--border)] pb-10">
           <div className="flex flex-wrap items-baseline gap-4">
-            <time className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <time className="text-[12px] font-mono tracking-[0.12em] text-[var(--text-mute)] uppercase">
               {meta.date}
             </time>
             {meta.tags?.map((t) => (
               <span
                 key={t}
-                className="text-[10px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
+                className="text-[12px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
               >
                 / {t}
               </span>
@@ -76,7 +76,7 @@ export default async function ArticlePage({
         <nav className="mt-20 border-t border-[var(--border)] pt-8">
           <Link
             href="/articles/"
-            className="text-[10px] font-mono tracking-[0.3em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]"
+            className="text-[12px] font-mono tracking-[0.12em] text-[var(--text-mute)] uppercase hover:text-[var(--text)]"
           >
             ← All Articles
           </Link>

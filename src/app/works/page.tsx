@@ -10,7 +10,7 @@ export const metadata = {
 export default function WorksPage() {
   return (
     <div className="pt-14">
-      <WorksSection headingAs="h1" />
+      <WorksSection headingAs="h1" num={null} />
     </div>
   );
 }

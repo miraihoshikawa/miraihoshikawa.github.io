@@ -10,7 +10,7 @@ export const metadata = {
 export default function SkillsPage() {
   return (
     <div className="pt-14">
-      <SkillsSection headingAs="h1" />
+      <SkillsSection headingAs="h1" num={null} />
     </div>
   );
 }

@@ -3,13 +3,13 @@ import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg-alt)]">
+    <footer className="relative z-[1] border-t border-[var(--border)] bg-[var(--bg-alt)]">
       <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
         {/* Big mark */}
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr] md:gap-10">
           {/* Identity */}
           <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
               Portfolio · 2026
             </p>
             <p className="mt-6 text-[clamp(1.6rem,3vw,2.4rem)] leading-none font-bold tracking-tight text-[var(--text)]">
@@ -25,7 +25,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="mb-4 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
               Navigate
             </p>
             <ul className="space-y-2 text-sm text-[var(--text-sub)]">
@@ -54,7 +54,7 @@ export function Footer() {
 
           {/* Focus */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="mb-4 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
               Focus
             </p>
             <ul className="space-y-2 text-sm text-[var(--text-sub)]">
@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="mb-4 font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+            <p className="mb-4 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
               Contact
             </p>
             <a
@@ -80,10 +80,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col gap-3 border-t border-[var(--border)] pt-6 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          <p className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
             © 2026 Mirai Hoshikawa. All rights reserved.
           </p>
-          <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--text-mute)] uppercase">
+          <p className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
             Built with Next.js · Hosted on GitHub Pages
           </p>
         </div>

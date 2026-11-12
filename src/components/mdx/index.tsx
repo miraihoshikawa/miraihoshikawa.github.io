@@ -25,8 +25,9 @@ function resolveSrc(src: string, imageBase?: string) {
  *   <Fig src="Fig1.png" caption="システム構成図" />
  */
 export function Fig({ src, alt, caption, imageBase }: ImgProps) {
+  // 余白は本文側（.mdx-body > figure）で付ける。横並びの中では余白なし
   return (
-    <figure className="my-10">
+    <figure>
       <img
         src={resolveSrc(src, imageBase)}
         alt={alt || (typeof caption === "string" ? caption : "")}
@@ -35,7 +36,7 @@ export function Fig({ src, alt, caption, imageBase }: ImgProps) {
         className="w-full"
       />
       {caption && (
-        <figcaption className="mt-3 text-center text-xs text-[var(--text-mute)]">
+        <figcaption className="mt-3 text-center text-[13px] leading-relaxed text-[var(--text-sub)]">
           {caption}
         </figcaption>
       )}
@@ -88,8 +89,9 @@ export function TextImage({
   side?: "left" | "right";
   imageBase?: string;
 }) {
+  // 長い文の横でも図が見えるよう、PC では画面上部に追従させる
   const figureBlock = (
-    <figure>
+    <figure className="md:sticky md:top-24 md:self-start">
       <img
         src={resolveSrc(figure, imageBase)}
         alt={typeof caption === "string" ? caption : ""}
@@ -98,7 +100,7 @@ export function TextImage({
         className="w-full"
       />
       {caption && (
-        <figcaption className="mt-2 text-center text-[10px] text-[var(--text-mute)]">
+        <figcaption className="mt-3 text-center text-[13px] leading-relaxed text-[var(--text-sub)]">
           {caption}
         </figcaption>
       )}
@@ -175,7 +177,7 @@ export function Callout({
   return (
     <aside className="my-10 border border-[var(--border)] bg-[var(--bg-alt)] p-5">
       {title && (
-        <p className="mb-2 text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
+        <p className="mb-2 text-[12px] font-mono tracking-[0.14em] text-[var(--text-mute)] uppercase">
           {title}
         </p>
       )}
@@ -193,12 +195,12 @@ export function NoImage({ caption }: { caption?: ReactNode }) {
   return (
     <figure className="my-10">
       <div className="flex aspect-video w-full items-center justify-center border border-dashed border-[var(--border)] bg-[var(--bg-alt)]">
-        <span className="font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+        <span className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
           No Image
         </span>
       </div>
       {caption && (
-        <figcaption className="mt-3 text-center text-xs text-[var(--text-mute)]">
+        <figcaption className="mt-3 text-center text-[13px] leading-relaxed text-[var(--text-sub)]">
           {caption}
         </figcaption>
       )}
@@ -245,15 +247,15 @@ export function LinkCard({
         />
       </div>
       <div className="flex flex-1 flex-col justify-center gap-2 p-5">
-        <p className="text-sm font-bold leading-snug text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+        <p className="text-base font-bold leading-snug text-[var(--text)] transition-colors group-hover:text-[var(--accent-ink)]">
           {title}
         </p>
         {description && (
-          <p className="line-clamp-2 text-xs leading-relaxed text-[var(--text-mute)]">
+          <p className="line-clamp-3 text-[13px] leading-relaxed text-[var(--text-sub)]">
             {description}
           </p>
         )}
-        <p className="mt-1 font-mono text-[10px] tracking-wider text-[var(--text-mute)]">
+        <p className="mt-1 font-mono text-[12px] tracking-wide text-[var(--text-mute)]">
           {host} ↗
         </p>
       </div>

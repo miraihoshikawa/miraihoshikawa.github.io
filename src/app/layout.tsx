@@ -65,7 +65,8 @@ export default function RootLayout({
       <body className="text-[var(--text)] antialiased">
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('reveal-on')",
+            __html:
+              "document.documentElement.classList.add('reveal-on');try{if(localStorage.getItem('motion-paused')==='1')document.documentElement.classList.add('motion-paused')}catch(e){}",
           }}
         />
         <script

@@ -10,21 +10,21 @@ export function SectionHeading({
   children: React.ReactNode;
   jp?: string;
   sub?: string;
-  num?: string;
+  num?: string | null;
   serif?: boolean;
   as?: "h1" | "h2" | "h3";
   titleClassName?: string;
 }) {
   return (
-    <div className="mb-16 reveal">
+    <div className="mb-12 reveal md:mb-16">
       {num && (
-        <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--accent)] uppercase">
+        <p className="mb-4 font-mono text-[12px] tracking-[0.12em] text-[var(--accent-ink)] uppercase">
           [{num}]
         </p>
       )}
-      <div className="flex items-baseline gap-6">
+      <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
         <Heading
-          className={`${titleClassName} leading-none font-bold tracking-tight text-[var(--text)]`}
+          className={`${titleClassName} leading-[1.15] font-bold tracking-tight text-[var(--text)] md:leading-none`}
           style={
             serif
               ? {

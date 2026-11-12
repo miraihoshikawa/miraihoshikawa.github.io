@@ -12,9 +12,9 @@ export function TeamBadge({
   const isTeam = type === "チーム";
   return (
     <span
-      className={`inline-flex items-center border px-2 py-0.5 text-[11px] tracking-wider ${
+      className={`inline-flex items-center border px-2 py-0.5 text-[12px] tracking-wider ${
         isTeam
-          ? "border-[var(--accent)] text-[var(--accent)]"
+          ? "border-[var(--accent)] text-[var(--accent-ink)]"
           : "border-[var(--border)] text-[var(--text-sub)]"
       } ${className}`}
     >
@@ -37,9 +37,9 @@ export function Tag({
   const isAward = label.includes("賞");
   return (
     <span
-      className={`inline-flex items-center border px-2 py-0.5 text-[11px] tracking-wider ${
+      className={`inline-flex items-center border px-2 py-0.5 text-[12px] tracking-wider ${
         isAward
-          ? "border-[var(--accent)] font-bold text-[var(--accent)]"
+          ? "border-[var(--accent)] font-bold text-[var(--accent-ink)]"
           : "border-[var(--border)] text-[var(--text-sub)]"
       } ${className}`}
     >

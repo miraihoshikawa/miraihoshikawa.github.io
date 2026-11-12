@@ -13,6 +13,8 @@
   --text-mute: #7e98b4; /* WCAG AA: 5.15:1 on --bg-alt, 6.07:1 on --bg */
   /* アクセント（水のシアンブルー） */
   --accent: #46b6ff;
+  /* 小さな文字・リンク用。彩度を少し落として暗い背景でちらつかせない（9.8:1 on --bg） */
+  --accent-ink: #7cc8f0;
   --accent-soft: rgba(70, 182, 255, 0.14);
 }
 
@@ -116,6 +118,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* 和文の見出しは文節で折り返し、行頭に小書きの仮名や約物が来ないようにする */
+h1,
+h2,
+h3 {
+  line-break: strict;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+p,
+li,
+dd {
+  line-break: strict;
+}
+/* 短い文（副題・箇条・カードの1行）は文節で折り返し、語の途中で切らない */
+.jp-phrase {
+  word-break: auto-phrase;
+}
+
 section {
   scroll-margin-top: 4rem;
   position: relative;
@@ -130,18 +150,21 @@ section {
   overflow: hidden;
   pointer-events: none;
 }
+/* 泡は奥行きの演出なので、文字や画像より目立たないよう明るさを抑える */
 .water-bg .bubble {
   position: absolute;
   bottom: -10vh;
   border-radius: 9999px;
+  /* 中心の光だけを残し、まわりは透明にして濁った灰色に見せない */
   background: radial-gradient(
     circle at 32% 28%,
-    rgba(255, 255, 255, 0.95),
-    rgba(110, 190, 255, 0.4) 42%,
-    rgba(110, 190, 255, 0) 72%
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(170, 220, 255, 0.35) 20%,
+    rgba(110, 190, 255, 0.06) 52%,
+    rgba(110, 190, 255, 0) 70%
   );
-  border: 1px solid rgba(150, 205, 255, 0.45);
-  box-shadow: 0 0 12px rgba(110, 190, 255, 0.25);
+  border: 1px solid rgba(150, 205, 255, 0.22);
+  box-shadow: 0 0 8px rgba(110, 190, 255, 0.22);
   opacity: 0;
   animation: bubbleRise linear infinite;
 }
@@ -151,13 +174,13 @@ section {
     opacity: 0;
   }
   12% {
-    opacity: 0.75;
+    opacity: 0.5;
   }
   50% {
     transform: translateY(-55vh) translateX(12px) scale(1);
   }
   88% {
-    opacity: 0.6;
+    opacity: 0.35;
   }
   100% {
     transform: translateY(-110vh) translateX(-8px) scale(1.05);
@@ -249,6 +272,14 @@ section {
   }
 }
 
+/* 一時停止ボタンで帯・泡の動きを止める */
+.motion-paused .works-marquee-track,
+.motion-paused .works-marquee-strip::before,
+.motion-paused .works-marquee-strip::after,
+.motion-paused .water-bg .bubble {
+  animation-play-state: paused;
+}
+
 /* WORKS カード 2枚重ねの前面画像：内側（右上）コーナーを柔らかくフェードし、
    重なり部分だけを背面画像に自然になじませる。 */
 .card-duo-blend {
@@ -256,100 +287,136 @@ section {
   mask-image: radial-gradient(70% 70% at 100% 0%, transparent 12%, #000 55%);
 }
 
-/* MDX 本文の基本タイポグラフィ */
-.mdx-body {
-  font-size: 1.0625rem; /* 17px */
-  line-height: 1.95;
-  color: var(--text-body);
-}
-.mdx-body p {
-  margin: 0 0 1.4em;
-}
-.mdx-body h2 {
-  font-size: 1.625rem; /* 26px */
-  font-weight: 700;
-  color: var(--text);
-  margin: 3em 0 1em;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-}
-.mdx-body h2:first-child {
-  margin-top: 0;
-}
-.mdx-body h3 {
-  font-size: 1.125rem; /* 18px */
-  font-weight: 700;
-  color: var(--text);
-  margin: 2em 0 0.6em;
-}
-.mdx-body ul,
-.mdx-body ol {
-  margin: 0 0 1.4em 1.4em;
-  line-height: 1.9;
-}
-.mdx-body li {
-  margin: 0.3em 0;
-}
-.mdx-body strong {
-  color: var(--text);
-  font-weight: 700;
-}
-.mdx-body a {
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: color 0.15s;
-}
-.mdx-body a:hover {
-  color: var(--accent);
-}
-.mdx-body code {
-  font-family: "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.9em;
-  background: var(--bg-alt);
-  padding: 0.15em 0.5em;
-  border-radius: 2px;
-}
-.mdx-body pre {
-  background: var(--bg-alt);
-  padding: 1em;
-  overflow-x: auto;
-  margin: 1.5em 0;
-  border-radius: 2px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-.mdx-body pre code {
-  background: none;
-  padding: 0;
-}
-.mdx-body table {
-  margin: 2em 0;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-  width: 100%;
-}
-.mdx-body th,
-.mdx-body td {
-  border-bottom: 1px solid var(--border);
-  padding: 0.8em 1em;
-  text-align: left;
-}
-.mdx-body th {
-  font-weight: 700;
-  color: var(--text);
-  border-bottom: 2px solid var(--border-strong);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.mdx-body figure {
-  margin: 2.5em 0;
-}
-.mdx-body figcaption {
-  font-size: 0.8rem;
-  color: var(--text-mute);
-  margin-top: 0.6em;
-  text-align: center;
+/* MDX 本文の基本タイポグラフィ。
+   components 層に入れて、コンポーネント側の Tailwind クラス（リンクカード等）で上書きできるようにする */
+@layer components {
+  .mdx-body {
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.8;
+    color: var(--text-body);
+    /* 長い本文は約物を詰めない（見出しは palt のまま） */
+    font-feature-settings: normal;
+  }
+  @media (min-width: 768px) {
+    .mdx-body {
+      line-height: 1.95;
+    }
+  }
+  /* 本文の1行は和文で約40字に収める。左端は図・横並びの段とそろえる */
+  .mdx-body > p,
+  .mdx-body > ul,
+  .mdx-body > ol,
+  .mdx-body > h2,
+  .mdx-body > h3 {
+    max-width: 40em;
+  }
+  .mdx-body p {
+    margin-top: 0;
+    margin-bottom: 1.4em;
+  }
+  .mdx-body h2 {
+    font-size: 1.625rem; /* 26px */
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 3em;
+    margin-bottom: 1em;
+    padding-top: 1.1em;
+    border-top: 1px solid var(--border);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .mdx-body > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .mdx-body h3 {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+  /* 箇条書きは図の横の本文（TextImage）でも同じ字下げにする */
+  .mdx-body ul,
+  .mdx-body ol {
+    margin-top: 0;
+    margin-bottom: 1.4em;
+    padding-left: 1.4em;
+    line-height: 1.9;
+  }
+  .mdx-body ul {
+    list-style: disc;
+  }
+  .mdx-body ol {
+    list-style: decimal;
+  }
+  .mdx-body li {
+    margin: 0.3em 0;
+  }
+  .mdx-body strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .mdx-body a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color 0.15s;
+  }
+  .mdx-body a:hover {
+    color: var(--accent-ink);
+  }
+  .mdx-body code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-alt);
+    padding: 0.15em 0.5em;
+    border-radius: 2px;
+  }
+  .mdx-body pre {
+    background: var(--bg-alt);
+    padding: 1em;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .mdx-body pre code {
+    background: none;
+    padding: 0;
+  }
+  .mdx-body table {
+    margin: 2em 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+  .mdx-body th,
+  .mdx-body td {
+    border-bottom: 1px solid var(--border);
+    padding: 0.8em 1em;
+    text-align: left;
+  }
+  .mdx-body th {
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 2px solid var(--border-strong);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  /* 単独の図だけ上下に余白。横並び（FigGrid）や文と並べた図（TextImage）の中の図には付けない */
+  .mdx-body > figure {
+    margin: 2.5em 0;
+  }
+  .mdx-body figcaption {
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1.6;
+    color: var(--text-sub);
+    margin-top: 0.75em;
+    text-align: center;
+  }
 }

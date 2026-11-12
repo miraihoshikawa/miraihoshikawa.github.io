@@ -2,27 +2,38 @@
 import { profile } from "@/data/profile";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { emphasizeSelf } from "@/components/shared/emphasizeSelf";
 
 export function AboutSection({
   detailed = false,
   noBorder = false,
   headingAs = "h2",
+  num = "01",
 }: {
   detailed?: boolean;
   noBorder?: boolean;
   headingAs?: "h1" | "h2";
+  num?: string | null;
 }) {
   return (
     <SectionWrapper id="about" noBorder={noBorder}>
       <SectionHeading
-        num="01"
+        num={num}
         jp="About / 自己紹介"
         serif
         as={headingAs}
         titleClassName="text-[clamp(1.65rem,4vw,2.9rem)]"
       >
-        干川未来 / Mirai Hoshikawa
+        干川未来
+        <span className="hidden sm:inline"> / </span>
+        <br className="sm:hidden" />
+        Mirai Hoshikawa
       </SectionHeading>
+
+      {/* 何をしている人かを最初の画面で伝える自己紹介文（名前の直下） */}
+      <p className="reveal -mt-4 mb-14 max-w-[40em] text-[17px] leading-[1.9] text-[var(--text-body)] md:-mt-6 md:mb-16 md:text-lg">
+        {profile.bio}
+      </p>
 
       {/* Top: portrait + content */}
       <div className="grid gap-12 md:grid-cols-[280px_1fr] md:gap-16">
@@ -32,7 +43,7 @@ export function AboutSection({
             alt={profile.name}
             loading="lazy"
             decoding="async"
-            className="aspect-[4/5] w-full max-w-xs object-cover grayscale"
+            className="aspect-[4/5] w-full max-w-[220px] object-cover grayscale md:max-w-xs"
           />
         </div>
 
@@ -42,10 +53,10 @@ export function AboutSection({
             <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
               Current Affiliation
             </p>
-            <p className="mt-2 text-xl text-[var(--text-body)]">
+            <p className="mt-2 text-lg text-[var(--text-body)] md:text-xl">
               {profile.university}
             </p>
-            <ul className="mt-2 space-y-0.5 text-xl text-[var(--text-sub)]">
+            <ul className="mt-2 space-y-1 text-base text-[var(--text-sub)] md:space-y-0.5 md:text-lg">
               {profile.labs.map((lab) => (
                 <li key={lab}>— {lab}</li>
               ))}
@@ -55,7 +66,7 @@ export function AboutSection({
             <p className="mt-5 font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
               Experience
             </p>
-            <ul className="mt-2 space-y-0.5 text-lg text-[var(--text-body)]">
+            <ul className="mt-2 space-y-1 text-[15px] text-[var(--text-body)] md:space-y-0.5 md:text-lg">
               {profile.experiences.map((exp) => (
                 <li key={exp.company}>
                   — {exp.company}　{exp.role}
@@ -64,15 +75,10 @@ export function AboutSection({
             </ul>
           </div>
 
-          {/* Bio (下・Affiliationと同じくらいのサイズ) */}
-          <p className="text-base leading-relaxed text-[var(--text-body)]">
-            {profile.bio}
-          </p>
-
           {/* Experience 詳細（/about 詳細ページのみ） */}
           {detailed && (
             <div>
-              <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
+              <p className="mb-4 font-mono text-[12px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
                 Experience / 活動内容
               </p>
               <div className="space-y-6">
@@ -86,7 +92,7 @@ export function AboutSection({
                       <p className="text-sm font-bold text-[var(--text)]">
                         {exp.company}
                       </p>
-                      <p className="mt-0.5 font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase">
+                      <p className="mt-0.5 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
                         {exp.role}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
@@ -112,7 +118,7 @@ export function AboutSection({
               key={ax.label}
               className="border-t-2 border-[var(--accent)] bg-[var(--bg-alt)] p-5"
             >
-              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)]">
+              <p className="font-mono text-[12px] tracking-[0.14em] text-[var(--accent-ink)]">
                 0{i + 1}
               </p>
               <p className="mt-2 text-base font-bold text-[var(--text)]">
@@ -151,13 +157,13 @@ export function AboutSection({
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-4">
-                  <p className="text-sm font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+                  <p className="text-sm font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent-ink)]">
                     {c.name}
                   </p>
-                  <p className="mt-1 font-mono text-[10px] tracking-wider text-[var(--text-mute)] uppercase">
+                  <p className="mt-1 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
                     {c.role}
                   </p>
-                  <p className="mt-3 font-mono text-[10px] tracking-wider text-[var(--accent)]">
+                  <p className="mt-3 font-mono text-[12px] tracking-wider text-[var(--accent-ink)]">
                     {new URL(c.url).host.replace(/^www\./, "")} ↗
                   </p>
                 </div>
@@ -172,9 +178,18 @@ export function AboutSection({
 }
 
 /** Works の後に置く、研究発表・展示・配信運用の記録 */
-export function RecordsSection() {
+export function RecordsSection({
+  num = "03",
+  headingAs = "h2",
+}: {
+  num?: string | null;
+  headingAs?: "h1" | "h2";
+}) {
   return (
     <SectionWrapper id="records">
+      <SectionHeading num={num} jp="経歴・実績" as={headingAs}>
+        Records
+      </SectionHeading>
       <div className="space-y-16">
         {/* Education（Works の後に表示） */}
         <HistoryBlock title="Education" jp="学歴">
@@ -182,7 +197,7 @@ export function RecordsSection() {
             {profile.history.education.map((e) => (
               <li
                 key={e}
-                className="py-3 text-sm leading-relaxed text-[var(--text-body)]"
+                className="py-3.5 text-[15px] leading-relaxed text-[var(--text-body)]"
               >
                 {e}
               </li>
@@ -196,9 +211,9 @@ export function RecordsSection() {
             {profile.history.honors.map((item) => (
               <li
                 key={item.date + item.text}
-                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
+                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
               >
-                <span className="font-mono text-[12px] text-[var(--text-mute)]">
+                <span className="font-mono text-[13px] text-[var(--text-sub)]">
                   {item.date}
                 </span>
                 <span className="text-[var(--text-body)]">
@@ -210,7 +225,7 @@ export function RecordsSection() {
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+                        className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"
                       >
                         [link]
                       </a>
@@ -228,13 +243,13 @@ export function RecordsSection() {
             {profile.history.publications.map((p) => (
               <li
                 key={p.text}
-                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
+                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
               >
-                <span className="font-mono text-[12px] text-[var(--text-mute)]">
+                <span className="font-mono text-[13px] text-[var(--text-sub)]">
                   {p.date}
                 </span>
                 <span className="text-[var(--text-body)]">
-                  {p.text}
+                  {emphasizeSelf(p.text)}
                   {p.url && (
                     <>
                       {" "}
@@ -242,7 +257,7 @@ export function RecordsSection() {
                         href={p.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+                        className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"
                       >
                         [link]
                       </a>
@@ -260,9 +275,9 @@ export function RecordsSection() {
             {profile.history.exhibitions.map((item) => (
               <li
                 key={item.date + item.text}
-                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
+                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
               >
-                <span className="font-mono text-[12px] text-[var(--text-mute)]">
+                <span className="font-mono text-[13px] text-[var(--text-sub)]">
                   {item.date}
                 </span>
                 <span className="text-[var(--text-body)]">
@@ -278,7 +293,7 @@ export function RecordsSection() {
         <HistoryBlock title="Operations" jp="配信・現場運用">
           {/* Big number */}
           <div className="mb-8 flex items-baseline gap-4">
-            <span className="text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tight text-[var(--accent)]">
+            <span className="text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tight text-[var(--accent-ink)]">
               {profile.history.operations.summaryCount}
             </span>
             <span className="text-xs text-[var(--text-mute)]">
@@ -296,7 +311,7 @@ export function RecordsSection() {
                 decoding="async"
                 className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
               />
-              <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+              <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
                 自作の演出統合インターフェースを用いた配信オペレーション卓
               </figcaption>
             </figure>
@@ -308,14 +323,14 @@ export function RecordsSection() {
                 decoding="async"
                 className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
               />
-              <figcaption className="mt-1.5 text-[10px] leading-tight text-[var(--text-mute)]">
+              <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
                 実イベント会場での配信オペレーション準備
               </figcaption>
             </figure>
           </div>
 
           {/* Venues */}
-          <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+          <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
             継続・定期で運用している配信現場
           </p>
           <ul className="mb-8 grid gap-x-8 gap-y-1.5 text-sm text-[var(--text-body)] sm:grid-cols-2">
@@ -328,16 +343,16 @@ export function RecordsSection() {
           </ul>
 
           {/* Highlights */}
-          <p className="mb-3 font-mono text-[10px] tracking-[0.25em] text-[var(--text-mute)] uppercase">
+          <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
             自作の配信システムを運用した主なイベント
           </p>
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.operations.highlights.map((item) => (
               <li
                 key={item.date + item.text}
-                className="grid gap-1 py-3 text-sm leading-relaxed sm:grid-cols-[80px_1fr] sm:gap-6"
+                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
               >
-                <span className="font-mono text-[12px] text-[var(--text-mute)]">
+                <span className="font-mono text-[13px] text-[var(--text-sub)]">
                   {item.date}
                 </span>
                 <span className="text-[var(--text-body)]">
@@ -361,9 +376,9 @@ function ExtLink({ href }: { href: string }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-70"
+        className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"
       >
-        (Link)
+        [link]
       </a>
     </>
   );
@@ -384,9 +399,9 @@ function HistoryBlock({
         <h3 className="text-lg font-bold tracking-tight text-[var(--text)]">
           {title}
         </h3>
-        <p className="text-xs text-[var(--text-mute)] md:mt-1">{jp}</p>
+        <p className="text-[13px] text-[var(--text-sub)] md:mt-1">{jp}</p>
       </div>
-      <div>{children}</div>
+      <div className="max-w-3xl">{children}</div>
     </div>
   );
 }

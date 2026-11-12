@@ -50,7 +50,7 @@ export function WorksMarqueeClient({ items }: { items: MarqueeItem[] }) {
                   decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
                 />
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--bg)]/95 to-transparent p-2 text-[10px] leading-tight font-medium text-[var(--text)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--bg)]/95 to-transparent p-2 text-[12px] leading-tight font-medium text-[var(--text)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {it.alt}
                 </span>
               </Link>

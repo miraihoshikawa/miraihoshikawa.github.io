@@ -134,6 +134,9 @@ git push origin main</code></pre>
     <tr><td><code>team</code></td><td class="opt">推奨</td><td>制作体制・担当。個人は <code>"個人制作"</code>、チームは <code>"グループ制作 / 干川は◯◯を担当"</code>。複数行は <code>|</code> で。</td></tr>
     <tr><td><code>teamType</code></td><td class="opt">推奨</td><td><code>"個人"</code> / <code>"チーム"</code>。カード・詳細に出る制作体制タグ。</td></tr>
     <tr><td><code>tags</code></td><td class="opt">任意</td><td>文脈タグ配列（例 <code>修士課程研究</code> / <code>長期インターン</code>）。</td></tr>
+    <tr><td><code>highlight</code></td><td class="opt">推奨</td><td>発表先・成果の<strong>1行</strong>（例 <code>"IEEE/SICE SII 2027 採択（国際会議論文）"</code>）。一覧カードと詳細冒頭の「発表・成果」に出る。<strong>実績欄（achievements）から事実だけを短く</strong>。受賞作は受賞名を書く（バッジと食い違わせない）。投稿中のものは書かない。</td></tr>
+    <tr><td><code>featured</code></td><td class="opt">任意</td><td><code>true</code> で Works 一覧の先頭「注目作品」に大きく出す。<strong>4件</strong>が目安（2列×2段で埋まる）。選ぶ基準＝外部からの評価（採択・受賞・導入）があり、3分野（研究・エンタメ・実装）を代表するもの。</td></tr>
+    <tr><td><code>hidden</code></td><td class="opt">任意</td><td><code>true</code> で一覧・マーキー・詳細・sitemap から一時的に外す。消せば復帰。</td></tr>
     <tr><td><code>aiUsage</code></td><td class="opt">推奨</td><td>AI利用の明記（複数行）。選考等で重要。書式は6章。</td></tr>
     <tr><td><code>tools</code></td><td class="opt">任意</td><td>使用ツールの配列。バッジ表示（<code>src/data/skills.ts</code> にロゴがあれば付く）。</td></tr>
     <tr><td><code>achievements</code></td><td class="opt">任意</td><td>導入・展示実績の配列（文字列）。<span class="small">※「発表予定/投稿中」は原則載せない方針（6章）。</span></td></tr>
@@ -167,6 +170,8 @@ team: "個人制作"                 # チーム例: "グループ制作 / 干�
 teamType: "個人"                 # 個人 | チーム
 tags:
   - "修士課程研究"
+highlight: "◯◯展 出展（2026）"     # カードと詳細冒頭に出る発表先・成果の1行
+featured: false                   # true で一覧の先頭に大きく（4件が目安）
 
 aiUsage: |
   ◯◯の処理：自身で実装。

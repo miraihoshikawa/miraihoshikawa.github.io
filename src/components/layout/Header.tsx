@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -12,8 +12,39 @@ const navItems = [
   { label: "Contact", href: "/#contact" },
 ];
 
+/** 作品画像の帯と背景の泡を止める（WCAG 2.2.2）。状態は次回も引き継ぐ */
+function useMotionPaused() {
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    setPaused(document.documentElement.classList.contains("motion-paused"));
+  }, []);
+  const toggle = () => {
+    const next = !paused;
+    setPaused(next);
+    document.documentElement.classList.toggle("motion-paused", next);
+    try {
+      localStorage.setItem("motion-paused", next ? "1" : "0");
+    } catch {}
+  };
+  return [paused, toggle] as const;
+}
+
+function MotionIcon({ paused }: { paused: boolean }) {
+  return paused ? (
+    <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M4 2.5v11l9-5.5z" />
+    </svg>
+  ) : (
+    <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M4 2.5h2.5v11H4zM9.5 2.5H12v11H9.5z" />
+    </svg>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [paused, toggleMotion] = useMotionPaused();
+  const motionLabel = paused ? "動きを再生" : "動きを一時停止";
   const pathname = usePathname();
   const isActive = (href: string) => {
     if (href.startsWith("/#")) return false;
@@ -31,11 +62,12 @@ export function Header() {
           Mirai Hoshikawa
         </Link>
 
-        <nav className="hidden gap-8 md:flex">
+        <div className="flex items-center gap-4 md:gap-6">
+        <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
             const cls = `text-[12px] tracking-wider uppercase transition-colors ${
               isActive(item.href)
-                ? "text-[var(--accent)]"
+                ? "text-[var(--accent-ink)]"
                 : "text-[var(--text-sub)] hover:text-[var(--text)]"
             }`;
             return item.href.startsWith("/#") ? (
@@ -50,6 +82,16 @@ export function Header() {
           })}
         </nav>
 
+        <button
+          type="button"
+          onClick={toggleMotion}
+          aria-pressed={paused}
+          aria-label={motionLabel}
+          title={motionLabel}
+          className="flex h-8 w-8 items-center justify-center text-[var(--text-sub)] transition-colors hover:text-[var(--text)]"
+        >
+          <MotionIcon paused={paused} />
+        </button>
         <button
           className="md:hidden p-2 text-[var(--text)]"
           onClick={() => setOpen(!open)}
@@ -80,6 +122,7 @@ export function Header() {
             )}
           </svg>
         </button>
+        </div>
       </div>
 
       {open && (
@@ -90,7 +133,7 @@ export function Header() {
           {navItems.map((item) => {
             const cls = `block py-2 text-[12px] tracking-wider uppercase ${
               isActive(item.href)
-                ? "text-[var(--accent)]"
+                ? "text-[var(--accent-ink)]"
                 : "text-[var(--text-sub)] hover:text-[var(--text)]"
             }`;
             return item.href.startsWith("/#") ? (
@@ -113,6 +156,15 @@ export function Header() {
               </Link>
             );
           })}
+          <button
+            type="button"
+            onClick={toggleMotion}
+            aria-pressed={paused}
+            className="mt-2 flex items-center gap-2 border-t border-[var(--border)] pt-4 text-[13px] text-[var(--text-sub)] hover:text-[var(--text)]"
+          >
+            <MotionIcon paused={paused} />
+            {paused ? "背景の動きを再生" : "背景の動きを一時停止"}
+          </button>
         </nav>
       )}
     </header>

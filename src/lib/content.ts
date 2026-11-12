@@ -10,6 +10,8 @@ export type ProjectMeta = {
   slug: string;
   number: string;
   hidden?: boolean; // trueで一覧・マーキー・詳細・sitemapから除外（一時非表示）
+  featured?: boolean; // trueで Works 一覧の先頭に大きく出す注目作品
+  highlight?: string; // 一覧カードと詳細の作品情報に出す、発表先・成果の1行
   title: string;
   subtitle?: string;
   category: ProjectCategory;

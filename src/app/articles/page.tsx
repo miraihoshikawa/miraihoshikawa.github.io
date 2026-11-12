@@ -31,14 +31,14 @@ export default function ArticlesIndexPage() {
                   className="group grid grid-cols-1 gap-2 py-8 md:grid-cols-[200px_1fr] md:gap-10"
                 >
                   <div className="flex items-baseline gap-3 md:block">
-                    <time className="text-[10px] font-mono tracking-[0.2em] text-[var(--text-mute)] uppercase">
+                    <time className="text-[12px] font-mono tracking-[0.14em] text-[var(--text-mute)] uppercase">
                       {a.date}
                     </time>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {a.tags?.map((t) => (
                         <span
                           key={t}
-                          className="text-[10px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
+                          className="text-[12px] font-mono tracking-wider text-[var(--text-mute)] uppercase"
                         >
                           / {t}
                         </span>
