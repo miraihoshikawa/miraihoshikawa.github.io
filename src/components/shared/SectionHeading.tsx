@@ -43,7 +43,7 @@ export function SectionHeading({
         )}
       </div>
       {sub && (
-        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--text-sub)]">
+        <p className="jp-phrase mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--text-sub)]">
           {sub}
         </p>
       )}

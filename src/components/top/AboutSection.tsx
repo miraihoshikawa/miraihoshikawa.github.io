@@ -107,31 +107,6 @@ export function AboutSection({
         </div>
       </div>
 
-      {/* 制作の3フィールド（一目で「何をする人か」を伝える） */}
-      <div className="mt-14 border-t border-[var(--border)] pt-10">
-        <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
-          Fields / 制作の3フィールド
-        </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {profile.axes.map((ax, i) => (
-            <div
-              key={ax.label}
-              className="border-t-2 border-[var(--accent)] bg-[var(--bg-alt)] p-5"
-            >
-              <p className="font-mono text-[12px] tracking-[0.14em] text-[var(--accent-ink)]">
-                0{i + 1}
-              </p>
-              <p className="mt-2 text-base font-bold text-[var(--text)]">
-                {ax.label}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
-                {ax.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* 所属企業（詳細ページのAboutのみ・OGP画像つきリンクカード） */}
       {detailed && (
         <div className="mt-14 border-t border-[var(--border)] pt-10">
@@ -289,80 +264,103 @@ export function RecordsSection({
           </ul>
         </HistoryBlock>
 
-        {/* Operations */}
-        <HistoryBlock title="Operations" jp="配信・現場運用">
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/** 配信・現場運用（/operations ページ）。トップからは外し、右上のタブから来る */
+export function OperationsSection() {
+  return (
+    <SectionWrapper id="operations">
+      <SectionHeading
+        jp="配信・現場運用"
+        as="h1"
+        sub="スタートアップ系イベントを中心に、配信現場の映像・音響・照明をまとめて担当している。演出と進行を1人で扱うための統合インターフェースも自作し、現場で運用している。"
+      >
+        Operations
+      </SectionHeading>
+      <div className="max-w-4xl">
           {/* Big number */}
-          <div className="mb-8 flex items-baseline gap-4">
-            <span className="text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tight text-[var(--accent-ink)]">
-              {profile.history.operations.summaryCount}
-            </span>
-            <span className="text-xs text-[var(--text-mute)]">
-              {profile.history.operations.summaryNote}
-            </span>
-          </div>
+        <div className="mb-8 flex items-baseline gap-4">
+          <span className="text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tight text-[var(--accent-ink)]">
+            {profile.history.operations.summaryCount}
+          </span>
+          <span className="text-xs text-[var(--text-mute)]">
+            {profile.history.operations.summaryNote}
+          </span>
+        </div>
 
-          {/* 配信オペレーション写真（2枚並べて横を埋める） */}
-          <div className="mb-8 grid max-w-2xl gap-5 sm:grid-cols-2">
-            <figure>
-              <img
-                src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
-                alt="自作の演出統合インターフェースによる配信オペレーション"
-                loading="lazy"
-                decoding="async"
-                className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
-              />
-              <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
-                自作の演出統合インターフェースを用いた配信オペレーション卓
-              </figcaption>
-            </figure>
-            <figure>
-              <img
-                src="/images/projects/02-streaming-interface/Fig_setup.jpg"
-                alt="実イベント会場での配信オペレーション準備"
-                loading="lazy"
-                decoding="async"
-                className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
-              />
-              <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
-                実イベント会場での配信オペレーション準備
-              </figcaption>
-            </figure>
-          </div>
+        {/* 配信オペレーション写真（2枚並べて横を埋める） */}
+        <div className="mb-12 grid gap-5 sm:grid-cols-2">
+          <figure>
+            <img
+              src="/images/projects/02-streaming-interface/Fig_onsite.jpg"
+              alt="自作の演出統合インターフェースによる配信オペレーション"
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
+            />
+            <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
+              自作の演出統合インターフェースを用いた配信オペレーション卓
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              src="/images/projects/02-streaming-interface/Fig_setup.jpg"
+              alt="実イベント会場での配信オペレーション準備"
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full border border-[var(--border)] object-cover"
+            />
+            <figcaption className="mt-1.5 text-[12px] leading-tight text-[var(--text-mute)]">
+              実イベント会場での配信オペレーション準備
+            </figcaption>
+          </figure>
+        </div>
 
-          {/* Venues */}
-          <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
-            継続・定期で運用している配信現場
-          </p>
-          <ul className="mb-8 grid gap-x-8 gap-y-1.5 text-sm text-[var(--text-body)] sm:grid-cols-2">
-            {profile.history.operations.venues.map((v) => (
-              <li key={v.text}>
-                — {v.text}
-                {v.url && <ExtLink href={v.url} />}
-              </li>
-            ))}
-          </ul>
+        {/* Venues */}
+        <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
+          継続・定期で運用している配信現場
+        </p>
+        <ul className="mb-8 grid gap-x-8 gap-y-1.5 text-sm text-[var(--text-body)] sm:grid-cols-2">
+          {profile.history.operations.venues.map((v) => (
+            <li key={v.text}>
+              — {v.text}
+              {v.url && <ExtLink href={v.url} />}
+            </li>
+          ))}
+        </ul>
 
-          {/* Highlights */}
-          <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
-            自作の配信システムを運用した主なイベント
-          </p>
-          <ul className="divide-y divide-[var(--border)]">
-            {profile.history.operations.highlights.map((item) => (
-              <li
-                key={item.date + item.text}
-                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
-              >
-                <span className="font-mono text-[13px] text-[var(--text-sub)]">
-                  {item.date}
-                </span>
-                <span className="text-[var(--text-body)]">
-                  {item.text}
-                  {"url" in item && item.url && <ExtLink href={item.url} />}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </HistoryBlock>
+        {/* Highlights */}
+        <p className="mb-3 font-mono text-[12px] tracking-[0.12em] text-[var(--text-mute)] uppercase">
+          自作の配信システムを運用した主なイベント
+        </p>
+        <ul className="divide-y divide-[var(--border)]">
+          {profile.history.operations.highlights.map((item) => (
+            <li
+              key={item.date + item.text}
+              className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
+            >
+              <span className="font-mono text-[13px] text-[var(--text-sub)]">
+                {item.date}
+              </span>
+              <span className="text-[var(--text-body)]">
+                {item.text}
+                {"url" in item && item.url && <ExtLink href={item.url} />}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-12 text-[15px]">
+          <a
+            href="/works/02-streaming-interface/"
+            className="inline-flex items-center gap-2 border-b border-[var(--accent-ink)] pb-1 text-[var(--text)] transition-colors hover:text-[var(--accent-ink)]"
+          >
+            自作の演出統合インターフェース（作品ページ）
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
       </div>
     </SectionWrapper>
   );

@@ -1,18 +1,26 @@
-import { WorksMarquee } from "@/components/top/WorksMarquee";
-import { AboutSection, RecordsSection } from "@/components/top/AboutSection";
-import { WorksSection } from "@/components/top/WorksSection";
-import { SkillsSection } from "@/components/top/SkillsSection";
+import { Hero, FieldIndex } from "@/components/top/Hero";
+import { WorksByField } from "@/components/shared/WorksByField";
+import { AboutSummary, SkillsSummary } from "@/components/top/HomeSummaries";
 import { ContactSection } from "@/components/top/ContactSection";
 
+/**
+ * トップ：作品映像の冒頭 → 3フィールドの入口 → フィールドごとの作品 →
+ * プロフィール要約 → Skills 要約 → 連絡先。
+ * 経歴・論文・展示は /about、配信・現場運用は /operations に置く。
+ */
 export default function Home() {
   return (
     <>
-      <WorksMarquee />
-      <AboutSection noBorder headingAs="h1" />
-      <WorksSection />
-      <RecordsSection />
-      <SkillsSection compact />
-      <ContactSection />
+      <Hero />
+      <FieldIndex />
+      <section id="works" className="scroll-mt-14">
+        <div className="mx-auto max-w-7xl px-6 pt-16 md:px-10 md:pt-20">
+          <WorksByField />
+        </div>
+      </section>
+      <AboutSummary />
+      <SkillsSummary />
+      <ContactSection num={null} />
     </>
   );
 }

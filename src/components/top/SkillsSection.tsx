@@ -41,8 +41,13 @@ export function SkillsSection({
       {/* Capabilities：領域ごとに写真と作品で見せる */}
       <GroupTitle title="Capabilities" jp="経験" />
       <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-        {capabilities.map((cap) => (
-          <CapabilityBlock key={cap.label} cap={cap} projects={projects} />
+        {capabilities.map((cap, i) => (
+          <CapabilityBlock
+            key={cap.label}
+            id={`cap-${i + 1}`}
+            cap={cap}
+            projects={projects}
+          />
         ))}
       </div>
 
@@ -153,15 +158,17 @@ function relatedWorks(cap: Capability, projects: ProjectMeta[]) {
 }
 
 function CapabilityBlock({
+  id,
   cap,
   projects,
 }: {
+  id: string;
   cap: Capability;
   projects: ProjectMeta[];
 }) {
   const works = relatedWorks(cap, projects);
   return (
-    <article className="reveal">
+    <article id={id} className="reveal scroll-mt-20">
       <div className="relative aspect-[16/9] overflow-hidden bg-[var(--bg-alt)]">
         <img
           src={cap.image}

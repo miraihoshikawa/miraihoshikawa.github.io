@@ -45,6 +45,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/operations/" className="transition-colors hover:text-[var(--text)]">
+                  Operations
+                </Link>
+              </li>
+              <li>
                 <Link href="/#contact" className="transition-colors hover:text-[var(--text)]">
                   Contact
                 </Link>

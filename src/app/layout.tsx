@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#141414",
 };
 
 const personJsonLd = {
@@ -66,7 +66,7 @@ export default function RootLayout({
       lang="ja"
       className={`${notoSansJP.variable} ${notoSerifJP.variable}`}
     >
-      <body className="text-[var(--text)] antialiased">
+      <body className="text-[var(--text)]">
         <script
           dangerouslySetInnerHTML={{
             __html:

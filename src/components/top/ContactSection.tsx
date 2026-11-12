@@ -2,10 +2,10 @@ import { profile } from "@/data/profile";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
-export function ContactSection() {
+export function ContactSection({ num = null }: { num?: string | null }) {
   return (
     <SectionWrapper id="contact">
-      <SectionHeading num="05" jp="連絡先" sub="研究・展示・実装のご相談、お気軽にご連絡ください。">
+      <SectionHeading num={num} jp="連絡先" sub="研究・展示・実装のご相談、お気軽にご連絡ください。">
         Contact
       </SectionHeading>
       <div className="space-y-2">

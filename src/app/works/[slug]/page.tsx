@@ -11,6 +11,7 @@ import { ToolBadge } from "@/components/shared/ToolBadge";
 import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
 import { Video, mdxComponents } from "@/components/mdx";
 import { emphasizeSelf } from "@/components/shared/emphasizeSelf";
+import { LoopVideo } from "@/components/shared/LoopVideo";
 
 // 作品詳細の「AI利用」セクションの表示切り替え（就活用）。
 // 表示したい時は true にするだけ。各作品の aiUsage データはそのまま残す。
@@ -154,8 +155,17 @@ export default async function WorkDetailPage({
 
       {/* Abstract — 左に画像・右に説明（これだけ読めば概要がわかる） */}
       <section className="mx-auto max-w-6xl px-6 pb-16 md:px-10 md:pb-24">
-        <div className="grid items-start gap-8 md:grid-cols-2 md:gap-12">
-          {meta.cover ? (
+        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:gap-12">
+          {meta.clip ? (
+            <div className="overflow-hidden bg-[var(--bg-alt)]">
+              <LoopVideo
+                src={meta.clip}
+                poster={meta.clipPoster ?? meta.cover}
+                eager
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+          ) : meta.cover ? (
             <div className="overflow-hidden bg-[var(--bg-alt)]">
               <img
                 src={meta.cover}

@@ -12,6 +12,8 @@ export type ProjectMeta = {
   hidden?: boolean; // trueで一覧・マーキー・詳細・sitemapから除外（一時非表示）
   featured?: boolean; // trueで Works 一覧の先頭に大きく出す注目作品
   highlight?: string; // 一覧カードと詳細の作品情報に出す、発表先・成果の1行
+  clip?: string; // 一覧カード・詳細冒頭で流す短いループ動画（public 配下のパス）
+  clipPoster?: string; // その動画の1コマ目の画像（読み込み前・停止中に表示）
   title: string;
   subtitle?: string;
   category: ProjectCategory;

@@ -1,23 +1,33 @@
 @import "tailwindcss";
 
+/* 全角ダッシュ（——）は欧文書体だと線が途切れて見えるので、和文書体で描く */
+@font-face {
+  font-family: "JP Dash";
+  src: local("Hiragino Sans W3"), local("HiraginoSans-W3"),
+    local("Hiragino Kaku Gothic ProN W3"), local("HiraKakuProN-W3"),
+    local("Noto Sans JP"), local("Yu Gothic");
+  unicode-range: U+2014-2015;
+}
+
 :root {
-  /* 黒＋シアンのパレット（2026-11-12 に紺から変更。写真を浮かせるため地はほぼ黒） */
-  --bg: #0a0a0a;
-  --bg-alt: #151515;
-  --card: #151515;
-  --border: #2a2a2a;
-  --border-strong: #f4f4f4;
-  --text: #f4f4f4;
-  --text-body: #d4d4d4; /* 13.4:1 on --bg */
-  --text-sub: #a3a3a3; /* 7.9:1 on --bg */
-  --text-mute: #8a8a8a; /* 5.7:1 on --bg、5.3:1 on --bg-alt */
+  /* 黒＋シアンのパレット（2026-11-12 に紺から変更）。
+     純黒は文字がにじんで見えやすいので、地は濃灰 #141414、文字の白も少し抑える */
+  --bg: #141414;
+  --bg-alt: #1d1d1d;
+  --card: #1d1d1d;
+  --border: #303030;
+  --border-strong: #ececec;
+  --text: #ececec;
+  --text-body: #cecece; /* 11.7:1 on --bg */
+  --text-sub: #a9a9a9; /* 7.8:1 on --bg */
+  --text-mute: #919191; /* 5.9:1 on --bg、5.4:1 on --bg-alt */
   /* アクセント（水のシアンブルー） */
   --accent: #46b6ff;
   /* 小さな文字・リンク用。彩度を少し落として暗い背景でちらつかせない（9.8:1 on --bg） */
   --accent-ink: #7cc8f0;
   --accent-soft: rgba(70, 182, 255, 0.14);
   /* ページ背景・泡・帯の光（配色を切り替えるときはここを差し替える） */
-  --page-bg: #0a0a0a;
+  --page-bg: #141414;
   /* 泡は黒地に漂う白い光の粒として薄く残す */
   --bubbles: block;
   --bubble-core: rgba(255, 255, 255, 0.8);
@@ -116,14 +126,15 @@
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, var(--font-jp),
+  font-family: "JP Dash", "Helvetica Neue", Helvetica, Arial, var(--font-jp),
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   color: var(--text);
   /* 上に水面の光、下にかけて深い青へ沈む */
   background: var(--page-bg);
   background-attachment: fixed;
   font-feature-settings: "palt" 1;
-  -webkit-font-smoothing: antialiased;
+  /* 暗い地では antialiased にすると文字が細く見えるので、OS 既定の描画にする */
+  -webkit-font-smoothing: auto;
 }
 
 /* 和文の見出しは文節で折り返し、行頭に小書きの仮名や約物が来ないようにする */
@@ -138,6 +149,8 @@ p,
 li,
 dd {
   line-break: strict;
+  /* 最後の行に1〜2字だけ残る改行を避ける */
+  text-wrap: pretty;
 }
 /* 短い文（副題・箇条・カードの1行）は文節で折り返し、語の途中で切らない */
 .jp-phrase {
@@ -166,14 +179,11 @@ section {
   border-radius: 9999px;
   /* 中心の光だけを残し、まわりは透明にして濁った灰色に見せない */
   background: radial-gradient(
-    circle at 32% 28%,
+    circle at 50% 50%,
     var(--bubble-core) 0%,
-    var(--bubble-mid) 20%,
-    var(--bubble-edge) 52%,
+    var(--bubble-mid) 30%,
     transparent 70%
   );
-  border: 1px solid var(--bubble-line);
-  box-shadow: 0 0 8px var(--bubble-edge);
   opacity: 0;
   animation: bubbleRise linear infinite;
 }

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { ProjectMeta } from "@/lib/content";
 import { TeamBadge, Tag } from "@/components/shared/TeamBadge";
+import { LoopVideo } from "@/components/shared/LoopVideo";
 
 const CATEGORY_LABEL: Record<string, string> = {
   research: "研究",
@@ -15,104 +16,112 @@ export function categoryText(p: ProjectMeta) {
   return cats.map((c) => CATEGORY_LABEL[c] ?? c).join(" / ");
 }
 
+type Variant = "default" | "large" | "wide";
+
 /**
- * 作品一覧。featured の作品を先に2列で大きく見せ、残りを3列で並べる。
- * featured が無ければ全作品を3列で並べる。
+ * 作品カード。clip があれば短いループ動画、無ければ画像（2枚重ね・単一・カバー）。
+ * wide＝注目作品用の横長（左に大きな映像、右に説明）。
  */
-export function WorksList({ projects }: { projects: ProjectMeta[] }) {
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-
-  return (
-    <>
-      {featured.length > 0 && (
-        <>
-          <p className="mb-6 font-mono text-[12px] tracking-[0.12em] text-[var(--text-sub)] uppercase">
-            Selected / 注目作品
-          </p>
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 md:gap-y-16">
-            {featured.map((p) => (
-              <li key={p.slug}>
-                <WorkCard p={p} large />
-              </li>
-            ))}
-          </ul>
-          <p className="mt-20 mb-6 border-t border-[var(--border)] pt-10 font-mono text-[12px] tracking-[0.12em] text-[var(--text-sub)] uppercase md:mt-24">
-            More Works / そのほかの作品
-          </p>
-        </>
+export function WorkCard({
+  p,
+  variant = "default",
+}: {
+  p: ProjectMeta;
+  variant?: Variant;
+}) {
+  const wide = variant === "wide";
+  const media = (
+    <div
+      className={`relative overflow-hidden bg-[var(--bg-alt)] ${
+        wide ? "aspect-[16/9]" : variant === "large" ? "aspect-[16/10]" : "aspect-[4/3]"
+      }`}
+    >
+      {p.clip ? (
+        <LoopVideo
+          src={p.clip}
+          poster={p.clipPoster ?? p.cover}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+        />
+      ) : (
+        <CardImage p={p} />
       )}
-      <ul className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-16">
-        {rest.map((p) => (
-          <li key={p.slug}>
-            <WorkCard p={p} />
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className="pointer-events-none absolute inset-0 bg-[var(--accent)] opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-10" />
+    </div>
   );
-}
 
-function WorkCard({ p, large = false }: { p: ProjectMeta; large?: boolean }) {
-  return (
-    <Link href={`/works/${p.slug}/`} className="group block">
-      {/* Image dominates */}
-      <div
-        className={`relative overflow-hidden bg-[var(--bg-alt)] ${
-          large ? "aspect-[16/10]" : "aspect-[4/3]"
+  const text = (
+    <div className={wide ? "md:py-2" : variant === "large" ? "mt-6" : "mt-5"}>
+      <p className="text-[13px] tracking-[0.04em] text-[var(--text-sub)]">
+        <span className="font-mono">{p.year}</span>
+        <span className="mx-2 text-[var(--text-mute)]" aria-hidden="true">
+          ·
+        </span>
+        {categoryText(p)}
+      </p>
+      <h3
+        className={`mt-2 font-bold leading-snug tracking-tight text-[var(--text)] transition-colors duration-300 group-hover:text-[var(--accent-ink)] ${
+          wide
+            ? "text-[clamp(1.75rem,3vw,2.25rem)]"
+            : variant === "large"
+              ? "text-2xl md:text-[1.75rem]"
+              : "text-lg md:text-xl"
         }`}
       >
-        <CardImage p={p} />
-        <div className="pointer-events-none absolute inset-0 bg-[var(--accent)] opacity-0 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-10" />
-      </div>
-
-      <div className={large ? "mt-6" : "mt-5"}>
-        <p className="text-[13px] tracking-[0.04em] text-[var(--text-sub)]">
-          <span className="font-mono">{p.year}</span>
-          <span className="mx-2 text-[var(--text-mute)]" aria-hidden="true">·</span>
-          {categoryText(p)}
-        </p>
-        <h3
-          className={`mt-2 font-bold leading-snug tracking-tight text-[var(--text)] transition-colors duration-300 group-hover:text-[var(--accent-ink)] ${
-            large ? "text-2xl md:text-[1.75rem]" : "text-lg md:text-xl"
+        {p.title}
+      </h3>
+      {p.subtitle && (
+        <p
+          className={`jp-phrase mt-1.5 leading-relaxed text-[var(--text-sub)] ${
+            wide || variant === "large" ? "text-base" : "text-[15px]"
           }`}
         >
-          {p.title}
-        </h3>
-        {p.subtitle && (
-          <p
-            className={`jp-phrase mt-1.5 leading-relaxed text-[var(--text-sub)] ${
-              large ? "text-base" : "text-[15px]"
-            }`}
-          >
-            {p.subtitle}
-          </p>
-        )}
-        {p.highlight && (
-          <p className="jp-phrase mt-2.5 flex items-start gap-2 text-[14px] leading-snug text-[var(--text-body)]">
-            <span
-              className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rotate-45 bg-[var(--accent)]"
-              aria-hidden="true"
-            />
-            {p.highlight}
-          </p>
-        )}
-        {(p.teamType || p.tags?.length) && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {p.teamType && <TeamBadge type={p.teamType} />}
-            {p.tags?.map((t) => <Tag key={t} label={t} />)}
-          </div>
-        )}
-      </div>
+          {p.subtitle}
+        </p>
+      )}
+      {wide && p.tagline && (
+        <p className="mt-5 text-[15px] leading-[1.9] text-[var(--text-body)]">
+          {p.tagline}
+        </p>
+      )}
+      {p.highlight && (
+        <p className="jp-phrase mt-3 flex items-start gap-2 text-[14px] leading-snug text-[var(--text-body)]">
+          <span
+            className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rotate-45 bg-[var(--accent)]"
+            aria-hidden="true"
+          />
+          {p.highlight}
+        </p>
+      )}
+      {(p.teamType || p.tags?.length) && (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {p.teamType && <TeamBadge type={p.teamType} />}
+          {p.tags?.map((t) => <Tag key={t} label={t} />)}
+        </div>
+      )}
+      {wide && (
+        <p className="mt-6 text-[14px] text-[var(--accent-ink)]">作品を見る →</p>
+      )}
+    </div>
+  );
+
+  return (
+    <Link
+      href={`/works/${p.slug}/`}
+      className={`group block ${
+        wide ? "grid items-center gap-8 md:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] md:gap-12" : ""
+      }`}
+    >
+      {media}
+      {text}
     </Link>
   );
 }
 
-function CardImage({ p }: { p: ProjectMeta }) {
+export function CardImage({ p }: { p: ProjectMeta }) {
   if (p.cardImages && p.cardImages.length === 2) {
     return (
       <>
-        {/* 空いた角を埋める、前面画像のぼかし（暗く沈めて紺になじませる） */}
+        {/* 空いた角を埋める、前面画像のぼかし（暗く沈めて地になじませる） */}
         <img
           src={p.cardImages[0]}
           alt=""
