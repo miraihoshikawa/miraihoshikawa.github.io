@@ -5,19 +5,13 @@ import { capabilities } from "@/data/skills";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
-/** トップ用のプロフィール要約。詳細（経歴・論文・受賞・展示）は /about へ */
+/** トップ用のプロフィール要約。詳細（経歴・論文・受賞・展示）は /about へ。写真は冒頭にある */
 export function AboutSummary() {
   return (
     <SectionWrapper id="about">
       <SectionHeading jp="自己紹介">About</SectionHeading>
-      <div className="grid gap-10 md:grid-cols-[240px_1fr] md:gap-16">
-        <img
-          src="/images/profile/portrait.jpeg"
-          alt={profile.name}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[4/5] w-full max-w-[200px] object-cover grayscale md:max-w-none"
-        />
+      {/* 写真はトップの冒頭に溶け込ませているので、ここでは文字だけにする */}
+      <div className="max-w-5xl">
         <div>
           <p className="max-w-[40em] text-[17px] leading-[1.9] text-[var(--text-body)]">
             {profile.bio}

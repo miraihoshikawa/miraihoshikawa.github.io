@@ -21,7 +21,7 @@ export const FIELDS: {
     jp: "研究",
     axis: 0,
     image: "/images/fields/research.jpg",
-    imageAlt: "ベッドの操作者のもとへ、ロボットが机の上の物を取りに行く（マスター・リモートシステム）",
+    imageAlt: "安全キャビネットでの細胞培養の作業（ロボット化細胞培養装置の研究）",
   },
   {
     key: "entertainment",

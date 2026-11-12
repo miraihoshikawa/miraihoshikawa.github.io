@@ -6,7 +6,8 @@ import { FIELDS } from "@/components/shared/WorksByField";
 const LEAD = (profile.bio.split("。")[1] ?? "").trim() + "。";
 
 /**
- * トップの冒頭。作品映像を全面に流し、名前・所属・3つのフィールドを重ねる。
+ * トップの冒頭。作品映像を全面に流し、右側に本人の写真を輪郭をぼかして溶け込ませ、
+ * 名前・所属・自己紹介文の1文を重ねる。
  * 映像は一時停止ボタン・「視差効果を減らす」設定で止まり、ポスター画像になる。
  */
 export function Hero() {
@@ -27,14 +28,28 @@ export function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-black/30 to-black/10 md:via-black/35 md:to-black/45"
         aria-hidden="true"
       />
+      {/* 本人の写真：白黒にして、輪郭を楕円状にぼかし映像になじませる */}
+      <img
+        src="/images/profile/hero-portrait.jpg"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        className="pointer-events-none absolute top-14 right-0 h-[62%] w-[78%] object-cover object-[50%_25%] opacity-85 grayscale md:top-auto md:bottom-0 md:h-[94%] md:w-[44%] md:opacity-90"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 58% 62% at 58% 48%, #000 38%, transparent 76%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 58% 62% at 58% 48%, #000 38%, transparent 76%)",
+        }}
+      />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/10 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent"
         aria-hidden="true"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
         <h1
-          className="text-[clamp(2.4rem,6.5vw,4.75rem)] leading-[1.08] font-bold tracking-tight text-white"
+          className="text-[clamp(1.9rem,4.2vw,3.1rem)] leading-[1.15] font-bold tracking-tight text-white"
           style={{
             fontFamily:
               'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
@@ -42,7 +57,7 @@ export function Hero() {
           }}
         >
           干川未来
-          <span className="mt-2 block text-[0.5em] font-semibold tracking-normal text-white/90 md:mt-3">
+          <span className="mt-1.5 block text-[0.52em] font-semibold tracking-normal text-white/90 md:mt-2">
             Mirai Hoshikawa
           </span>
         </h1>
@@ -59,7 +74,7 @@ export function Hero() {
         </p>
         {/* 何をしている人か（自己紹介文の2文目をそのまま使う） */}
         <p
-          className="mt-4 max-w-[36em] text-[15px] leading-[1.9] text-white/85 md:text-base"
+          className="jp-phrase mt-4 max-w-[36em] text-[15px] leading-[1.9] text-white/85 md:text-base"
           style={{ textShadow: "0 1px 10px rgba(0,0,0,0.75)" }}
         >
           {LEAD}
