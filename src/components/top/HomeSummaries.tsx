@@ -5,56 +5,59 @@ import { capabilities } from "@/data/skills";
 import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
-/** トップ用のプロフィール要約。詳細（経歴・論文・受賞・展示）は /about へ。写真は冒頭にある */
-export function AboutSummary() {
+/**
+ * トップの About。作品映像のすぐ下に置き、最初の画面で少し見えるようにする。
+ * 小さな写真・名前・所属・自己紹介だけにし、経歴の詳細は /about へ。
+ */
+export function AboutIntro() {
   return (
-    <SectionWrapper id="about">
-      <SectionHeading jp="自己紹介">About</SectionHeading>
-      {/* 写真はトップの冒頭に溶け込ませているので、ここでは文字だけにする */}
-      <div className="max-w-5xl">
-        <div>
-          <p className="max-w-[40em] text-[17px] leading-[1.9] text-[var(--text-body)]">
-            {profile.bio}
-          </p>
-          <dl className="mt-10 grid gap-8 border-t border-[var(--border)] pt-8 lg:grid-cols-2">
-            <div>
-              <dt className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-sub)] uppercase">
-                Current Affiliation
-              </dt>
-              <dd className="mt-3 text-[15px] leading-relaxed text-[var(--text-body)]">
-                <p className="text-[var(--text)]">{profile.university}</p>
-                <ul className="mt-1.5 space-y-1 text-[var(--text-sub)]">
-                  {profile.labs.map((lab) => (
-                    <li key={lab}>— {lab}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[12px] tracking-[0.12em] text-[var(--text-sub)] uppercase">
-                Experience
-              </dt>
-              <dd className="mt-3">
-                <ul className="space-y-2 text-[15px] leading-snug text-[var(--text-body)]">
-                  {profile.experiences.map((exp) => (
-                    <li key={exp.company}>
-                      <span className="text-[var(--text)]">{exp.company}</span>
-                      <span className="mt-0.5 block text-[13px] text-[var(--text-sub)]">
-                        {exp.role}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          </dl>
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
-            <TextLink href="/about/">プロフィールと活動の詳細</TextLink>
-            <TextLink href="/about/#records">論文・受賞・展示の一覧</TextLink>
+    <section id="about" className="scroll-mt-14">
+      <div className="mx-auto max-w-7xl px-6 pt-8 pb-14 md:px-10 md:pt-10 md:pb-16">
+        <div className="flex items-start gap-5 md:gap-10">
+          <img
+            src="/images/profile/portrait.jpeg"
+            alt={profile.name}
+            decoding="async"
+            className="aspect-[4/5] w-20 shrink-0 object-cover grayscale sm:w-28 md:w-36"
+          />
+          <div className="min-w-0">
+            <p className="font-mono text-[12px] tracking-[0.12em] text-[var(--accent-ink)] uppercase">
+              About
+            </p>
+            <h1
+              className="mt-2 text-[clamp(1.5rem,2.8vw,2.1rem)] leading-tight font-bold tracking-tight text-[var(--text)]"
+              style={{
+                fontFamily:
+                  'var(--font-serif), "Hiragino Mincho ProN", "Yu Mincho", serif',
+              }}
+            >
+              干川未来
+              <span className="ml-3 text-[0.62em] font-semibold whitespace-nowrap text-[var(--text-sub)]">
+                Mirai Hoshikawa
+              </span>
+            </h1>
+            <p className="jp-phrase mt-2 text-[14px] leading-relaxed text-[var(--text-sub)] md:text-[15px]">
+              {profile.university.replace(/ (\d+年)$/, "\u00a0$1")}
+              <span className="mx-2 hidden text-[var(--text-mute)] sm:inline" aria-hidden="true">
+                ／
+              </span>
+              <span className="block sm:inline">{profile.labs[0]}</span>
+            </p>
+            <p className="mt-5 hidden max-w-[40em] text-[16px] leading-[1.9] text-[var(--text-body)] md:block">
+              {profile.bio}
+            </p>
           </div>
         </div>
+        {/* スマホは写真の横が狭いので、自己紹介は下に回す */}
+        <p className="mt-5 text-[15px] leading-[1.9] text-[var(--text-body)] md:hidden">
+          {profile.bio}
+        </p>
+        <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[15px] md:ml-[11.5rem]">
+          <TextLink href="/about/">プロフィールと活動の詳細</TextLink>
+          <TextLink href="/about/#records">論文・受賞・展示の一覧</TextLink>
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }
 

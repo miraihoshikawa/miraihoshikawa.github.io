@@ -1,7 +1,8 @@
+import { getAllProjects } from "@/lib/content";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { WorksByField } from "@/components/shared/WorksByField";
+import { WorksList } from "@/components/shared/WorksList";
 
-/** 作品一覧（/works）。研究・エンタメ・実装のフィールドごとに並べる */
+/** 作品一覧（トップと /works）。注目作品を大きく、残りをグリッドで並べる */
 export function WorksSection({
   headingAs = "h2",
   num = null,
@@ -9,8 +10,9 @@ export function WorksSection({
   headingAs?: "h1" | "h2";
   num?: string | null;
 }) {
+  const projects = getAllProjects();
   return (
-    <section id="works" className="border-t border-[var(--border)]">
+    <section id="works" className="scroll-mt-14 border-t border-[var(--border)]">
       <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
         <SectionHeading
           num={num}
@@ -20,7 +22,7 @@ export function WorksSection({
         >
           Works
         </SectionHeading>
-        <WorksByField headingAs="h2" />
+        <WorksList projects={projects} />
       </div>
     </section>
   );
