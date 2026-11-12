@@ -1,21 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  /* 濃いめの青（ダーク・水）パレット */
-  --bg: #07162b;
-  --bg-alt: #0d2545;
-  --card: #0d2545;
-  --border: #1d3a5e;
-  --border-strong: #eaf2fb;
-  --text: #eaf2fb;
-  --text-body: #cad9ec;
-  --text-sub: #95acc6;
-  --text-mute: #7e98b4; /* WCAG AA: 5.15:1 on --bg-alt, 6.07:1 on --bg */
+  /* 黒＋シアンのパレット（2026-11-12 に紺から変更。写真を浮かせるため地はほぼ黒） */
+  --bg: #0a0a0a;
+  --bg-alt: #151515;
+  --card: #151515;
+  --border: #2a2a2a;
+  --border-strong: #f4f4f4;
+  --text: #f4f4f4;
+  --text-body: #d4d4d4; /* 13.4:1 on --bg */
+  --text-sub: #a3a3a3; /* 7.9:1 on --bg */
+  --text-mute: #8a8a8a; /* 5.7:1 on --bg、5.3:1 on --bg-alt */
   /* アクセント（水のシアンブルー） */
   --accent: #46b6ff;
   /* 小さな文字・リンク用。彩度を少し落として暗い背景でちらつかせない（9.8:1 on --bg） */
   --accent-ink: #7cc8f0;
   --accent-soft: rgba(70, 182, 255, 0.14);
+  /* ページ背景・泡・帯の光（配色を切り替えるときはここを差し替える） */
+  --page-bg: #0a0a0a;
+  /* 泡は黒地に漂う白い光の粒として薄く残す */
+  --bubbles: block;
+  --bubble-core: rgba(255, 255, 255, 0.8);
+  --bubble-mid: rgba(255, 255, 255, 0.16);
+  --bubble-edge: rgba(255, 255, 255, 0.03);
+  --bubble-line: rgba(255, 255, 255, 0.1);
+  --glow: rgba(255, 255, 255, 0.35);
+  --glow-soft: rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -110,9 +120,7 @@ body {
     "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   color: var(--text);
   /* 上に水面の光、下にかけて深い青へ沈む */
-  background:
-    radial-gradient(120% 70% at 50% 0%, rgba(54, 110, 180, 0.35) 0%, transparent 55%),
-    linear-gradient(180deg, #07162b 0%, #0a2044 55%, #06142a 100%);
+  background: var(--page-bg);
   background-attachment: fixed;
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;
@@ -144,6 +152,7 @@ section {
 
 /* ===== 泡（バブル）背景レイヤー ===== */
 .water-bg {
+  display: var(--bubbles);
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -158,13 +167,13 @@ section {
   /* 中心の光だけを残し、まわりは透明にして濁った灰色に見せない */
   background: radial-gradient(
     circle at 32% 28%,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(170, 220, 255, 0.35) 20%,
-    rgba(110, 190, 255, 0.06) 52%,
-    rgba(110, 190, 255, 0) 70%
+    var(--bubble-core) 0%,
+    var(--bubble-mid) 20%,
+    var(--bubble-edge) 52%,
+    transparent 70%
   );
-  border: 1px solid rgba(150, 205, 255, 0.22);
-  box-shadow: 0 0 8px rgba(110, 190, 255, 0.22);
+  border: 1px solid var(--bubble-line);
+  box-shadow: 0 0 8px var(--bubble-edge);
   opacity: 0;
   animation: bubbleRise linear infinite;
 }
@@ -174,13 +183,13 @@ section {
     opacity: 0;
   }
   12% {
-    opacity: 0.5;
+    opacity: 0.38;
   }
   50% {
     transform: translateY(-55vh) translateX(12px) scale(1);
   }
   88% {
-    opacity: 0.35;
+    opacity: 0.26;
   }
   100% {
     transform: translateY(-110vh) translateX(-8px) scale(1.05);
@@ -241,11 +250,11 @@ section {
   pointer-events: none;
   background: repeating-linear-gradient(
     90deg,
-    rgba(110, 190, 255, 0) 0px,
-    rgba(150, 210, 255, 0.85) 60px,
-    rgba(110, 190, 255, 0) 120px
+    transparent 0px,
+    var(--glow) 60px,
+    transparent 120px
   );
-  filter: drop-shadow(0 0 5px rgba(110, 190, 255, 0.6));
+  filter: drop-shadow(0 0 5px var(--glow-soft));
   animation: marqueeEdgeFlow 8s linear infinite;
 }
 .works-marquee-strip::before {

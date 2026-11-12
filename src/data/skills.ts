@@ -4,11 +4,28 @@ export type SkillCategory = {
   items: string[];
 };
 
+/**
+ * 経験の領域。image＝領域の代表写真（自分の作品から）、tools＝主なツール、
+ * match＝作品の tools にこれらが含まれていれば「この技術を使った作品」に出す、
+ * works＝ツールで判定できない領域は作品の slug を直接指定する。
+ */
+export type Capability = SkillCategory & {
+  image: string;
+  imageAlt: string;
+  tools: string[];
+  match?: string[];
+  works?: string[];
+};
+
 /** 実務でできること（設計〜製作〜現場運用までの領域別） */
-export const capabilities: SkillCategory[] = [
+export const capabilities: Capability[] = [
   {
     label: "Hardware Development",
     jp: "ハードウェア開発",
+    image: "/images/projects/10-bakebake-xr-haptics/1.jpg",
+    imageAlt: "3Dプリントで作った火の玉型の空気砲（ばけばけXR ハプティクス）",
+    tools: ["SolidWorks", "Fusion 360", "3Dプリンタ"],
+    match: ["SolidWorks", "Fusion 360", "3Dプリント", "3D Printer (FDM)"],
     items: [
       "CAD設計（SolidWorks / Fusion 360）",
       "3Dプリンタによる試作・筐体プロトタイピング",
@@ -19,6 +36,10 @@ export const capabilities: SkillCategory[] = [
   {
     label: "Electronics & Embedded",
     jp: "電子回路・組み込み",
+    image: "/images/projects/08-relational-coral/Fig_group.jpg",
+    imageAlt: "M5Stack と LED を内蔵して発光する珊瑚のオブジェ（Relational Coral）",
+    tools: ["KiCAD", "Arduino", "M5Stack"],
+    match: ["KiCAD", "Arduino", "M5Stack CoreS3", "M5Dial", "NeoPixel", "ESP-NOW"],
     items: [
       "KiCADによる回路・基板設計",
       "基板加工・実装・デバッグ",
@@ -29,6 +50,10 @@ export const capabilities: SkillCategory[] = [
   {
     label: "Interactive / Spatial Computing",
     jp: "インタラクション・空間演出",
+    image: "/images/projects/05-kaleid-perspective/1.jpg",
+    imageAlt: "万華鏡の像を大画面に投影する体験（Kaleid Perspective）",
+    tools: ["TouchDesigner", "Unity", "Meta Quest 3"],
+    match: ["TouchDesigner", "Unity", "Meta Quest 3", "OpenCV", "YOLOv8", "YOLO11 / PyTorch", "DMX照明"],
     items: [
       "TouchDesignerによるインタラクション設計",
       "DMX / Art-Net による照明制御",
@@ -39,6 +64,10 @@ export const capabilities: SkillCategory[] = [
   {
     label: "Installation & Operation",
     jp: "設営・テクニカルオペレーション",
+    image: "/images/projects/02-streaming-interface/Fig_stage.jpg",
+    imageAlt: "ピッチイベントでの映像・照明演出",
+    tools: ["映像スイッチャー", "DMX照明", "音響設備"],
+    works: ["02-streaming-interface", "04-bakebake-xr", "08-relational-coral"],
     items: [
       "配信現場での映像・音響・照明オペレーション",
       "インスタレーション作品の設営・運用",

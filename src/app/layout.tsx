@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: { canonical: "/" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
 };
 
 const personJsonLd = {

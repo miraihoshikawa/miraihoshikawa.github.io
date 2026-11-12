@@ -11,7 +11,7 @@ export default function Home() {
       <AboutSection noBorder headingAs="h1" />
       <WorksSection />
       <RecordsSection />
-      <SkillsSection />
+      <SkillsSection compact />
       <ContactSection />
     </>
   );
