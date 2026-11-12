@@ -114,6 +114,10 @@ export const profile = {
     // 研究発表（引用形式・任意でリンク）
     publications: [
       {
+        date: "2027.01",
+        text: "Mirai Hoshikawa, Akira Uehara, Yoshiyuki Sankai, Hiroaki Kawamoto, “Development of Cybernic Master-Remote System Controlled by Multimodal Vital Information,” Proceedings of the 2027 IEEE/SICE International Symposium on System Integrations (SII), 2027. (Accepted)",
+      },
+      {
         date: "2026.12",
         text: "Kosuke Shimizu, Riri Ikebe, Hiroki Ichikura, Mirai Hoshikawa, “Naming the Inexplicable: A Generative Apparatus for Rehearsing Yōkai-Making in Compressed Communal Time,” SIGGRAPH Asia 2026 Art Papers, 2026年12月.",
         url: "https://doi.org/10.1145/3829215.3843681",
