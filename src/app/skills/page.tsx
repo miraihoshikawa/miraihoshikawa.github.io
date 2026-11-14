@@ -5,6 +5,8 @@ export const metadata = {
   description:
     "干川未来のスキルと扱える機材。CAD・回路設計・3Dプリント・金属加工から、TouchDesigner・ROS2・XR、配信・現場運用まで。",
   alternates: { canonical: "/skills/" },
+  // ページは検索に出すが、このページの画像（機材・ロゴ・作品写真のタイル）は画像検索に載せない
+  robots: { index: true, follow: true, noimageindex: true },
 };
 
 export default function SkillsPage() {
