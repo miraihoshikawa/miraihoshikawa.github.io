@@ -5,12 +5,10 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { emphasizeSelf } from "@/components/shared/emphasizeSelf";
 
 export function AboutSection({
-  detailed = false,
   noBorder = false,
   headingAs = "h2",
   num = "01",
 }: {
-  detailed?: boolean;
   noBorder?: boolean;
   headingAs?: "h1" | "h2";
   num?: string | null;
@@ -75,84 +73,85 @@ export function AboutSection({
             </ul>
           </div>
 
-          {/* Experience 詳細（/about 詳細ページのみ） */}
-          {detailed && (
-            <div>
-              <p className="mb-4 font-mono text-[12px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
-                Experience / 活動内容
-              </p>
-              <div className="space-y-6">
-                {profile.experiences
-                  .filter((exp) => exp.detail)
-                  .map((exp) => (
-                    <div
-                      key={exp.company}
-                      className="border-l-2 border-[var(--border)] pl-5"
-                    >
-                      <p className="text-sm font-bold text-[var(--text)]">
-                        {exp.company}
-                      </p>
-                      <p className="mt-0.5 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
-                        {exp.role}
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
-                        {exp.detail}
-                      </p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-
         </div>
       </div>
-
-      {/* 所属企業（詳細ページのAboutのみ・OGP画像つきリンクカード） */}
-      {detailed && (
-        <div className="mt-14 border-t border-[var(--border)] pt-10">
-          <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
-            Affiliated Companies / 所属企業
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {profile.companies.map((c) => (
-              <a
-                key={c.name}
-                href={c.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)] transition-colors hover:border-[var(--accent)]"
-              >
-                <div className="flex aspect-video items-center justify-center overflow-hidden bg-white p-6">
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <p className="text-sm font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent-ink)]">
-                    {c.name}
-                  </p>
-                  <p className="mt-1 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
-                    {c.role}
-                  </p>
-                  <p className="mt-3 font-mono text-[12px] tracking-wider text-[var(--accent-ink)]">
-                    {new URL(c.url).host.replace(/^www\./, "")} ↗
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
 
     </SectionWrapper>
   );
 }
 
-/** Works の後に置く、研究発表・展示・配信運用の記録 */
+/** /about の一番下：活動内容（企業・団体での役割）と所属企業のリンク */
+export function ActivitiesSection() {
+  return (
+    <SectionWrapper id="activities">
+      <SectionHeading num={null} jp="活動内容・所属企業">
+        Experience
+      </SectionHeading>
+      <p className="mb-4 font-mono text-[12px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
+        Activities / 活動内容
+      </p>
+      <div className="space-y-6">
+        {profile.experiences
+          .filter((exp) => exp.detail)
+          .map((exp) => (
+            <div
+              key={exp.company}
+              className="border-l-2 border-[var(--border)] pl-5"
+            >
+              <p className="text-sm font-bold text-[var(--text)]">
+                {exp.company}
+              </p>
+              <p className="mt-0.5 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
+                {exp.role}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
+                {exp.detail}
+              </p>
+            </div>
+          ))}
+      </div>
+      <div className="mt-14 border-t border-[var(--border)] pt-10">
+        <p className="font-mono text-[13px] tracking-[0.15em] text-[var(--text-sub)] uppercase">
+          Affiliated Companies / 所属企業
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {profile.companies.map((c) => (
+            <a
+              key={c.name}
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-alt)] transition-colors hover:border-[var(--accent)]"
+            >
+              <div className="flex aspect-video items-center justify-center overflow-hidden bg-white p-6">
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-4">
+                <p className="text-sm font-bold text-[var(--text)] transition-colors group-hover:text-[var(--accent-ink)]">
+                  {c.name}
+                </p>
+                <p className="mt-1 font-mono text-[12px] tracking-wider text-[var(--text-mute)] uppercase">
+                  {c.role}
+                </p>
+                <p className="mt-3 font-mono text-[12px] tracking-wider text-[var(--accent-ink)]">
+                  {new URL(c.url).host.replace(/^www\./, "")} ↗
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/** 経歴・実績（/about）。学歴 → 研究発表 → 受賞 → 展示の順 */
 export function RecordsSection({
   num = "03",
   headingAs = "h2",
@@ -166,7 +165,7 @@ export function RecordsSection({
         Records
       </SectionHeading>
       <div className="space-y-16">
-        {/* Education（Works の後に表示） */}
+        {/* Education */}
         <HistoryBlock title="Education" jp="学歴">
           <ul className="divide-y divide-[var(--border)]">
             {profile.history.education.map((e) => (
@@ -175,38 +174,6 @@ export function RecordsSection({
                 className="py-3.5 text-[15px] leading-relaxed text-[var(--text-body)]"
               >
                 {e}
-              </li>
-            ))}
-          </ul>
-        </HistoryBlock>
-
-        {/* Honors */}
-        <HistoryBlock title="Honors" jp="受賞・奨学・採択">
-          <ul className="divide-y divide-[var(--border)]">
-            {profile.history.honors.map((item) => (
-              <li
-                key={item.date + item.text}
-                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
-              >
-                <span className="font-mono text-[13px] text-[var(--text-sub)]">
-                  {item.date}
-                </span>
-                <span className="text-[var(--text-body)]">
-                  {item.text}
-                  {item.url && (
-                    <>
-                      {" "}
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"
-                      >
-                        [link]
-                      </a>
-                    </>
-                  )}
-                </span>
               </li>
             ))}
           </ul>
@@ -230,6 +197,38 @@ export function RecordsSection({
                       {" "}
                       <a
                         href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"
+                      >
+                        [link]
+                      </a>
+                    </>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </HistoryBlock>
+
+        {/* Honors */}
+        <HistoryBlock title="Honors" jp="受賞・奨学・採択">
+          <ul className="divide-y divide-[var(--border)]">
+            {profile.history.honors.map((item) => (
+              <li
+                key={item.date + item.text}
+                className="grid gap-1 py-3.5 text-[15px] leading-relaxed sm:grid-cols-[84px_1fr] sm:gap-6"
+              >
+                <span className="font-mono text-[13px] text-[var(--text-sub)]">
+                  {item.date}
+                </span>
+                <span className="text-[var(--text-body)]">
+                  {item.text}
+                  {item.url && (
+                    <>
+                      {" "}
+                      <a
+                        href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[var(--accent-ink)] underline underline-offset-2 hover:opacity-70"

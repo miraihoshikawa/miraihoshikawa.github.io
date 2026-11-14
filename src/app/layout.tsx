@@ -70,7 +70,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('reveal-on');try{if(localStorage.getItem('motion-paused')==='1')document.documentElement.classList.add('motion-paused')}catch(e){}",
+              "document.documentElement.classList.add('reveal-on');try{localStorage.removeItem('motion-paused')}catch(e){}",
           }}
         />
         <script

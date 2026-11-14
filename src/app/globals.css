@@ -31,7 +31,7 @@
   /* 泡は黒地に漂う白い光の粒として薄く残す */
   --bubbles: block;
   --bubble-core: rgba(255, 255, 255, 0.8);
-  --bubble-mid: rgba(255, 255, 255, 0.16);
+  --bubble-mid: rgba(255, 255, 255, 0.22);
   --bubble-edge: rgba(255, 255, 255, 0.03);
   --bubble-line: rgba(255, 255, 255, 0.1);
   --glow: rgba(255, 255, 255, 0.35);
@@ -192,14 +192,14 @@ section {
     transform: translateY(0) translateX(0) scale(0.9);
     opacity: 0;
   }
-  12% {
-    opacity: 0.38;
+  6% {
+    opacity: 0.6;
   }
   50% {
     transform: translateY(-55vh) translateX(12px) scale(1);
   }
-  88% {
-    opacity: 0.26;
+  90% {
+    opacity: 0.42;
   }
   100% {
     transform: translateY(-110vh) translateX(-8px) scale(1.05);
@@ -289,14 +289,6 @@ section {
   .works-marquee-strip::after {
     animation: none;
   }
-}
-
-/* 一時停止ボタンで帯・泡の動きを止める */
-.motion-paused .works-marquee-track,
-.motion-paused .works-marquee-strip::before,
-.motion-paused .works-marquee-strip::after,
-.motion-paused .water-bg .bubble {
-  animation-play-state: paused;
 }
 
 /* WORKS カード 2枚重ねの前面画像：内側（右上）コーナーを柔らかくフェードし、

@@ -1,4 +1,4 @@
-import { AboutSection, RecordsSection } from "@/components/top/AboutSection";
+import { AboutSection, RecordsSection, ActivitiesSection } from "@/components/top/AboutSection";
 
 export const metadata = {
   title: "About",
@@ -10,8 +10,9 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-14">
-      <AboutSection detailed headingAs="h1" num={null} />
+      <AboutSection headingAs="h1" num={null} />
       <RecordsSection num={null} />
+      <ActivitiesSection />
     </div>
   );
 }

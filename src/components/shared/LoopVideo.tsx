@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 
 /**
  * 無音でループする短い動画（作品のサムネイル・トップの映像）。
- * 画面に入っている間だけ再生し、ヘッダーの一時停止（html.motion-paused）や
- * OS の「視差効果を減らす」設定のときはポスター画像のまま止める。
+ * 画面に入っている間だけ再生し、OS の「視差効果を減らす」設定のときは
+ * ポスター画像のまま止める。
  */
 export function LoopVideo({
   src,
@@ -26,11 +26,10 @@ export function LoopVideo({
     const v = ref.current;
     if (!v) return;
     v.muted = true;
-    const root = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     const update = () => {
-      const stop = reduce.matches || root.classList.contains("motion-paused");
+      const stop = reduce.matches;
       if (visible && !stop) {
         v.play().catch(() => {});
       } else {
@@ -45,12 +44,9 @@ export function LoopVideo({
       { threshold: 0.2 }
     );
     io.observe(v);
-    const mo = new MutationObserver(update);
-    mo.observe(root, { attributes: true, attributeFilter: ["class"] });
     reduce.addEventListener("change", update);
     return () => {
       io.disconnect();
-      mo.disconnect();
       reduce.removeEventListener("change", update);
     };
   }, []);

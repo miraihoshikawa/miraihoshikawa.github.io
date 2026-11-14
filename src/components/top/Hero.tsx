@@ -13,9 +13,9 @@ export function Hero() {
       className="relative h-[42svh] min-h-[260px] w-full overflow-hidden bg-black md:h-[58svh] md:min-h-[400px] md:max-h-[640px]"
     >
       <LoopVideo
-        src="/videos/hero-v5.mp4"
-        srcSmall="/videos/hero-v5-sm.mp4"
-        poster="/videos/hero-v5.jpg"
+        src="/videos/hero-v6.mp4"
+        srcSmall="/videos/hero-v6-sm.mp4"
+        poster="/videos/hero-v6.jpg"
         eager
         className="absolute inset-0 h-full w-full object-cover"
       />
